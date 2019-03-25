@@ -4,6 +4,7 @@ import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/model/YYUser.dart';
 import 'package:lychee/page/YYLoginPage.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 
 class YYMinePage extends StatefulWidget {
   @override
@@ -41,7 +42,9 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
 
   topPressed() {
     if (baseWidgetControl.data == null) {
-      YYCommonUtils.navigatorRouter(context, YYLoginPage());
+      // YYCommonUtils.navigatorRouter(context, YYLoginPage());
+      // FlutterBoost.singleton.openPage("flutter://login", {"present":true});
+      FlutterBoost.singleton.openPage("native://UIViewControllerDemo",null);
     } 
   }
 

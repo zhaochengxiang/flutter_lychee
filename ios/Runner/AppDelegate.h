@@ -1,6 +1,6 @@
-#import <Flutter/Flutter.h>
 #import <UIKit/UIKit.h>
+#import <flutter_boost/FlutterBoost.h>
 
-@interface AppDelegate : FlutterAppDelegate
+@interface AppDelegate : FLBFlutterAppDelegate <UIApplicationDelegate>
 
 @end

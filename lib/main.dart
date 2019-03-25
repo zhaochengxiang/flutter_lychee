@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 import 'package:lychee/common/event/YYHttpErrorEvent.dart';
 import 'package:lychee/page/YYHomeTabBarPage.dart';
+import 'package:lychee/page/YYLoginPage.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/manager/YYShareManager.dart';
 import 'package:lychee/common/manager/YYPushManager.dart';
@@ -25,6 +27,14 @@ class _LycheeAppState extends State<LycheeApp> {
     super.initState();
     YYShareManager.init();
     YYPushManager.init();
+    
+    FlutterBoost.singleton.registerPageBuilders({
+      'flutter://home': (pageName, params, _) => YYHomeTabBarPage(),
+      'flutter://login': (pageName, params, _) => YYLoginPage(),
+    });
+
+    FlutterBoost.handleOnStartPage();
+
     stream =  YYCommonUtils.eventBus.on<YYHttpErrorEvent>().listen((event) {
       errorHandleFunction(event.message);
     });
@@ -48,7 +58,8 @@ class _LycheeAppState extends State<LycheeApp> {
 
     return new MaterialApp(
       theme: new ThemeData(primaryColor: Colors.white,canvasColor: Colors.white),
-      home: new YYHomeTabBarPage()
+      builder: FlutterBoost.init(),
+      home: Container()
     );
   }
 }

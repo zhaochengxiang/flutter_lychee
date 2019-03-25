@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/widget/YYInputWidget.dart';
@@ -62,7 +63,8 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
       if (res!=null && res.result) {
         YYLocalStorage.save(YYCommonUtils.TOKEN_KEY, res.data['token']);
         YYNeedRefreshEvent.refreshHandleFunction('YYMinePage');
-        Navigator.pop(context);
+        // Navigator.pop(context);
+        FlutterBoost.singleton.closePageForContext(context);
       }
     }
   }
@@ -84,7 +86,14 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
       child: Scaffold(
         appBar: new AppBar(
           title:Text("用手机登录"),
-          iconTheme: new IconThemeData(color: Colors.black),
+          leading: FlatButton(
+            padding: EdgeInsets.all(0), 
+            child: Image.asset(YYCommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+            onPressed: (){
+                // Navigator.pop(context);
+              FlutterBoost.singleton.closePageForContext(context);
+              },
+          )
         ),
         body: Padding(
           padding: EdgeInsets.only(left: 15.5,right: 15.5), 
