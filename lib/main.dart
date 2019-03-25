@@ -25,8 +25,8 @@ class _LycheeAppState extends State<LycheeApp> {
   @override
   void initState() {
     super.initState();
-    YYShareManager.init();
-    YYPushManager.init();
+    // YYShareManager.init();
+    // YYPushManager.init();
     
     FlutterBoost.singleton.registerPageBuilders({
       'flutter://home': (pageName, params, _) => YYHomeTabBarPage(),
