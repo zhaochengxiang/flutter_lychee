@@ -48,7 +48,7 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
          if(Platform.isIOS){
           FlutterBoost.singleton.openPage("native://UIViewControllerDemo",null);
         }else if(Platform.isAndroid){
-          FlutterBoost.singleton.openPage("native://NativePageActivity",null);
+          FlutterBoost.singleton.openPage("native://NativePageActivity",{"query":{"present":true}});
         }
     } 
   }

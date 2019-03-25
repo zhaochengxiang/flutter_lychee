@@ -2,7 +2,7 @@ package com.wanjuanlink.lychee;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
+import android.util.Log;
 
 import java.lang.Class;
 
@@ -15,7 +15,7 @@ public class PageRouter {
     }
 
     public static boolean openPageByUrl(Context context, String url, int requestCode) {
-        String className = url.split("://")[1];
+        String className = url.split("://")[1].split("\\?")[0];
 
         try {
             context.startActivity(new Intent(context,Class.forName(Package_Name+'.'+className)));
