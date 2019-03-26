@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.wanjuanlink.lychee">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
@@ -10,7 +12,7 @@
         android:name=".MyApplication"
         android:label="荔枝课堂_flutter"
         android:icon="@mipmap/ic_launcher"
-        >
+        tools:replace="android:name">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
