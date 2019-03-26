@@ -1,11 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/model/YYUser.dart';
 import 'package:lychee/page/YYLoginPage.dart';
-import 'package:flutter_boost/flutter_boost.dart';
-import 'dart:io';
 
 class YYMinePage extends StatefulWidget {
   @override

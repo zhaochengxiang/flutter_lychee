@@ -10,11 +10,13 @@ import com.taobao.idlefish.flutterboost.interfaces.IPlatform;
 import java.util.Map;
 
 import io.flutter.app.FlutterApplication;
+import com.wanjuanlink.lychee.loader.ServiceLoader;
 
 public class MyApplication extends FlutterApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        ServiceLoader.load();
 
         FlutterBoostPlugin.init(new IPlatform() {
             @Override

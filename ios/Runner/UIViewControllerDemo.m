@@ -9,8 +9,9 @@
 #import "UIViewControllerDemo.h"
 #import <Flutter/Flutter.h>
 #import "YYRouter.h"
+#import "YYCrossPlatformService.h"
 
-@interface UIViewControllerDemo ()
+@interface UIViewControllerDemo () <FlutterServiceEventListner>
 
 @end
 
@@ -19,10 +20,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [YYCrossPlatformService.service addListener:self forEvent:@"flutter test"];
 }
 
+- (void)onEvent:(NSString *)event params:(NSString *)params {
+    NSLog(@"params:%@",params);
+}
 
 - (IBAction)pushFlutterPage:(id)sender {
+    [YYCrossPlatformService MessageToFlutter:^(NSDictionary *r){
+        NSLog(@"Message to Flutter success!");
+    } message:@"Message from native"];
+    
+    [YYCrossPlatformService.service emitEvent:@"test" params:@{@"param":@"name"}];
+    
     [YYRouter.sharedRouter openPage:@"flutter://login" params:@{} animated:YES completion:^(BOOL f){}];
 }
 
