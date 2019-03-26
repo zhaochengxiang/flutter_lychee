@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050F71622248B01700CB4F90 /* YYRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F71602248B01700CB4F90 /* YYRouter.m */; };
+		050F71BB224A166F00CB4F90 /* YYCrossPlatformService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 050F71B6224A166F00CB4F90 /* YYCrossPlatformService.mm */; };
+		050F71BC224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = 050F71BA224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.mm */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		3B80C3941E831B6300D905FE /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B80C3931E831B6300D905FE /* App.framework */; };
@@ -38,6 +41,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		050F71602248B01700CB4F90 /* YYRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYRouter.m; sourceTree = "<group>"; };
+		050F71612248B01700CB4F90 /* YYRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYRouter.h; sourceTree = "<group>"; };
+		050F71B6224A166F00CB4F90 /* YYCrossPlatformService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YYCrossPlatformService.mm; sourceTree = "<group>"; };
+		050F71B7224A166F00CB4F90 /* YYCrossPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCrossPlatformService.h; sourceTree = "<group>"; };
+		050F71B9224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCrossPlatformServiceMessageToNative.h; sourceTree = "<group>"; };
+		050F71BA224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YYCrossPlatformServiceMessageToNative.mm; sourceTree = "<group>"; };
 		056CC5FD223B744F00F277ED /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
@@ -72,6 +81,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050F71B4224A166F00CB4F90 /* cross_platform */ = {
+			isa = PBXGroup;
+			children = (
+				050F71B5224A166F00CB4F90 /* service */,
+				050F71B8224A166F00CB4F90 /* handlers */,
+			);
+			name = cross_platform;
+			path = XService/cross_platform;
+			sourceTree = "<group>";
+		};
+		050F71B5224A166F00CB4F90 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				050F71B6224A166F00CB4F90 /* YYCrossPlatformService.mm */,
+				050F71B7224A166F00CB4F90 /* YYCrossPlatformService.h */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		050F71B8224A166F00CB4F90 /* handlers */ = {
+			isa = PBXGroup;
+			children = (
+				050F71B9224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.h */,
+				050F71BA224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.mm */,
+			);
+			path = handlers;
+			sourceTree = "<group>";
+		};
 		4F6E16BFDCC05E4EB49F1B03 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,9 +159,12 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				050F71B4224A166F00CB4F90 /* cross_platform */,
 				056CC5FD223B744F00F277ED /* Runner.entitlements */,
 				7AFFD8ED1D35381100E5BB4D /* AppDelegate.h */,
 				7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */,
+				050F71612248B01700CB4F90 /* YYRouter.h */,
+				050F71602248B01700CB4F90 /* YYRouter.m */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -250,11 +290,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Runner/Pods-Runner-resources.sh",
 				"${PODS_ROOT}/mob_sharesdk/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
+				"${PODS_ROOT}/mob_sharesdk/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK/WeiboSDK.bundle",
 				"${PODS_ROOT}/mob_sharesdk/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDKUI.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,8 +361,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				050F71622248B01700CB4F90 /* YYRouter.m in Sources */,
+				050F71BB224A166F00CB4F90 /* YYCrossPlatformService.mm in Sources */,
 				978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */,
 				97C146F31CF9000F007C117D /* main.m in Sources */,
+				050F71BC224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.mm in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,7 +462,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wanjuanlink.lychee1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wanjuanlink.lychee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Lychee Class";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -547,7 +592,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wanjuanlink.lychee1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wanjuanlink.lychee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Lychee Class development";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -576,7 +621,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wanjuanlink.lychee1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wanjuanlink.lychee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Lychee Class";
 				VERSIONING_SYSTEM = "apple-generic";
