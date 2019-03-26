@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		050F71622248B01700CB4F90 /* YYRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F71602248B01700CB4F90 /* YYRouter.m */; };
-		050F71662248B2EE00CB4F90 /* UIViewControllerDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F71632248B2EE00CB4F90 /* UIViewControllerDemo.m */; };
-		050F71672248B2EE00CB4F90 /* UIViewControllerDemo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050F71642248B2EE00CB4F90 /* UIViewControllerDemo.xib */; };
 		050F71BB224A166F00CB4F90 /* YYCrossPlatformService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 050F71B6224A166F00CB4F90 /* YYCrossPlatformService.mm */; };
 		050F71BC224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = 050F71BA224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.mm */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
@@ -45,9 +43,6 @@
 /* Begin PBXFileReference section */
 		050F71602248B01700CB4F90 /* YYRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYRouter.m; sourceTree = "<group>"; };
 		050F71612248B01700CB4F90 /* YYRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYRouter.h; sourceTree = "<group>"; };
-		050F71632248B2EE00CB4F90 /* UIViewControllerDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerDemo.m; sourceTree = "<group>"; };
-		050F71642248B2EE00CB4F90 /* UIViewControllerDemo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIViewControllerDemo.xib; sourceTree = "<group>"; };
-		050F71652248B2EE00CB4F90 /* UIViewControllerDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerDemo.h; sourceTree = "<group>"; };
 		050F71B6224A166F00CB4F90 /* YYCrossPlatformService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = YYCrossPlatformService.mm; sourceTree = "<group>"; };
 		050F71B7224A166F00CB4F90 /* YYCrossPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCrossPlatformService.h; sourceTree = "<group>"; };
 		050F71B9224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYCrossPlatformServiceMessageToNative.h; sourceTree = "<group>"; };
@@ -170,9 +165,6 @@
 				7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */,
 				050F71612248B01700CB4F90 /* YYRouter.h */,
 				050F71602248B01700CB4F90 /* YYRouter.m */,
-				050F71652248B2EE00CB4F90 /* UIViewControllerDemo.h */,
-				050F71632248B2EE00CB4F90 /* UIViewControllerDemo.m */,
-				050F71642248B2EE00CB4F90 /* UIViewControllerDemo.xib */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -266,7 +258,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
-				050F71672248B2EE00CB4F90 /* UIViewControllerDemo.xib in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				9740EEB41CF90195004384FC /* Debug.xcconfig in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
@@ -375,7 +366,6 @@
 				978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */,
 				97C146F31CF9000F007C117D /* main.m in Sources */,
 				050F71BC224A166F00CB4F90 /* YYCrossPlatformServiceMessageToNative.mm in Sources */,
-				050F71662248B2EE00CB4F90 /* UIViewControllerDemo.m in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

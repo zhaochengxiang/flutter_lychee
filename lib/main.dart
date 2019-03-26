@@ -5,12 +5,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:lychee/common/event/YYHttpErrorEvent.dart';
 import 'package:lychee/page/YYHomeTabBarPage.dart';
-import 'package:lychee/page/YYLoginPage.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/manager/YYShareManager.dart';
 import 'package:lychee/common/manager/YYPushManager.dart';
 import 'package:lychee/common/xservice/loader/YYServiceLoader.dart';
-import 'package:lychee/common/xservice/cross-platform/service/YYCrossPlatformService.dart';
 
 void main() => runApp(LycheeApp());
 
@@ -32,23 +30,8 @@ class _LycheeAppState extends State<LycheeApp> {
     YYPushManager.init();
     YYServiceLoader.load();
 
-    YYCrossPlatformService.MessageToNative("This is message from flutter",(Exception e){
-    return false;
-    }).then((bool value){
-    if(value){
-      print("Sending flutter message to native. succuess");
-    }else{
-      print("Sending flutter message to native. failed");
-    }
-    });
-    YYCrossPlatformService.service().addEventListner("test", (String event , Map<dynamic,dynamic> params){
-      print(params);
-      YYCrossPlatformService.service().emitEvent("flutter test", {"flutter param":"name"});
-    });
-    
     FlutterBoost.singleton.registerPageBuilders({
       'flutter://home': (pageName, params, _) => YYHomeTabBarPage(),
-      'flutter://login': (pageName, params, _) => YYLoginPage(),
     });
 
     FlutterBoost.handleOnStartPage();

@@ -63,8 +63,7 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
       if (res!=null && res.result) {
         YYLocalStorage.save(YYCommonUtils.TOKEN_KEY, res.data['token']);
         YYNeedRefreshEvent.refreshHandleFunction('YYMinePage');
-        // Navigator.pop(context);
-        FlutterBoost.singleton.closePageForContext(context);
+        Navigator.pop(context);
       }
     }
   }
@@ -90,8 +89,7 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
             padding: EdgeInsets.all(0), 
             child: Image.asset(YYCommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
             onPressed: (){
-                // Navigator.pop(context);
-              FlutterBoost.singleton.closePageForContext(context);
+                Navigator.pop(context);
               },
           )
         ),
