@@ -21,6 +21,18 @@ PODS:
     - MOBFoundation
   - mob_sharesdk/ShareSDK (4.2.1.1):
     - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.2.1.1):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.2.1.1):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.2.1.1):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.2.1.1):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
   - mob_sharesdk/ShareSDKPlatforms/WeChat (4.2.1.1):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
@@ -34,6 +46,10 @@ PODS:
   - sharesdk (0.0.1):
     - Flutter
     - mob_sharesdk
+    - mob_sharesdk/ShareSDKPlatforms/Facebook
+    - mob_sharesdk/ShareSDKPlatforms/QQ
+    - mob_sharesdk/ShareSDKPlatforms/SinaWeibo
+    - mob_sharesdk/ShareSDKPlatforms/Twitter
     - mob_sharesdk/ShareSDKPlatforms/WeChat
     - mob_sharesdk/ShareSDKUI
   - xservice_kit (0.0.1):
@@ -91,7 +107,7 @@ SPEC CHECKSUMS:
   MOBFoundation: ce2ba976fd435b0cb06897466b2746e639895b7d
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
-  sharesdk: 70f7fde981edcf181843e4203fe704eae3f43c8c
+  sharesdk: dc69ef855c237227a575efebc71fe2132c35df01
   xservice_kit: a86c64372b3e41e7d8e9b1a0b9139866680f525c
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
