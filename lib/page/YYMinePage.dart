@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
@@ -41,7 +42,8 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
 
   topPressed() {
     if (baseWidgetControl.data == null) {
-      YYCommonUtils.navigatorRouter(context, YYLoginPage());
+      // YYCommonUtils.navigatorRouter(context, YYLoginPage());
+      FlutterBoost.singleton.openPage("flutter://login", null);
     } 
   }
 

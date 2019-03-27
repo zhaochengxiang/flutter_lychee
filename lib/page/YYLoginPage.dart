@@ -10,7 +10,6 @@ import 'package:lychee/common/local/YYLocalStorage.dart';
 import 'package:lychee/common/event/YYNeedRefreshEvent.dart';
 
 class YYLoginPage extends StatefulWidget {
-
   @override
   _YYLoginPageState createState() => _YYLoginPageState();
 }
@@ -63,7 +62,8 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
       if (res!=null && res.result) {
         YYLocalStorage.save(YYCommonUtils.TOKEN_KEY, res.data['token']);
         YYNeedRefreshEvent.refreshHandleFunction('YYMinePage');
-        Navigator.pop(context);
+        // Navigator.pop(context);
+        FlutterBoost.singleton.closePageForContext(context);
       }
     }
   }
@@ -89,7 +89,8 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
             padding: EdgeInsets.all(0), 
             child: Image.asset(YYCommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
             onPressed: (){
-                Navigator.pop(context);
+                // Navigator.pop(context);
+                FlutterBoost.singleton.closePageForContext(context);
               },
           )
         ),

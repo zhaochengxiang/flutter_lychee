@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     setContentView(R.layout.main);
 
-    mFragment = FlutterFragment.instance();
+    mFragment = FlutterFragment.instance("flutter://home");
 
     getSupportFragmentManager()
             .beginTransaction()

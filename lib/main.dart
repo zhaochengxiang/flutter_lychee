@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:lychee/common/event/YYHttpErrorEvent.dart';
 import 'package:lychee/page/YYHomeTabBarPage.dart';
+import 'package:lychee/page/YYLoginPage.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/manager/YYShareManager.dart';
 import 'package:lychee/common/manager/YYPushManager.dart';
@@ -32,6 +33,7 @@ class _LycheeAppState extends State<LycheeApp> {
 
     FlutterBoost.singleton.registerPageBuilders({
       'flutter://home': (pageName, params, _) => YYHomeTabBarPage(),
+      'flutter://login': (pageName, params, _) => YYLoginPage(),
     });
 
     FlutterBoost.handleOnStartPage();
