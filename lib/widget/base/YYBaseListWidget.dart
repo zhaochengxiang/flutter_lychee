@@ -70,45 +70,47 @@ class _YYBaseListWidgetState extends State<YYBaseListWidget> with YYBaseDecorati
     Widget decoration = buildDecoration(widget.control,widget.onRefresh,widget.emptyTip);
     if (decoration != null) return decoration; 
 
-    return new EasyRefresh(
-      ///GlobalKey，用户外部获取RefreshIndicator的State，做显示刷新
-      key: widget.refreshKey,
-      refreshHeader: ClassicsHeader(
-        key: _refreshHeaderKey,
-        refreshText: "下拉刷新",
-        refreshReadyText: "释放刷新",
-        refreshingText: "正在刷新...",
-        refreshedText: "刷新结束",
-        moreInfo: "更新于 %T",
-        showMore: true,
-        bgColor: Colors.white,
-        textColor: Color(YYColors.primaryText),
-        moreInfoColor: Color(YYColors.secondaryText),
-       ),
-      refreshFooter: ClassicsFooter(
-        key: _refreshFooterKey,
-        loadText: "上拉加载",
-        loadReadyText: "释放加载",
-        loadingText: "正在加载",
-        loadedText: "加载结束",
-        noMoreText: "没有更多数据",
-        moreInfo: "更新于 %T",
-        bgColor: Colors.white,
-        textColor: Color(YYColors.primaryText),
-        moreInfoColor: Color(YYColors.secondaryText),
-        showMore: true,
-      ),
-      onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
-      loadMore:(widget.control.needRefreshFooter)?widget.onLoadMore:null,
-      child: new ListView.builder(
-        ///根据状态返回子孔健
-        itemBuilder: (context, index) {
-          return widget.itemBuilder(context, index);
-        },
+    return new SafeArea( 
+      child: new EasyRefresh(
+        ///GlobalKey，用户外部获取RefreshIndicator的State，做显示刷新
+        key: widget.refreshKey,
+        refreshHeader: ClassicsHeader(
+          key: _refreshHeaderKey,
+          refreshText: "下拉刷新",
+          refreshReadyText: "释放刷新",
+          refreshingText: "正在刷新...",
+          refreshedText: "刷新结束",
+          moreInfo: "更新于 %T",
+          showMore: true,
+          bgColor: Colors.white,
+          textColor: Color(YYColors.primaryText),
+          moreInfoColor: Color(YYColors.secondaryText),
+        ),
+        refreshFooter: ClassicsFooter(
+          key: _refreshFooterKey,
+          loadText: "上拉加载",
+          loadReadyText: "释放加载",
+          loadingText: "正在加载",
+          loadedText: "加载结束",
+          noMoreText: "没有更多数据",
+          moreInfo: "更新于 %T",
+          bgColor: Colors.white,
+          textColor: Color(YYColors.primaryText),
+          moreInfoColor: Color(YYColors.secondaryText),
+          showMore: true,
+        ),
+        onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
+        loadMore:(widget.control.needRefreshFooter)?widget.onLoadMore:null,
+        child: new ListView.builder(
+          ///根据状态返回子孔健
+          itemBuilder: (context, index) {
+            return widget.itemBuilder(context, index);
+          },
 
-        ///根据状态返回数量
-        itemCount: _getListCount(),
-      ),
+          ///根据状态返回数量
+          itemCount: _getListCount(),
+        ),
+      )
     );
   }
 }

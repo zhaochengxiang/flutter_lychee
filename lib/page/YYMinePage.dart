@@ -5,6 +5,7 @@ import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/model/YYUser.dart';
 import 'package:lychee/page/YYLoginPage.dart';
+import 'package:lychee/common/local/YYLocalStorage.dart';
 
 class YYMinePage extends StatefulWidget {
   @override
@@ -22,8 +23,15 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
 
   static const List services = [{"image":"my_book.png","title":"我的图书"},{"image":"my_library.png","title":"我的图书馆"},{"image":"my_note.png","title":"拍书笔记"},{"image":"my_lesson.png","title":"我的小讲"},{"image":"my_course.png","title":"我的短课"},{"image":"my_frame.png","title":"我的书架"},{"image":"my_follow.png","title":"我的关注"},{"image":"my_recommend.png","title":"推荐给朋友"},{"image":"my_about.png","title":"关于我们"}];
 
-  @override
-  bool get needNetworkRequest => false;
+   @override
+  Future<bool> needNetworkRequest() async {
+    var token = await YYLocalStorage.get(YYCommonUtils.TOKEN_KEY);
+    if (token != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   remotePath() {
@@ -42,7 +50,6 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
 
   topPressed() {
     if (baseWidgetControl.data == null) {
-      // YYCommonUtils.navigatorRouter(context, YYLoginPage());
       FlutterBoost.singleton.openPage("flutter://login", null);
     } 
   }

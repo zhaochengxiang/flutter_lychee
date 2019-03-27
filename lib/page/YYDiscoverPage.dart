@@ -15,9 +15,11 @@ class YYDiscoverPage extends StatefulWidget {
 }
 
 class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliveClientMixin<YYDiscoverPage>,YYBaseState<YYDiscoverPage>, YYBaseListState<YYDiscoverPage> {
-  
+
   @override
-  bool get needNetworkRequest => false;
+  Future<bool> needNetworkRequest() async {
+    return false;
+  }
 
   @override
   bool get needRefreshHeader => false;

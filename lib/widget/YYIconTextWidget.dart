@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
+import 'package:lychee/common/style/YYStyle.dart';
 
 /**
  * 带图标Icon的文本，可调节
@@ -46,9 +47,24 @@ class YYIconTextWidget extends StatelessWidget {
 
   List<Widget> commonChildren() {
     List<Widget> widgetList = new List();
-    widgetList.add((iconAssetName.length!=0)?new Image.asset(YYCommonUtils.Local_Icon_prefix+iconAssetName,fit:iconFit , width:iconWidth, height:iconHeight, color:iconColor):new Container());
 
-    widgetList.add((iconNetUrl.length!=0)?new FadeInImage.assetNetwork(placeholder: YYCommonUtils.Local_Icon_prefix+'book_placeholder.png',image:iconNetUrl,fit:iconFit,width: iconWidth,height:iconHeight):new Container());
+    widgetList.add((iconAssetName.length!=0)?new Container(
+      width: iconWidth,
+      height:iconHeight,
+      decoration: new BoxDecoration(
+        border: Border.all(color:Color(YYColors.border),width: 0.3),
+      ),
+      child: Image.asset(YYCommonUtils.Local_Icon_prefix+iconAssetName,fit:iconFit, color:iconColor),
+    ) : new Container());
+
+    widgetList.add((iconNetUrl.length!=0)?new Container(
+      width: iconWidth,
+      height:iconHeight,
+      decoration: new BoxDecoration(
+        border: Border.all(color:Color(YYColors.border),width: 0.3),
+      ),
+      child: FadeInImage.assetNetwork(placeholder: YYCommonUtils.Local_Icon_prefix+'book_placeholder.png',image:iconNetUrl,fit:iconFit),
+    ) : new Container());
     widgetList.add(new Padding(padding: new EdgeInsets.all(padding)));
     widgetList.add(new Container(width:iconWidth,height:maxLines*textLineHeight,child:Text(iconText,style: textStyle,overflow: TextOverflow.ellipsis,maxLines: maxLines,textAlign: TextAlign.center)));
 

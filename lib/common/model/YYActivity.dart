@@ -7,37 +7,13 @@ part 'YYActivity.g.dart';
 class YYActivity {
     double id;
     String type;
-    /**
-     * 主题
-     */
     String subject;
-    /**
-     * 详情
-     */
     String detail;
-    /**
-     * 主办方
-     */
     String sponsor;
-    /**
-     * 城市
-     */
     String city;
-    /**
-     * 地点
-     */
     String address;
-    /**
-     * 时间
-     */
     String time;
-    /**
-     * 报名方法或者方式
-     */
     String registration;
-    /**
-     * 来源链接
-     */
     String link;
     List<YYSpeaker> speakerList;
 

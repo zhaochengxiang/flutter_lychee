@@ -27,8 +27,10 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
   final TextEditingController phoneController = new TextEditingController();
   final TextEditingController capthaController = new TextEditingController();
 
-  @override
-  bool get needNetworkRequest => false;
+   @override
+  Future<bool> needNetworkRequest() async {
+    return false;
+  }
 
   capthaPressd(context) async {
     if (isPhoneValid) {
@@ -62,7 +64,6 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
       if (res!=null && res.result) {
         YYLocalStorage.save(YYCommonUtils.TOKEN_KEY, res.data['token']);
         YYNeedRefreshEvent.refreshHandleFunction('YYMinePage');
-        // Navigator.pop(context);
         FlutterBoost.singleton.closePageForContext(context);
       }
     }
@@ -89,7 +90,6 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
             padding: EdgeInsets.all(0), 
             child: Image.asset(YYCommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
             onPressed: (){
-                // Navigator.pop(context);
                 FlutterBoost.singleton.closePageForContext(context);
               },
           )

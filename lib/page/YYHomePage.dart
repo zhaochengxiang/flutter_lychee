@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 
 import 'package:lychee/widget/base/YYBaseScrollSate.dart';
 import 'package:lychee/widget/base/YYBaseScrollWidget.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/model/YYIndex.dart';
+import 'package:lychee/common/model/YYBanner.dart';
 import 'package:lychee/widget/YYSwiperWidget.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/YYIconTextWidget.dart';
 import 'package:lychee/widget/YYLessonItemWidget.dart';
 import 'package:lychee/widget/YYCourseItemWidget.dart';
-import 'package:lychee/widget/YYBookItemWidget.dart';
-import 'package:lychee/common/model/YYBook.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
+import 'package:lychee/widget/YYBookGridWidget.dart';
 
 class YYHomePage extends StatefulWidget {
   @override
@@ -60,9 +61,17 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
 
     var banners = baseWidgetControl.data.bannerList;
 
+    List urls = List();
+    if (banners != null) {
+      for (int i=0;i<banners.length;i++) {
+        YYBanner book = banners[i];
+        urls.add(book.image);
+      }
+    }
+
     return (banners==null||banners.length==0)?new Container():new YYSwiperWidget(
       height: 125,
-      banners: banners,
+      urls: urls,
       dotActiveColor: Color(YYColors.primary),
       selectItemChanged:(selectIndex) {
        
@@ -78,6 +87,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
           Expanded(
             flex: 1,
             child: _optionIconText("book.png","图书",() {
+              FlutterBoost.singleton.openPage("flutter://home_book", null);
             }),
           ),
           Expanded(
@@ -112,22 +122,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
             ),
           ),
         ),
-        new ListView.builder(
-          shrinkWrap: true,
-          physics: new NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            int start = index*YYBookItemWidget.defaultColumn;
-            int end = (index+1)*YYBookItemWidget.defaultColumn;
-            List<YYBook> itemBooks = new List<YYBook>();
-            for (int i=start;i<end&&i<books.length;i++) {
-              itemBooks.add(books[i]);
-            }
-            return new YYBookItemWidget(itemBooks,onPressed: (book){
-
-            });
-          },
-          itemCount: (books.length%YYBookItemWidget.defaultColumn==0)?(books.length~/YYBookItemWidget.defaultColumn):(books.length~/YYBookItemWidget.defaultColumn+1),
-        ),
+        new YYBookGridWidget(books),
       ],
     );
   }

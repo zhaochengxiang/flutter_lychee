@@ -26,7 +26,9 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
   dynamic get getData => data;
 
   @protected
-  bool get needNetworkRequest => true;
+  Future<bool> needNetworkRequest() async {
+    return true;
+  }
 
   @protected
   remotePath() {
@@ -120,9 +122,11 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
     super.initState();
     initControl();
 
-    if (needNetworkRequest == true) {
-      handleRefresh();
-    }
+    needNetworkRequest().then((res) {
+      if (res == true) {
+        handleRefresh();
+      } 
+    });
     
     refreshEventStream =  YYCommonUtils.eventBus.on<YYNeedRefreshEvent>().listen((event) {
       refreshHandleFunction(event.className);

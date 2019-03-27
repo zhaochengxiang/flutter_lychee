@@ -10,6 +10,7 @@ import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/manager/YYShareManager.dart';
 import 'package:lychee/common/manager/YYPushManager.dart';
 import 'package:lychee/common/xservice/loader/YYServiceLoader.dart';
+import 'package:lychee/page/YYHomeBookPage.dart';
 
 void main() => runApp(LycheeApp());
 
@@ -34,6 +35,7 @@ class _LycheeAppState extends State<LycheeApp> {
     FlutterBoost.singleton.registerPageBuilders({
       'flutter://home': (pageName, params, _) => YYHomeTabBarPage(),
       'flutter://login': (pageName, params, _) => YYLoginPage(),
+      'flutter://home_book': (pageName, params, _) => YYHomeBookPage(),
     });
 
     FlutterBoost.handleOnStartPage();

@@ -7,7 +7,7 @@ typedef void YYSwiperSelectItemChanged<int>(int value);
 class YYSwiperWidget extends StatelessWidget {
 
   final double height;
-  final List<YYBanner> banners;
+  final List urls;
   final IconData iconPrevious;
   final IconData iconNext;
   final Color dotColor;
@@ -16,7 +16,7 @@ class YYSwiperWidget extends StatelessWidget {
   final double dotActiveSize;
   final YYSwiperSelectItemChanged selectItemChanged;
 
-  YYSwiperWidget({@required this.height,@required this.banners,this.iconPrevious, this.iconNext, this.dotColor, this.dotSize = 6.0, this.dotActiveColor, this.dotActiveSize = 6.0, this.selectItemChanged});
+  YYSwiperWidget({@required this.height,@required this.urls,this.iconPrevious, this.iconNext, this.dotColor, this.dotSize = 6.0, this.dotActiveColor, this.dotActiveSize = 6.0, this.selectItemChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class YYSwiperWidget extends StatelessWidget {
         height: height,
         child: Swiper(
           itemBuilder: _swiperBuilder,
-          itemCount: banners.length,
-          pagination:  (banners.length>1)?new SwiperPagination(
+          itemCount: urls.length,
+          pagination:  (urls.length>1)?new SwiperPagination(
             builder: DotSwiperPaginationBuilder(
               color:dotColor??Colors.white,
               size: dotSize,
@@ -39,17 +39,16 @@ class YYSwiperWidget extends StatelessWidget {
             iconNext: iconNext??null,
           ),
           scrollDirection: Axis.horizontal,
-          autoplay: (banners.length>1)?true:false,
-          loop: (banners.length>1)?true:false,
+          autoplay: (urls.length>1)?true:false,
+          loop: (urls.length>1)?true:false,
           onTap: (index) => selectItemChanged?.call(index),
         ),
     );
   }
 
   Widget _swiperBuilder(BuildContext context, int index) {
-    YYBanner banner = banners[index];
     return (Image.network(
-      banner.image,
+      urls[index],
       fit: BoxFit.fill,
     ));
   }
