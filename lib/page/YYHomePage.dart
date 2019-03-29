@@ -56,7 +56,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
     );
   }
 
-  _bannerWidget() {
+  _buildBannerWidget() {
     if (baseWidgetControl.data==null) return new Container();
 
     var banners = baseWidgetControl.data.bannerList;
@@ -71,7 +71,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
 
     return (banners==null||banners.length==0)?new Container():new YYSwiperWidget(
       height: 125,
-      urls: urls,
+      imageUrls: urls,
       dotActiveColor: Color(YYColors.primary),
       selectItemChanged:(selectIndex) {
        
@@ -79,33 +79,28 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
     );
   } 
 
-  _optionWidget() {
+  _buildOptionWidget() {
     return new Padding(
       padding:new EdgeInsets.only(left:0,top:21.0,right:0,bottom:10.5),
       child: new Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: _optionIconText("book.png","图书",() {
+          _optionIconText("book.png","图书",() {
               FlutterBoost.singleton.openPage("flutter://home_book", null);
-            }),
-          ),
-          Expanded(
-            flex: 1,
-            child: _optionIconText("lesson.png","小讲",() {
-            }),
-          ),
-          Expanded(
-            flex: 1,
-            child: _optionIconText("course.png","短课",() {
-            }),
-          ),
+          }),
+          _optionIconText("lesson.png","小讲",() {
+         
+          }),
+          _optionIconText("course.png","短课",() {
+            
+          }),
         ],
       ),
     );
   }
 
-  _chosenBookWidget() {
+  _buildChosenBookWidget() {
     if (baseWidgetControl.data == null) return new Container();
 
     var books =baseWidgetControl.data.chosenBookList;
@@ -127,7 +122,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
     );
   }
 
-  _chosenLessonWidget() {
+  _buildChosenLessonWidget() {
     if (baseWidgetControl.data == null) return new Container();
 
     var lessons =baseWidgetControl.data.chosenLessonList;
@@ -158,7 +153,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
     );
   }
 
-  _chosenCourseWidget() {
+  _buildChosenCourseWidget() {
     if (baseWidgetControl.data == null) return new Container();
 
     var courses =baseWidgetControl.data.chosenCourseList;
@@ -217,11 +212,11 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _bannerWidget(),
-            _optionWidget(),
-            _chosenBookWidget(),
-            _chosenLessonWidget(),
-            _chosenCourseWidget(),
+            _buildBannerWidget(),
+            _buildOptionWidget(),
+            _buildChosenBookWidget(),
+            _buildChosenLessonWidget(),
+            _buildChosenCourseWidget(),
           ]
         ),
       ),

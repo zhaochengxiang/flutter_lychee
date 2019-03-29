@@ -47,7 +47,7 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
 
     return (fineBooks==null||fineBooks.length==0)?new Container():new YYSwiperWidget(
       height: 125,
-      urls: urls,
+      imageUrls: urls,
       dotActiveColor: Color(YYColors.primary),
       selectItemChanged:(selectIndex) {
        

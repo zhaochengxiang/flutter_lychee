@@ -7,7 +7,7 @@ typedef void YYSwiperSelectItemChanged<int>(int value);
 class YYSwiperWidget extends StatelessWidget {
 
   final double height;
-  final List urls;
+  final List imageUrls;
   final IconData iconPrevious;
   final IconData iconNext;
   final Color dotColor;
@@ -16,7 +16,7 @@ class YYSwiperWidget extends StatelessWidget {
   final double dotActiveSize;
   final YYSwiperSelectItemChanged selectItemChanged;
 
-  YYSwiperWidget({@required this.height,@required this.urls,this.iconPrevious, this.iconNext, this.dotColor, this.dotSize = 6.0, this.dotActiveColor, this.dotActiveSize = 6.0, this.selectItemChanged});
+  YYSwiperWidget({@required this.height,@required this.imageUrls,this.iconPrevious, this.iconNext, this.dotColor, this.dotSize = 6.0, this.dotActiveColor, this.dotActiveSize = 6.0, this.selectItemChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class YYSwiperWidget extends StatelessWidget {
         height: height,
         child: Swiper(
           itemBuilder: _swiperBuilder,
-          itemCount: urls.length,
-          pagination:  (urls.length>1)?new SwiperPagination(
+          itemCount: imageUrls.length,
+          pagination:  (imageUrls.length>1)?new SwiperPagination(
             builder: DotSwiperPaginationBuilder(
               color:dotColor??Colors.white,
               size: dotSize,
@@ -39,8 +39,8 @@ class YYSwiperWidget extends StatelessWidget {
             iconNext: iconNext??null,
           ),
           scrollDirection: Axis.horizontal,
-          autoplay: (urls.length>1)?true:false,
-          loop: (urls.length>1)?true:false,
+          autoplay: (imageUrls.length>1)?true:false,
+          loop: (imageUrls.length>1)?true:false,
           onTap: (index) => selectItemChanged?.call(index),
         ),
     );
@@ -48,7 +48,7 @@ class YYSwiperWidget extends StatelessWidget {
 
   Widget _swiperBuilder(BuildContext context, int index) {
     return (Image.network(
-      urls[index],
+      imageUrls[index],
       fit: BoxFit.fill,
     ));
   }

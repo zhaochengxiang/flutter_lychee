@@ -106,7 +106,15 @@ class _YYHomeTabBarPageState extends State<YYHomeTabBarPage> {
           children: pages,
           index: _tabIndex,
         ),
-        bottomNavigationBar: new CupertinoTabBar(
+        bottomNavigationBar: new BottomNavigationBar(
+          type:BottomNavigationBarType.fixed,
+          iconSize: 24.0,
+          currentIndex: _tabIndex,
+          onTap: (index) {
+            setState((){
+              _tabIndex = index;
+            });
+          },
           items: <BottomNavigationBarItem>[
             new BottomNavigationBarItem(
                 icon: getTabIcon(0),
@@ -121,12 +129,6 @@ class _YYHomeTabBarPageState extends State<YYHomeTabBarPage> {
                 icon: getTabIcon(3),
                 title: getTabTitle(3)),
           ],
-          currentIndex: _tabIndex,
-          onTap: (index) {
-            setState((){
-              _tabIndex = index;
-            });
-          },
         ),
       ),
     );
