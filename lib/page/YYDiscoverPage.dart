@@ -66,6 +66,7 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
     return new Scaffold(
       appBar: new AppBar(
         title:Text("发现"),
+        centerTitle: true,
       ),
       body: YYBaseListWidget(
         control: control,

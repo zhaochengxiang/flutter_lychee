@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:lychee/common/model/YYCategory.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 
-class YYCategoryLeftItemWidget extends StatefulWidget {
+class YYCategoryLeftItem extends StatefulWidget {
   final YYCategory category;
   final bool highlight;
   final VoidCallback onPress;
 
-  YYCategoryLeftItemWidget({this.category,this.highlight,this.onPress});
+  YYCategoryLeftItem({this.category,this.highlight,this.onPress});
 
   @override
-  _YYCategoryLeftItemWidgetState createState() => _YYCategoryLeftItemWidgetState();
+  _YYCategoryLeftItemState createState() => _YYCategoryLeftItemState();
 }
 
-class _YYCategoryLeftItemWidgetState extends State<YYCategoryLeftItemWidget> {
+class _YYCategoryLeftItemState extends State<YYCategoryLeftItem> {
   @override
   Widget build(BuildContext context) {
 

@@ -4,8 +4,8 @@ import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/widget/base/YYBaseWidget.dart';
 import 'package:lychee/common/model/YYCategory.dart';
-import 'package:lychee/widget/YYCategoryLeftItemWidget.dart';
-import 'package:lychee/widget/YYCategoryRightItemWidget.dart';
+import 'package:lychee/widget/YYCategoryLeftItem.dart';
+import 'package:lychee/widget/YYCategoryRightItem.dart';
 
 class YYCategoryPage extends StatefulWidget {
   @override
@@ -43,7 +43,7 @@ class _YYCategoryPagePageState extends State<YYCategoryPage>  with AutomaticKeep
     return new ListView.builder(
       physics: ClampingScrollPhysics(),
       itemBuilder: (context, index) {
-        return YYCategoryLeftItemWidget(category: baseWidgetControl.data[index],highlight: (index==leftIndex),onPress: (){
+        return YYCategoryLeftItem(category: baseWidgetControl.data[index],highlight: (index==leftIndex),onPress: (){
           setState(() {
             leftIndex = index;
             rightSectionIndex = -1;
@@ -64,7 +64,7 @@ class _YYCategoryPagePageState extends State<YYCategoryPage>  with AutomaticKeep
     return new ListView.builder(
       physics: ClampingScrollPhysics(),
       itemBuilder: (context, index) {
-        return YYCategoryRightItemWidget(
+        return YYCategoryRightItem(
           category: rightCategories[index],
           isSectionHighlight: (index==rightSectionIndex&&rightItemIndex==-1),
           itemHighlightIndex: (index==rightSectionIndex)?rightItemIndex:-1,
@@ -91,6 +91,7 @@ class _YYCategoryPagePageState extends State<YYCategoryPage>  with AutomaticKeep
     return new Scaffold(
       appBar: new AppBar(
         title:Text("分类"),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
           icon: new Image.asset(YYCommonUtils.Local_Icon_prefix+"search.png",width: 24.0,height: 24.0),

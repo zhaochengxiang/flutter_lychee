@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:lychee/common/model/YYBanner.dart';
 
 typedef void YYSwiperSelectItemChanged<int>(int value);
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_boost/flutter_boost.dart';
 
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/widget/YYInputWidget.dart';
@@ -64,7 +63,7 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
       if (res!=null && res.result) {
         YYLocalStorage.save(YYCommonUtils.TOKEN_KEY, res.data['token']);
         YYNeedRefreshEvent.refreshHandleFunction('YYMinePage');
-        FlutterBoost.singleton.closePageForContext(context);
+        YYCommonUtils.closePage(context);
       }
     }
   }
@@ -90,8 +89,8 @@ class _YYLoginPageState extends State<YYLoginPage> with AutomaticKeepAliveClient
             padding: EdgeInsets.all(0), 
             child: Image.asset(YYCommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
             onPressed: (){
-                FlutterBoost.singleton.closePageForContext(context);
-              },
+              YYCommonUtils.closePage(context);
+            },
           )
         ),
         body: Padding(

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boost/flutter_boost.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/model/YYUser.dart';
-import 'package:lychee/page/YYLoginPage.dart';
 import 'package:lychee/common/local/YYLocalStorage.dart';
 
 class YYMinePage extends StatefulWidget {
@@ -50,7 +48,7 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
 
   topPressed() {
     if (baseWidgetControl.data == null) {
-      FlutterBoost.singleton.openPage("flutter://login", null);
+      YYCommonUtils.openPage("flutter://login", null);
     } 
   }
 

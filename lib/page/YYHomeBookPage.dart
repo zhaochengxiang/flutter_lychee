@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boost/flutter_boost.dart';
 
 import 'package:lychee/widget/base/YYBaseScrollSate.dart';
 import 'package:lychee/widget/base/YYBaseScrollWidget.dart';
@@ -7,9 +6,10 @@ import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/model/YYBookHome.dart';
 import 'package:lychee/common/model/YYBook.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
-import 'package:lychee/widget/YYBookGridWidget.dart';
+import 'package:lychee/widget/YYBookGrid.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/YYSwiperWidget.dart';
+import 'package:lychee/widget/YYSectionWdiget.dart';
 
 class YYHomeBookPage extends StatefulWidget {
   @override
@@ -61,27 +61,12 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
     var latestBooks = baseWidgetControl.data.latestList;
     return (latestBooks==null||latestBooks.length==0)?new Container():new Column(
       children: <Widget>[
-        new Container(
-          height:40.5,
-          child: new Padding(
-            padding: new EdgeInsets.only(left:10.5,right:10.5),
-            child:FlatButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () {},
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Text("新书推荐",style: TextStyle(color: Color(YYColors.primarySection),fontSize: YYSize.large)),
-                  ),
-                  Text("更多",style: TextStyle(color: Color(YYColors.secondarySection),fontSize: YYSize.small)),
-                  Image.asset(YYCommonUtils.Local_Icon_prefix+"arrow_more.png",width: 13,height: 13,fit:BoxFit.fill)
-                ],
-              )
-            )
-          ),
+        YYSectionWidget(
+          title: "新书推荐",
+          subtitle: "更多",
+          onPressed: () {},
         ),
-        new YYBookGridWidget(latestBooks),
+        new YYBookGrid(latestBooks),
       ],
     ); 
   }
@@ -92,27 +77,12 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
     var popularBooks = baseWidgetControl.data.topPopularList;
     return (popularBooks==null||popularBooks.length==0)?new Container():new Column(
       children: <Widget>[
-        new Container(
-          height:40.5,
-          child: new Padding(
-            padding: new EdgeInsets.only(left:10.5,right:10.5),
-            child:FlatButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () {},
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Text("热门图书",style: TextStyle(color: Color(YYColors.primarySection),fontSize: YYSize.large)),
-                  ),
-                  Text("更多",style: TextStyle(color: Color(YYColors.secondarySection),fontSize: YYSize.small)),
-                  Image.asset(YYCommonUtils.Local_Icon_prefix+"arrow_more.png",width: 13,height: 13,fit:BoxFit.fill)
-                ],
-              )
-            )
-          ),
+        YYSectionWidget(
+          title: "热门图书",
+          subtitle: "更多",
+          onPressed: () {},
         ),
-        new YYBookGridWidget(popularBooks),
+        new YYBookGrid(popularBooks),
       ],
     );
   }
@@ -124,11 +94,12 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
     return new Scaffold(
       appBar: new AppBar(
         title:Text("图书"),
+        centerTitle: true,
         leading: FlatButton(
           padding: EdgeInsets.all(0), 
           child: Image.asset(YYCommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
           onPressed: (){
-            FlutterBoost.singleton.closePageForContext(context);
+            YYCommonUtils.closePage(context);
           },
         )
       ),

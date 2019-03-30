@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lychee/common/model/YYLesson.dart';
+import 'package:lychee/common/model/YYCourse.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 
-class YYLessonItemWidget extends StatelessWidget {
-  final YYLesson lesson;
+class YYCourseItem extends StatelessWidget {
+  final YYCourse course;
   final VoidCallback onPressed;
-
-  YYLessonItemWidget(this.lesson,{this.onPressed});
+  YYCourseItem(this.course,{this.onPressed});
 
   @override
     Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class YYLessonItemWidget extends StatelessWidget {
                     child: new FadeInImage.assetNetwork(
                       placeholder: YYCommonUtils.Local_Icon_prefix+'user_placeholder.png',
                       fit: BoxFit.fill,
-                      image: YYCommonUtils.avatarPath(lesson.avatar),
+                      image: YYCommonUtils.avatarPath(course.avatar),
                       width: 52.0,
                       height: 52.0,
                     ),
@@ -41,15 +40,15 @@ class YYLessonItemWidget extends StatelessWidget {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          (lesson.type== 1||lesson.type == 2)?Padding(padding: EdgeInsets.only(bottom:10.5), child:Image.asset(YYCommonUtils.Local_Icon_prefix+'voice.png',width: 16.5,height: 16.5,fit:BoxFit.fill)):new Container(),
-                          Expanded(child:(lesson.title!=null)?Padding(padding: EdgeInsets.only(bottom:10.5), child:Text(lesson.title,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),maxLines: 1,overflow: TextOverflow.ellipsis)):new Container()),
+                          Expanded(child:(course.title!=null)?Padding(padding: EdgeInsets.only(bottom:10.5), child:Text(course.title,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),maxLines: 1,overflow: TextOverflow.ellipsis)):new Container()),
                         ],
                       ),
                       Row(
                         children: <Widget>[  
-                          (lesson.author!=null)?Padding(padding:EdgeInsets.only(right:10.5),child:Text(lesson.author,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium),maxLines: 1,overflow: TextOverflow.ellipsis)):new Container(),
-                          Expanded(child:(lesson.honor!=null)?Text(lesson.honor,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium),maxLines: 1,overflow: TextOverflow.ellipsis):new Container()),
-                          (lesson.salePrice > 0)?Text("￥"+lesson.salePrice.toString(),style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium,),maxLines: 1,overflow: TextOverflow.ellipsis,):new Container(),
+                          (course.author!=null)?Padding(padding:EdgeInsets.only(right:10.5),child:Text(course.author,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium),maxLines: 1,overflow: TextOverflow.ellipsis)):new Container(),
+                          (course.honor!=null)?Padding(padding:EdgeInsets.only(right: 10.5),child:Text(course.honor,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium),maxLines: 1,overflow: TextOverflow.ellipsis)):new Container(),
+                          Expanded(child:Text("共${course.lessonQuantity}讲",style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium),maxLines: 1,overflow: TextOverflow.ellipsis)),
+                          (course.salePrice > 0)?Text("￥"+course.salePrice.toString(),style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium,),maxLines: 1,overflow: TextOverflow.ellipsis,):new Container(),
                         ],
                       )
                     ],  

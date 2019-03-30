@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 
 import 'package:event_bus/event_bus.dart';
 
@@ -33,8 +35,16 @@ class YYCommonUtils {
     );
   }
 
-  static navigatorRouter(BuildContext context, Widget widget) {
-    return Navigator.push(context, new MaterialPageRoute(builder: (context) => widget));
+  static openPage(url, params) {
+    if(Platform.isIOS){
+      FlutterBoost.singleton.openPage(url, params);
+    }else if(Platform.isAndroid){
+      FlutterBoost.singleton.openPage(url, {"query":params});
+    }
+  }
+
+  static closePage(BuildContext context) {
+    FlutterBoost.singleton.closePageForContext(context);
   }
 
   static isPhoneNo(String phone) {

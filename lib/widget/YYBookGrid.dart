@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lychee/common/model/YYBook.dart';
-import 'package:lychee/widget/YYIconTextWidget.dart';
+import 'package:lychee/widget/YYIconText.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 
 typedef BookItemCallback = void Function(YYBook book);
 
-class YYBookGridWidget extends StatelessWidget {
+class YYBookGrid extends StatelessWidget {
   static const double bookImageWidth = 93.5; 
   static const double bookImageHeight = 130.0;
   static const double bookItemHeight = 181.0;
   final int column;
   final List<YYBook> books;
   final BookItemCallback onPressed;
-  YYBookGridWidget(this.books,{this.column=3,this.onPressed});
+  YYBookGrid(this.books,{this.column=3,this.onPressed});
 
   List<Widget> _buildGridTiles() {
     List<Widget> lists = new List();
@@ -22,13 +22,14 @@ class YYBookGridWidget extends StatelessWidget {
       Widget tile = new FlatButton( 
         padding: EdgeInsets.all(0),
         child: Container( 
-          child: new YYIconTextWidget(
+          child: new YYIconText(
+              direction: YYIconTextDirection.column,
               iconNetUrl: YYCommonUtils.coverPath(book.cover,'s'),
-              iconText: book.title,
               iconWidth: bookImageWidth,
               iconHeight: bookImageHeight,
+              iconShapeBorder: Border.all(color:Color(YYColors.border),width: 0.3),
+              text: book.title,
               textStyle: TextStyle(color: Color(YYColors.primarySection),fontSize: YYSize.medium),
-              type:2,
               padding: 2.5,
               maxLines: 2,
               mainAxisAlignment: MainAxisAlignment.center,

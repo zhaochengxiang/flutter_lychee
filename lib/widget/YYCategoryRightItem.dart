@@ -4,20 +4,20 @@ import 'package:lychee/common/style/YYStyle.dart';
 
 typedef CategoryItemCallback = void Function(int index);
 
-class YYCategoryRightItemWidget extends StatefulWidget {
+class YYCategoryRightItem extends StatefulWidget {
   final YYCategory category;
   final bool isSectionHighlight;
   final int itemHighlightIndex;
   final VoidCallback onSectionPress;
   final CategoryItemCallback onItemPress;
 
-  YYCategoryRightItemWidget({this.category,this.isSectionHighlight,this.itemHighlightIndex,this.onSectionPress,this.onItemPress});
+  YYCategoryRightItem({this.category,this.isSectionHighlight,this.itemHighlightIndex,this.onSectionPress,this.onItemPress});
 
   @override
-  _YYCategoryRightItemWidgetState createState() => _YYCategoryRightItemWidgetState();
+  _YYCategoryRightItemState createState() => _YYCategoryRightItemState();
 }
 
-class _YYCategoryRightItemWidgetState extends State<YYCategoryRightItemWidget> {
+class _YYCategoryRightItemState extends State<YYCategoryRightItem> {
 
   static const double crossAxisSpacing = 1.0;
   static const int crossAxisCount = 3;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boost/flutter_boost.dart';
 
 import 'package:lychee/widget/base/YYBaseScrollSate.dart';
 import 'package:lychee/widget/base/YYBaseScrollWidget.dart';
@@ -8,11 +7,12 @@ import 'package:lychee/common/model/YYIndex.dart';
 import 'package:lychee/common/model/YYBanner.dart';
 import 'package:lychee/widget/YYSwiperWidget.dart';
 import 'package:lychee/common/style/YYStyle.dart';
-import 'package:lychee/widget/YYIconTextWidget.dart';
-import 'package:lychee/widget/YYLessonItemWidget.dart';
-import 'package:lychee/widget/YYCourseItemWidget.dart';
+import 'package:lychee/widget/YYIconText.dart';
+import 'package:lychee/widget/YYLessonItem.dart';
+import 'package:lychee/widget/YYCourseItem.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
-import 'package:lychee/widget/YYBookGridWidget.dart';
+import 'package:lychee/widget/YYBookGrid.dart';
+import 'package:lychee/widget/YYSectionWdiget.dart';
 
 class YYHomePage extends StatefulWidget {
   @override
@@ -42,13 +42,13 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
   _optionIconText(String assetName,String text, VoidCallback callback) {
     return new FlatButton(
       padding: EdgeInsets.all(0),
-      child: new YYIconTextWidget(
-        type:2,
+      child: new YYIconText(
+        direction:YYIconTextDirection.column,
         iconAssetName: assetName,
-        iconText: text,
         iconWidth: 62.5,
         iconHeight: 62.5,
         textStyle: TextStyle(color: Color(YYColors.primarySection),fontSize: YYSize.medium),
+        text: text,
         padding: 2.5,
         mainAxisAlignment: MainAxisAlignment.center,
       ),
@@ -61,17 +61,17 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
 
     var banners = baseWidgetControl.data.bannerList;
 
-    List urls = List();
+    List imageUrls = List();
     if (banners != null) {
       for (int i=0;i<banners.length;i++) {
         YYBanner book = banners[i];
-        urls.add(book.image);
+        imageUrls.add(book.image);
       }
     }
 
     return (banners==null||banners.length==0)?new Container():new YYSwiperWidget(
       height: 125,
-      imageUrls: urls,
+      imageUrls: imageUrls,
       dotActiveColor: Color(YYColors.primary),
       selectItemChanged:(selectIndex) {
        
@@ -87,7 +87,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _optionIconText("book.png","图书",() {
-              FlutterBoost.singleton.openPage("flutter://home_book", null);
+            YYCommonUtils.openPage("flutter://home_book", null);
           }),
           _optionIconText("lesson.png","小讲",() {
          
@@ -103,21 +103,16 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
   _buildChosenBookWidget() {
     if (baseWidgetControl.data == null) return new Container();
 
-    var books =baseWidgetControl.data.chosenBookList;
+    var books = baseWidgetControl.data.chosenBookList;
 
     return (books==null||books.length==0)?new Container():new Column(
       children: <Widget>[
-        new Container(
-          height:40.5,
-          child: new Padding(
-            padding: new EdgeInsets.only(left:10.5),
-            child: Align( 
-              alignment: Alignment.centerLeft,
-              child: Text("精选图书",style: TextStyle(color: Color(YYColors.primarySection),fontSize: YYSize.large))
-            ),
-          ),
+        YYSectionWidget(
+          title: "精选图书",
         ),
-        new YYBookGridWidget(books),
+        new YYBookGrid(books,onPressed: (book){
+          YYCommonUtils.openPage("flutter://book_detail", {"lid":0,"uuid":book.uuid});
+        }),
       ],
     );
   }
@@ -129,21 +124,14 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
 
     return (lessons==null||lessons.length==0)?new Container():new Column(
       children: <Widget>[
-        new Container(
-          height:40.5,
-          child: new Padding(
-            padding: new EdgeInsets.only(left:10.5),
-            child: Align( 
-              alignment: Alignment.centerLeft,
-              child: Text("精选小讲",style: TextStyle(color: Color(YYColors.primarySection),fontSize: YYSize.large))
-            ),
-          ),
+        YYSectionWidget(
+          title: "精选小讲",
         ),
         new ListView.builder(
           shrinkWrap: true,
           physics: new NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return new YYLessonItemWidget(lessons[index],onPressed:() {
+            return new YYLessonItem(lessons[index],onPressed:() {
 
             });
           },
@@ -160,21 +148,14 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
 
     return (courses==null||courses.length==0)?new Container():new Column(
       children: <Widget>[
-        new Container(
-          height:40.5,
-          child: new Padding(
-            padding: new EdgeInsets.only(left:10.5),
-            child: Align( 
-              alignment: Alignment.centerLeft,
-              child: Text("精选短课",style: TextStyle(color: Color(YYColors.primarySection),fontSize: YYSize.large))
-            ),
-          ),
+        YYSectionWidget(
+          title: "精选短课",
         ),
         new ListView.builder(
           shrinkWrap: true,
           physics: new NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return new YYCourseItemWidget(courses[index],onPressed: (){
+            return new YYCourseItem(courses[index],onPressed: (){
               
             });
           },
@@ -196,6 +177,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
 
           }),
         title:Text("荔枝课堂"),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
           icon: new Image.asset(YYCommonUtils.Local_Icon_prefix+"search.png",width: 24.0,height: 24.0),

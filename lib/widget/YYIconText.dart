@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
-import 'package:lychee/common/style/YYStyle.dart';
 
-/**
- * 带图标Icon的文本，可调节
- * Created by zcx
- * Date: 2019-03-05
- */
-class YYIconTextWidget extends StatelessWidget {
-  static const int row = 1;
-  static const int column = 2;
+enum YYIconTextDirection {
+  row,
+  column,
+}
 
-  final int type;
-  final String iconText;
+class YYIconText extends StatelessWidget {
+  final YYIconTextDirection direction;
   final String iconAssetName;
   final String iconNetUrl;
   final double iconWidth;
   final double iconHeight;
-  final Color iconColor;
+  final ShapeBorder iconShapeBorder;
   final BoxFit iconFit;
+  final String text;
   final TextStyle textStyle;
   final int maxLines;
   final double textLineHeight;
@@ -27,18 +23,18 @@ class YYIconTextWidget extends StatelessWidget {
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
 
-  YYIconTextWidget({
-    this.type = 1,
+  YYIconText({
+    this.direction = YYIconTextDirection.row,
     this.iconAssetName = '',
-    this.iconText,
     this.iconNetUrl = '',
     this.iconWidth,
     this.iconHeight,
+    this.iconShapeBorder,
     this.iconFit = BoxFit.fill,
+    this.text,
     this.textStyle,
     this.maxLines = 1,
     this.textLineHeight = 20.0,
-    this.iconColor,
     this.padding = 0.0,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
@@ -52,21 +48,21 @@ class YYIconTextWidget extends StatelessWidget {
       width: iconWidth,
       height:iconHeight,
       decoration: new BoxDecoration(
-        border: Border.all(color:Color(YYColors.border),width: 0.3),
+        border: iconShapeBorder??null,
       ),
-      child: Image.asset(YYCommonUtils.Local_Icon_prefix+iconAssetName,fit:iconFit, color:iconColor),
+      child: Image.asset(YYCommonUtils.Local_Icon_prefix+iconAssetName,fit:iconFit),
     ) : new Container());
 
     widgetList.add((iconNetUrl.length!=0)?new Container(
       width: iconWidth,
       height:iconHeight,
       decoration: new BoxDecoration(
-        border: Border.all(color:Color(YYColors.border),width: 0.3),
+        border: iconShapeBorder??null,
       ),
       child: FadeInImage.assetNetwork(placeholder: YYCommonUtils.Local_Icon_prefix+'book_placeholder.png',image:iconNetUrl,fit:iconFit),
     ) : new Container());
     widgetList.add(new Padding(padding: new EdgeInsets.all(padding)));
-    widgetList.add(new Container(width:iconWidth,height:maxLines*textLineHeight,child:Text(iconText,style: textStyle,overflow: TextOverflow.ellipsis,maxLines: maxLines,textAlign: TextAlign.center)));
+    widgetList.add(new Container(width:iconWidth,height:maxLines*textLineHeight,child:Text(text,style: textStyle,overflow: TextOverflow.ellipsis,maxLines: maxLines,textAlign: TextAlign.center)));
 
     return widgetList;
   }
@@ -91,6 +87,6 @@ class YYIconTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (type==1)?rowWidget():columnWidget();
+    return (direction==YYIconTextDirection.row)?rowWidget():columnWidget();
   }
 }
