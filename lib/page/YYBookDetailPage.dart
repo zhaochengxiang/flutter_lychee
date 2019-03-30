@@ -8,16 +8,20 @@ import 'package:lychee/common/model/YYRichBook.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/widget/YYSectionWdiget.dart';
 import 'package:lychee/widget/YYBookGrid.dart';
+import 'package:lychee/common/style/YYStyle.dart';
+import 'package:lychee/common/event/YYNeedRefreshEvent.dart';
 
 class YYBookDetailPage extends StatefulWidget {
   final Map params;
   YYBookDetailPage(this.params) :super();
 
   @override
-  _YYBookDetailPageState createState() => _YYBookDetailPageState();
+  _YYBookDetailPageState createState() => _YYBookDetailPageState(params);
 }
 
 class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepAliveClientMixin<YYBookDetailPage>,YYBaseState<YYBookDetailPage>, YYBaseScrollState<YYBookDetailPage> {
+  Map params;
+  _YYBookDetailPageState(this.params) :super();
   @override
   remotePath() {
     return "/book/get";
@@ -25,7 +29,7 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
 
   @override
   generateRemoteParams() {
-    return {"uuid":widget.params['uuid'],"lid":widget.params['lid']};    
+    return {"uuid":params['uuid'],"lid":params['lid']};    
   }
 
   @override
@@ -41,7 +45,7 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
     return new Scaffold(
       appBar: new AppBar(
         title:Text("图书详情"),
-        centerTitle: true,
+        centerTitle: true, 
         leading: FlatButton(
           padding: EdgeInsets.all(0), 
           child: Image.asset(YYCommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
@@ -49,6 +53,13 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
             YYCommonUtils.closePage(context);
           },
         ),
+        actions: <Widget>[
+          IconButton(
+          icon: new Image.asset(YYCommonUtils.Local_Icon_prefix+"more.png",width: 24.0,height: 24.0),
+          onPressed: () {
+
+          })
+        ]
       ),
       body: YYBaseScrollWidget(
         control:control,
@@ -58,11 +69,23 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            (richBook.book==null)?new Container():YYBookItem(book:richBook.book,height:146,onPressed: (){},),
+            (richBook.book==null)?new Container():YYBookItem(book:richBook.book,height:146),
+            (richBook.book==null||richBook.book.summary==null||richBook.book.summary.length==0)?new Container():new Column(
+              children: <Widget>[
+                YYSectionWidget(title: "内容简介"),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.5,right: 10.5),
+                  child: Text(richBook.book.summary,style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large,letterSpacing: 0,height:1.2),),
+                )
+              ],
+            ),
             (richBook.favoriteList==null||richBook.favoriteList.length==0)?new Container():new Column(
               children: <Widget>[
                 YYSectionWidget(title: "相关图书"),
-                YYBookGrid(richBook.favoriteList),
+                YYBookGrid(richBook.favoriteList,onPressed: (book) {
+                  params["uuid"] = book.uuid??"";
+                  YYNeedRefreshEvent.refreshHandleFunction("YYBookDetailPage");
+                }),
               ],
             ),
           ]
