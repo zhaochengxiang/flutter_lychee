@@ -21,6 +21,8 @@ class YYBookDetailPage extends StatefulWidget {
 
 class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepAliveClientMixin<YYBookDetailPage>,YYBaseState<YYBookDetailPage>, YYBaseScrollState<YYBookDetailPage> {
   Map params;
+  YYRichBook richBook;
+
   _YYBookDetailPageState(this.params) :super();
   @override
   remotePath() {
@@ -39,8 +41,7 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
 
   @override
   Widget build(BuildContext context) {
-    YYBaseScrollWidgetControl control = baseWidgetControl;
-    YYRichBook richBook = control.data;
+    richBook = baseWidgetControl.data;
 
     return new Scaffold(
       appBar: new AppBar(
@@ -62,7 +63,7 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
         ]
       ),
       body: YYBaseScrollWidget(
-        control:control,
+        control:baseWidgetControl,
         onRefresh:handleRefresh,
         refreshKey: refreshIndicatorKey,
         child: (richBook==null)?new Container():new Column(
@@ -75,7 +76,7 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
                 YYSectionWidget(title: "内容简介"),
                 Padding(
                   padding: EdgeInsets.only(left: 10.5,right: 10.5),
-                  child: Text(richBook.book.summary,style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large,letterSpacing: 0,height:1.2),),
+                  child: Text(richBook.book.summary,style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large,letterSpacing: 0,height:1.2)),
                 )
               ],
             ),

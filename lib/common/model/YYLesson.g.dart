@@ -25,7 +25,10 @@ YYLesson _$YYLessonFromJson(Map<String, dynamic> json) {
       json['avatar'] as String,
       json['honor'] as String,
       json['resume'] as String,
-      json['paid'] as bool);
+      json['paid'] as bool,
+      json['mime'] as int,
+      json['favorite'] as bool,
+      json['uuid'] as String);
 }
 
 Map<String, dynamic> _$YYLessonToJson(YYLesson instance) => <String, dynamic>{
@@ -46,5 +49,8 @@ Map<String, dynamic> _$YYLessonToJson(YYLesson instance) => <String, dynamic>{
       'avatar': instance.avatar,
       'honor': instance.honor,
       'resume': instance.resume,
-      'paid': instance.paid
+      'paid': instance.paid,
+      'mime': instance.mime,
+      'favorite': instance.favorite,
+      'uuid': instance.uuid
     };

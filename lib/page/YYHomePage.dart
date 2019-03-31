@@ -13,6 +13,7 @@ import 'package:lychee/widget/YYCourseItem.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/widget/YYBookGrid.dart';
 import 'package:lychee/widget/YYSectionWdiget.dart';
+import 'package:lychee/widget/YYSeparatorWidget.dart';
 
 class YYHomePage extends StatefulWidget {
   @override
@@ -20,6 +21,8 @@ class YYHomePage extends StatefulWidget {
 }
 
 class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMixin<YYHomePage>,YYBaseState<YYHomePage>, YYBaseScrollState<YYHomePage> {
+
+  YYIndex homeIndex;
 
   @override
   bool get needRefreshHeader => true;
@@ -57,9 +60,9 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
   }
 
   _buildBannerWidget() {
-    if (baseWidgetControl.data==null) return new Container();
+    if (homeIndex==null) return new Container();
 
-    var banners = baseWidgetControl.data.bannerList;
+    var banners = homeIndex.bannerList;
 
     List imageUrls = List();
     if (banners != null) {
@@ -90,10 +93,10 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
             YYCommonUtils.openPage("flutter://home_book", null);
           }),
           _optionIconText("lesson.png","小讲",() {
-         
+            YYCommonUtils.openPage("flutter://lesson", null);
           }),
           _optionIconText("course.png","短课",() {
-            
+            YYCommonUtils.openPage("flutter://course", null);
           }),
         ],
       ),
@@ -101,9 +104,9 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
   }
 
   _buildChosenBookWidget() {
-    if (baseWidgetControl.data == null) return new Container();
+    if (homeIndex == null) return new Container();
 
-    var books = baseWidgetControl.data.chosenBookList;
+    var books = homeIndex.chosenBookList;
 
     return (books==null||books.length==0)?new Container():new Column(
       children: <Widget>[
@@ -118,18 +121,19 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
   }
 
   _buildChosenLessonWidget() {
-    if (baseWidgetControl.data == null) return new Container();
+    if (homeIndex == null) return new Container();
 
-    var lessons =baseWidgetControl.data.chosenLessonList;
+    var lessons = homeIndex.chosenLessonList;
 
     return (lessons==null||lessons.length==0)?new Container():new Column(
       children: <Widget>[
         YYSectionWidget(
           title: "精选小讲",
         ),
-        new ListView.builder(
+        new ListView.separated(
           shrinkWrap: true,
           physics: new NeverScrollableScrollPhysics(),
+          separatorBuilder: (context, index)=>YYSeparatorWidget(),
           itemBuilder: (context, index) {
             return new YYLessonItem(lessons[index],onPressed:() {
 
@@ -142,18 +146,19 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
   }
 
   _buildChosenCourseWidget() {
-    if (baseWidgetControl.data == null) return new Container();
+    if (homeIndex == null) return new Container();
 
-    var courses =baseWidgetControl.data.chosenCourseList;
+    var courses = homeIndex.chosenCourseList;
 
     return (courses==null||courses.length==0)?new Container():new Column(
       children: <Widget>[
         YYSectionWidget(
           title: "精选短课",
         ),
-        new ListView.builder(
+        new ListView.separated(
           shrinkWrap: true,
           physics: new NeverScrollableScrollPhysics(),
+          separatorBuilder: (context, index)=>YYSeparatorWidget(),
           itemBuilder: (context, index) {
             return new YYCourseItem(courses[index],onPressed: (){
               
@@ -167,7 +172,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
 
   @override
   Widget build(BuildContext context) {
-    YYBaseScrollWidgetControl control = baseWidgetControl;
+    homeIndex = baseWidgetControl.data;
 
     return new Scaffold(
       appBar: new AppBar(
@@ -187,7 +192,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
         ],
       ),
       body: YYBaseScrollWidget(
-        control:control,
+        control:baseWidgetControl,
         onRefresh:handleRefresh,
         refreshKey: refreshIndicatorKey,
         child: new Column(

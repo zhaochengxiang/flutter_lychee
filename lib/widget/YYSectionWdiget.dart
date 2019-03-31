@@ -19,8 +19,12 @@ class YYSectionWidget extends StatelessWidget {
         Expanded(
           child: Text(title,style: titleTextStyle??TextStyle(color: Color(YYColors.primarySection),fontSize: YYSize.large)),
         ),
-        (subtitle==null)?new Container():Text(subtitle,style: subtitleTextStyle??TextStyle(color: Color(YYColors.secondarySection),fontSize: YYSize.small)),
-        Image.asset(YYCommonUtils.Local_Icon_prefix+"arrow_more.png",width: 13,height: 13,fit:BoxFit.fill)
+        (subtitle==null)?new Container():new Row(
+          children: <Widget>[
+            Text(subtitle,style: subtitleTextStyle??TextStyle(color: Color(YYColors.secondarySection),fontSize: YYSize.small)),
+            Image.asset(YYCommonUtils.Local_Icon_prefix+"arrow_more.png",width: 13,height: 13,fit:BoxFit.fill)
+          ],
+        ),
       ],
     );
   }

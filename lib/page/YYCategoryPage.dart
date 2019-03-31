@@ -17,6 +17,7 @@ class YYCategoryPage extends StatefulWidget {
 class _YYCategoryPagePageState extends State<YYCategoryPage>  with AutomaticKeepAliveClientMixin<YYCategoryPage>,YYBaseState<YYCategoryPage> {
 
   int leftIndex = 0;
+  List<YYCategory> allCategories;
   List<YYCategory> rightCategories;
   int rightSectionIndex = -1;
   int rightItemIndex = -1;
@@ -38,12 +39,12 @@ class _YYCategoryPagePageState extends State<YYCategoryPage>  with AutomaticKeep
 
   @protected
   Widget _buildLeftListView() {
-    if (baseWidgetControl.data == null) return new Container();
+    if (allCategories == null) return new Container();
 
     return new ListView.builder(
       physics: ClampingScrollPhysics(),
       itemBuilder: (context, index) {
-        return YYCategoryLeftItem(category: baseWidgetControl.data[index],highlight: (index==leftIndex),onPress: (){
+        return YYCategoryLeftItem(category: allCategories[index],highlight: (index==leftIndex),onPress: (){
           setState(() {
             leftIndex = index;
             rightSectionIndex = -1;
@@ -57,9 +58,9 @@ class _YYCategoryPagePageState extends State<YYCategoryPage>  with AutomaticKeep
 
   @protected
   Widget _buildRightListView() {
-    if (baseWidgetControl.data == null) return new Container();
+    if (allCategories == null) return new Container();
 
-    rightCategories =baseWidgetControl.data[leftIndex].children;
+    rightCategories = allCategories[leftIndex].children;
 
     return new ListView.builder(
       physics: ClampingScrollPhysics(),
@@ -88,6 +89,8 @@ class _YYCategoryPagePageState extends State<YYCategoryPage>  with AutomaticKeep
 
   @override
   Widget build(BuildContext context) {
+    allCategories = baseWidgetControl.data;
+
     return new Scaffold(
       appBar: new AppBar(
         title:Text("分类"),

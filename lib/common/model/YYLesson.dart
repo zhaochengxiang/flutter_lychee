@@ -64,6 +64,9 @@ class YYLesson {
   String honor;
   String resume;
   bool paid;
+  int mime; 
+  bool favorite;
+  String uuid;
 
   YYLesson(
     this.id,
@@ -83,7 +86,10 @@ class YYLesson {
     this.avatar,
     this.honor,
     this.resume,
-    this.paid
+    this.paid,
+    this.mime,
+    this.favorite,
+    this.uuid
   );
 
   factory YYLesson.fromJson(Map<String, dynamic> json) => _$YYLessonFromJson(json);
