@@ -17,7 +17,7 @@ class YYCategoryPage extends StatefulWidget {
 class _YYCategoryPagePageState extends State<YYCategoryPage>  with AutomaticKeepAliveClientMixin<YYCategoryPage>,YYBaseState<YYCategoryPage> {
 
   int leftIndex = 0;
-  List<YYCategory> allCategories;
+  List<dynamic> allCategories;
   List<YYCategory> rightCategories;
   int rightSectionIndex = -1;
   int rightItemIndex = -1;

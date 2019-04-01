@@ -14,6 +14,8 @@ import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/widget/YYBookGrid.dart';
 import 'package:lychee/widget/YYSectionWdiget.dart';
 import 'package:lychee/widget/YYSeparatorWidget.dart';
+import 'package:lychee/common/model/YYCourse.dart';
+import 'package:lychee/common/model/YYLesson.dart';
 
 class YYHomePage extends StatefulWidget {
   @override
@@ -135,8 +137,9 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
           physics: new NeverScrollableScrollPhysics(),
           separatorBuilder: (context, index)=>YYSeparatorWidget(),
           itemBuilder: (context, index) {
-            return new YYLessonItem(lessons[index],onPressed:() {
-
+            YYLesson lesson = lessons[index];
+            return new YYLessonItem(lesson,onPressed: (){
+              YYCommonUtils.openPage("flutter://lesson_detail", {"uuid":lesson.uuid});
             });
           },
           itemCount: lessons.length,
@@ -160,8 +163,9 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
           physics: new NeverScrollableScrollPhysics(),
           separatorBuilder: (context, index)=>YYSeparatorWidget(),
           itemBuilder: (context, index) {
-            return new YYCourseItem(courses[index],onPressed: (){
-              
+            YYCourse course = courses[index];
+            return new YYCourseItem(course,onPressed: (){
+              YYCommonUtils.openPage("flutter://course_detail", {"uuid":course.uuid});
             });
           },
           itemCount: courses.length,
