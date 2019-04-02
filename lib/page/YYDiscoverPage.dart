@@ -30,7 +30,10 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
   @override
   List get getDataList => [{"image":"found_fav.png","title":"大家都收藏"},{"image":"found_cut.png","title":"大家都在读"},{"image":"found_read.png","title":"大家都读过"},{"image":"found_location.png","title":"附近图书馆"}];
 
-  _renderListItem(data) {
+  _renderListItem(index) {
+    YYBaseListWidgetControl control = baseWidgetControl;
+    var data = control.dataList[index];
+
     return FlatButton( 
       padding: EdgeInsets.all(0),
       child:Container(
@@ -53,7 +56,13 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
         )
       ),
       onPressed: () {
-        
+        if (index == 0) {
+          YYCommonUtils.openPage("flutter://top_collection", null);
+        } else if (index == 1) {
+          YYCommonUtils.openPage("flutter://top_reading", null);
+        } else if (index == 2) {
+          YYCommonUtils.openPage("flutter://top_read", null);
+        }
       },
     );
   }
@@ -61,16 +70,14 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
   @override
   Widget build(BuildContext context) {
     
-    YYBaseListWidgetControl control = baseWidgetControl;
-
     return new Scaffold(
       appBar: new AppBar(
         title:Text("发现"),
         centerTitle: true,
       ),
       body: YYBaseListWidget(
-        control: control,
-        itemBuilder: (BuildContext context, int index) => _renderListItem(control.dataList[index]),
+        control: baseWidgetControl,
+        itemBuilder: (BuildContext context, int index) => _renderListItem(index),
         refreshKey: refreshIndicatorKey,
       ),
     );

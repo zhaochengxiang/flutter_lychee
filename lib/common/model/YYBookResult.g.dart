@@ -11,7 +11,8 @@ YYBookResult _$YYBookResultFromJson(Map<String, dynamic> json) {
       json['total'] as int,
       (json['last'] as num)?.toDouble(),
       json['offset'] as int,
-      (json['bookList'] as List)
+      json['hasNext'] as bool,
+      (json['list'] as List)
           ?.map((e) =>
               e == null ? null : YYBook.fromJson(e as Map<String, dynamic>))
           ?.toList());
@@ -22,5 +23,6 @@ Map<String, dynamic> _$YYBookResultToJson(YYBookResult instance) =>
       'total': instance.total,
       'last': instance.last,
       'offset': instance.offset,
-      'bookList': instance.bookList
+      'hasNext': instance.hasNext,
+      'list': instance.list
     };

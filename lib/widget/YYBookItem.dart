@@ -8,7 +8,7 @@ class YYBookItem extends StatelessWidget {
   final YYBook book;
   final double height;
   final VoidCallback onPressed;
-  YYBookItem({@required this.book,this.height,this.onPressed});
+  YYBookItem({@required this.book,this.height=146.0,this.onPressed});
 
   Widget _buildContent() {
     return Container(
@@ -27,7 +27,7 @@ class YYBookItem extends StatelessWidget {
               child: Container(
                 width: 90,
                 height: 125,
-                child: FadeInImage.assetNetwork(
+                child: (book.cover==null||book.cover.length==0)?Image.asset(YYCommonUtils.Local_Icon_prefix+'book_placeholder.png',fit:BoxFit.fill):FadeInImage.assetNetwork(
                   placeholder: YYCommonUtils.Local_Icon_prefix+'book_placeholder.png',
                   fit: BoxFit.fill,
                   image: YYCommonUtils.coverPath(book.cover,'s'),

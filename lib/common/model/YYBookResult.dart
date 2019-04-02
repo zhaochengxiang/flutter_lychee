@@ -8,13 +8,15 @@ class YYBookResult {
   int total;
   double last;
   int offset;
-  List<YYBook> bookList;
+  bool hasNext;
+  List<YYBook> list;
 
   YYBookResult(
     this.total,
     this.last,
     this.offset,
-    this.bookList,
+    this.hasNext,
+    this.list,
   );
 
   factory YYBookResult.fromJson(Map<String, dynamic> json) => _$YYBookResultFromJson(json);

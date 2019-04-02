@@ -69,7 +69,9 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
       });
     }
 
-    var res = await YYHttpManager.netFetch(remotePath(),generateRemoteParams(),null,null,noTip:true);
+    var params = generateRemoteParams();
+
+    var res = await YYHttpManager.netFetch(remotePath(),params,null,null,noTip:true);
 
     if (res != null && res.result) {
       var data = res.data;

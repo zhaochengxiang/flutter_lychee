@@ -79,6 +79,9 @@ class YYHttpManager {
       if (YYCommonUtils.DEBUG) {
         print('请求异常: ' + e.toString());
         print('请求异常url: ' + url);
+        if (params != null) {
+          print('请求异常参数: ' + params.toString());
+        }
       }
       return new YYResultData(YYHttpErrorEvent.errorHandleFunction( e.message, noTip), false);
     }

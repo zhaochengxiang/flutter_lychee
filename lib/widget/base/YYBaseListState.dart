@@ -31,9 +31,17 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
   handleRefreshData(data) {
     YYBaseListWidgetControl control = baseWidgetControl;
     control.dataList.clear();
-    if (data is Map) {
-      control.dataList.add(jsonConvertToModel(data));
-    } else if (data is List) {
+    if (data is List) {
+      for (int i = 0; i < data.length; i++) {
+        control.dataList.add(jsonConvertToModel(data[i]));
+      }
+    }
+  }
+
+  @protected
+  handleMoreData(data) {
+    YYBaseListWidgetControl control = baseWidgetControl;
+    if (data is List) {
       for (int i = 0; i < data.length; i++) {
         control.dataList.add(jsonConvertToModel(data[i]));
       }
@@ -50,18 +58,14 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
         baseWidgetControl.isLoading = true;
       });
     }
-    var res = await YYHttpManager.netFetch(remotePath(),generateMoreRemoteParams(),null,null);
+
+    var params = generateMoreRemoteParams();
+    var res = await YYHttpManager.netFetch(remotePath(),params,null,null);
 
     if (res != null && res.result) {
-      var data = res.data;
       if (isShow) {
         setState(() {
-          YYBaseListWidgetControl control = baseWidgetControl;
-          if (data is List) {
-            for (int i = 0; i < data.length; i++) {
-              control.dataList.add(jsonConvertToModel(data[i]));
-            }
-          } 
+          handleMoreData(res.data); 
         });
       }
     }

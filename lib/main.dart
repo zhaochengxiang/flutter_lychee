@@ -16,6 +16,9 @@ import 'package:lychee/page/YYCoursePage.dart';
 import 'package:lychee/page/YYLessonPage.dart';
 import 'package:lychee/page/YYLessonDetailPage.dart';
 import 'package:lychee/page/YYCourseDetailPage.dart';
+import 'package:lychee/page/YYTopCollectionBookPage.dart';
+import 'package:lychee/page/YYTopReadingBookPage.dart';
+import 'package:lychee/page/YYTopReadBookPage.dart';
 
 void main() => runApp(LycheeApp());
 
@@ -46,6 +49,9 @@ class _LycheeAppState extends State<LycheeApp> {
       'flutter://lesson_detail': (pageName, params, _) => YYLessonDetailPage(params),
       'flutter://course': (pageName, params, _) => YYCoursePage(),
       'flutter://course_detail': (pageName, params, _) => YYCourseDetailPage(params),
+      'flutter://top_collection': (pageName, params, _) => YYTopCollectionBookPage(),
+      'flutter://top_reading': (pageName, params, _) => YYTopReadingBookPage(),
+      'flutter://top_read': (pageName, params, _) => YYTopReadBookPage(),
     });
 
     FlutterBoost.handleOnStartPage();

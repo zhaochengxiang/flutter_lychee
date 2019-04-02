@@ -4,6 +4,7 @@ import 'package:lychee/common/style/YYStyle.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:lychee/widget/base/YYBaseDecorationState.dart';
 import 'package:lychee/Widget/base/YYBaseScrollWidget.dart';
+import 'package:lychee/widget/YYSeparatorWidget.dart';
 
 class YYBaseListWidget extends StatefulWidget {
   ///item渲染
@@ -101,8 +102,8 @@ class _YYBaseListWidgetState extends State<YYBaseListWidget> with YYBaseDecorati
         ),
         onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
         loadMore:(widget.control.needRefreshFooter)?widget.onLoadMore:null,
-        child: new ListView.builder(
-          ///根据状态返回子孔健
+        child: new ListView.separated(
+          separatorBuilder: (context, index)=>YYSeparatorWidget(),
           itemBuilder: (context, index) {
             return widget.itemBuilder(context, index);
           },
