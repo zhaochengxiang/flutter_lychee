@@ -121,7 +121,7 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
             (widget.control.options&YYBaseBookListWidgetControl.ShowFrame>0)?_buildTopOptionWidget(widget.control.curFrameName, _topFrameOnPressed):new Container(),
 
             (widget.control.options&YYBaseBookListWidgetControl.ShowCount>0)?Expanded(
-              child: Text("共"+widget.control.total.toString()+"本",style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),maxLines: 1,overflow: TextOverflow.ellipsis),
+              child: Text("共"+widget.control.total.toString()+"本",style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),maxLines: 1,overflow: TextOverflow.ellipsis,textAlign: TextAlign.end,),
             ):new Container(),
           ],
         ),

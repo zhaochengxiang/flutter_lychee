@@ -33,10 +33,10 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
       params["category"] = control.cid;
     }
     if (control.options&YYBaseBookListWidgetControl.ShowLibrary > 0) {
-      params["lid"] = control.lid;
+      params["lid"] = control.lid.toInt();
     }
     if (control.options&YYBaseBookListWidgetControl.ShowFrame > 0) {
-      params["fid"] =control.fid;
+      params["fid"] =control.fid.toInt();
     }
     params["last"] = control.last.toInt();
     params["offset"] = control.offset;
@@ -51,10 +51,10 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
       params["category"] = control.cid;
     }
     if (control.options&YYBaseBookListWidgetControl.ShowLibrary > 0) {
-      params["lid"] = control.lid;
+      params["lid"] = control.lid.toInt();
     }
     if (control.options&YYBaseBookListWidgetControl.ShowFrame > 0) {
-      params["fid"] =control.fid;
+      params["fid"] =control.fid.toInt();
     }
     params["last"] = control.last.toInt();
     params["offset"] = control.offset;

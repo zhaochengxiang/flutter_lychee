@@ -120,7 +120,11 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
             ],
           )
         ),
-        onPressed: (){},
+        onPressed: (){
+          if (i==0) {
+            YYCommonUtils.openPage("flutter://mine_book", null);
+          }
+        },
       );
       lists.add(tile);
     }

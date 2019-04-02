@@ -50,7 +50,8 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
       imageUrls: urls,
       dotActiveColor: Color(YYColors.primary),
       selectItemChanged:(selectIndex) {
-       
+       YYBook book = fineBooks[selectIndex];
+       YYCommonUtils.openPage("flutter://book_detail", {"lid":0,"uuid":book.uuid});
       },
     );
   }
@@ -64,7 +65,9 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
         YYSectionWidget(
           title: "新书推荐",
           subtitle: "更多",
-          onPressed: () {},
+          onPressed: () {
+            YYCommonUtils.openPage("flutter://top_latest", null);
+          },
         ),
         new YYBookGrid(latestBooks),
       ],
@@ -80,7 +83,9 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
         YYSectionWidget(
           title: "热门图书",
           subtitle: "更多",
-          onPressed: () {},
+          onPressed: () {
+            YYCommonUtils.openPage("flutter://top_popular", null);
+          },
         ),
         new YYBookGrid(popularBooks),
       ],
