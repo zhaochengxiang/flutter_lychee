@@ -6,6 +6,9 @@ import 'package:lychee/widget/base/YYBaseListWidget.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
+import './YYTopCollectionBookPage.dart';
+import './YYTopReadingBookPage.dart';
+import './YYTopReadBookPage.dart';
 
 class YYDiscoverPage extends StatefulWidget {
   @override
@@ -57,11 +60,11 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
       ),
       onPressed: () {
         if (index == 0) {
-          YYCommonUtils.openPage("flutter://top_collection", null);
+          YYCommonUtils.openPage(context, YYTopCollectionBookPage());
         } else if (index == 1) {
-          YYCommonUtils.openPage("flutter://top_reading", null);
+          YYCommonUtils.openPage(context, YYTopReadingBookPage());
         } else if (index == 2) {
-          YYCommonUtils.openPage("flutter://top_read", null);
+          YYCommonUtils.openPage(context, YYTopReadBookPage());
         }
       },
     );

@@ -3,9 +3,6 @@ PODS:
     - Flutter
     - Reachability
   - Flutter (1.0.0)
-  - flutter_boost (0.0.1):
-    - Flutter
-    - xservice_kit
   - fluttertoast (0.0.2):
     - Flutter
   - image_picker (0.0.1):
@@ -58,7 +55,6 @@ PODS:
 DEPENDENCIES:
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
-  - flutter_boost (from `.symlinks/plugins/flutter_boost/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - jpush_flutter (from `.symlinks/plugins/jpush_flutter/ios`)
@@ -79,8 +75,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/connectivity/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
-  flutter_boost:
-    :path: ".symlinks/plugins/flutter_boost/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   image_picker:
@@ -97,7 +91,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   connectivity: d5992e3758d68b1c4b12d6e012fe0813f1aa1645
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
-  flutter_boost: 24249d12d924d858cf445a84949484bc08bca000
   fluttertoast: 0a20dcbbb8ecfd1a61b6285651ff2d5989d033fb
   image_picker: ee00aab0487cedc80a304085219503cc6d0f2e22
   JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7

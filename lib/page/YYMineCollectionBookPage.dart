@@ -55,7 +55,7 @@ class _YYMineCollectionBookPageState extends State<YYMineCollectionBookPage> wit
         onLoadMore: onLoadMore,
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
-        itemBuilder: (BuildContext context, int index) => renderListItem(index),
+        itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
       )
     );
   }

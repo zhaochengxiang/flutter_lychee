@@ -11,6 +11,7 @@ import 'package:lychee/common/model/YYLessonHome.dart';
 import 'package:lychee/common/model/YYLesson.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/YYSeparatorWidget.dart';
+import './YYLessonDetailPage.dart';
 
 class YYLessonPage extends StatefulWidget {
   @override
@@ -78,7 +79,7 @@ class _YYLessonPageState extends State<YYLessonPage> with AutomaticKeepAliveClie
           itemBuilder: (context, index) {
             YYLesson recommend = recommends[index];
             return new YYLessonItem(recommend,onPressed: (){
-              YYCommonUtils.openPage("flutter://lesson_detail", {"uuid":recommend.uuid});
+              YYCommonUtils.openPage(context, YYLessonDetailPage({"uuid":recommend.uuid}));
             });
           },
           itemCount: recommends.length,

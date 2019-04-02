@@ -6,6 +6,7 @@ import 'package:lychee/widget/base/YYBaseListWidget.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
+import './YYMineCollectionBookPage.dart';
 
 class YYMineBookPage extends StatefulWidget {
   @override
@@ -57,7 +58,7 @@ class _YYMineBookPageState extends State<YYMineBookPage>  with AutomaticKeepAliv
       ),
       onPressed: () {
         if (index == 0) {
-          YYCommonUtils.openPage("flutter://mine_collection", null);
+          YYCommonUtils.openPage(context, YYMineCollectionBookPage());
         }
       },
     );

@@ -10,6 +10,9 @@ import 'package:lychee/widget/YYBookGrid.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/YYSwiperWidget.dart';
 import 'package:lychee/widget/YYSectionWdiget.dart';
+import './YYBookDetailPage.dart';
+import './YYTopPopularBookPage.dart';
+import './YYTopLatestBookPage.dart';
 
 class YYHomeBookPage extends StatefulWidget {
   @override
@@ -51,7 +54,7 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
       dotActiveColor: Color(YYColors.primary),
       selectItemChanged:(selectIndex) {
        YYBook book = fineBooks[selectIndex];
-       YYCommonUtils.openPage("flutter://book_detail", {"lid":0,"uuid":book.uuid});
+        YYCommonUtils.openPage(context, YYBookDetailPage({"lid":0,"uuid":book.uuid}));
       },
     );
   }
@@ -66,7 +69,7 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
           title: "新书推荐",
           subtitle: "更多",
           onPressed: () {
-            YYCommonUtils.openPage("flutter://top_latest", null);
+            YYCommonUtils.openPage(context, YYTopLatestBookPage());
           },
         ),
         new YYBookGrid(latestBooks),
@@ -84,7 +87,7 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
           title: "热门图书",
           subtitle: "更多",
           onPressed: () {
-            YYCommonUtils.openPage("flutter://top_popular", null);
+            YYCommonUtils.openPage(context, YYTopPopularBookPage());
           },
         ),
         new YYBookGrid(popularBooks),

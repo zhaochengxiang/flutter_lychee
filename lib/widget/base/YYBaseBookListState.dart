@@ -6,6 +6,7 @@ import 'package:lychee/common/model/YYBookResult.dart';
 import 'package:lychee/widget/YYBookItem.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/model/YYBook.dart';
+import 'package:lychee/page/YYBookDetailPage.dart';
 
 mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,AutomaticKeepAliveClientMixin<T>  {
 
@@ -98,11 +99,11 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
   }
 
   @protected
-  renderListItem(index) {
+  renderListItem(context,index) {
     YYBaseBookListWidgetControl control = baseWidgetControl;
     YYBook book = control.dataList[index];
     return YYBookItem(book:book,onPressed: (){
-      YYCommonUtils.openPage("flutter://book_detail", {"lid":0,"uuid":book.uuid});
+      YYCommonUtils.openPage(context, YYBookDetailPage({"lid":0,"uuid":book.uuid}));
     });
   }
 

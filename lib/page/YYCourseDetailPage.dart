@@ -11,6 +11,7 @@ import 'package:lychee/widget/YYSeparatorWidget.dart';
 import 'package:lychee/widget/YYSectionWdiget.dart';
 import 'package:lychee/widget/YYCourseDetailItem.dart';
 import 'package:lychee/common/model/YYLesson.dart';
+import 'package:lychee/page/YYLessonDetailPage.dart';
 
 class YYCourseDetailPage extends StatefulWidget {
   final Map params;
@@ -92,7 +93,7 @@ class _YYCourseDetailPageState extends State<YYCourseDetailPage> with AutomaticK
                   itemBuilder: (context, index) {
                     YYLesson lesson = course.lessonList[index];
                     return new YYCourseDetailItem(lesson,index,onPressed:() {
-                      YYCommonUtils.openPage("flutter://lesson_detail", {"uuid":lesson.uuid});
+                      YYCommonUtils.openPage(context, YYLessonDetailPage({"uuid":lesson.uuid}));
                     });
                   },
                   itemCount: course.lessonList.length,

@@ -11,6 +11,7 @@ import 'package:lychee/common/model/YYCourseHome.dart';
 import 'package:lychee/common/model/YYCourse.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/YYSeparatorWidget.dart';
+import 'package:lychee/page/YYCourseDetailPage.dart';
 
 class YYCoursePage extends StatefulWidget {
   @override
@@ -78,7 +79,7 @@ class _YYCoursePageState extends State<YYCoursePage> with AutomaticKeepAliveClie
           itemBuilder: (context, index) {
             YYCourse recommend = recommends[index];
             return new YYCourseItem(recommends[index],onPressed: (){
-              YYCommonUtils.openPage("flutter://course_detail", {"uuid":recommend.uuid});
+              YYCommonUtils.openPage(context, YYCourseDetailPage({"uuid":recommend.uuid}));
             });
           },
           itemCount: recommends.length,
