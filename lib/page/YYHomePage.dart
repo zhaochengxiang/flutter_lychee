@@ -16,6 +16,12 @@ import 'package:lychee/widget/YYSectionWdiget.dart';
 import 'package:lychee/widget/YYSeparatorWidget.dart';
 import 'package:lychee/common/model/YYCourse.dart';
 import 'package:lychee/common/model/YYLesson.dart';
+import './YYHomeBookPage.dart';
+import './YYLessonPage.dart';
+import './YYLessonDetailPage.dart';
+import './YYCoursePage.dart';
+import './YYCourseDetailPage.dart';
+import './YYBookDetailPage.dart';
 
 class YYHomePage extends StatefulWidget {
   @override
@@ -92,13 +98,13 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _optionIconText("book.png","图书",() {
-            YYCommonUtils.openPage("flutter://home_book", null);
+            YYCommonUtils.openPage(context, YYHomeBookPage());           
           }),
           _optionIconText("lesson.png","小讲",() {
-            YYCommonUtils.openPage("flutter://lesson", null);
+            YYCommonUtils.openPage(context, YYLessonPage());           
           }),
           _optionIconText("course.png","短课",() {
-            YYCommonUtils.openPage("flutter://course", null);
+            YYCommonUtils.openPage(context, YYCoursePage());           
           }),
         ],
       ),
@@ -116,7 +122,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
           title: "精选图书",
         ),
         new YYBookGrid(books,onPressed: (book){
-          YYCommonUtils.openPage("flutter://book_detail", {"lid":0,"uuid":book.uuid});
+          YYCommonUtils.openPage(context, YYBookDetailPage({"lid":0,"uuid":book.uuid}));
         }),
       ],
     );
@@ -139,7 +145,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
           itemBuilder: (context, index) {
             YYLesson lesson = lessons[index];
             return new YYLessonItem(lesson,onPressed: (){
-              YYCommonUtils.openPage("flutter://lesson_detail", {"uuid":lesson.uuid});
+              YYCommonUtils.openPage(context, YYLessonDetailPage({"uuid":lesson.uuid}));
             });
           },
           itemCount: lessons.length,
@@ -165,7 +171,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
           itemBuilder: (context, index) {
             YYCourse course = courses[index];
             return new YYCourseItem(course,onPressed: (){
-              YYCommonUtils.openPage("flutter://course_detail", {"uuid":course.uuid});
+              YYCommonUtils.openPage(context, YYCourseDetailPage({"uuid":course.uuid}));
             });
           },
           itemCount: courses.length,

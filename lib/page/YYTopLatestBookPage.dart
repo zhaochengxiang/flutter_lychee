@@ -70,7 +70,7 @@ class _YYTopLatestBookPageState extends State<YYTopLatestBookPage> with Automati
         onLoadMore: onLoadMore,
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
-        itemBuilder: (BuildContext context, int index) => renderListItem(index),
+        itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
       )
     );
   }

@@ -4,6 +4,8 @@ import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/model/YYUser.dart';
 import 'package:lychee/common/local/YYLocalStorage.dart';
+import './YYLoginPage.dart';
+import './YYMineBookPage.dart';
 
 class YYMinePage extends StatefulWidget {
   @override
@@ -48,7 +50,7 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
 
   topPressed() {
     if (baseWidgetControl.data == null) {
-      YYCommonUtils.openPage("flutter://login", null);
+      YYCommonUtils.openPage(context, YYLoginPage());
     } 
   }
 
@@ -122,7 +124,7 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
         ),
         onPressed: (){
           if (i==0) {
-            YYCommonUtils.openPage("flutter://mine_book", null);
+            YYCommonUtils.openPage(context, YYMineBookPage());
           }
         },
       );

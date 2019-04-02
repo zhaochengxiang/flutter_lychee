@@ -174,13 +174,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_boost:
-    dependency: "direct main"
-    description:
-      name: flutter_boost
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.400"
   flutter_easyrefresh:
     dependency: "direct main"
     description:
@@ -544,12 +537,12 @@ packages:
     source: hosted
     version: "1.0.9"
   xservice_kit:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: xservice_kit
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.26"
+    version: "0.0.27"
   yaml:
     dependency: transitive
     description:

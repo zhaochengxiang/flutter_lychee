@@ -46,7 +46,7 @@ class _YYTopReadingBookPageState extends State<YYTopReadingBookPage> with Automa
         onLoadMore: onLoadMore,
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
-        itemBuilder: (BuildContext context, int index) => renderListItem(index),
+        itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
       )
     );
   }
