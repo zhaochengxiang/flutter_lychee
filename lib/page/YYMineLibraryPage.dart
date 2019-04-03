@@ -46,8 +46,6 @@ class _YYMineLibraryPageState extends State<YYMineLibraryPage>  with AutomaticKe
   }
 
   _renderListItem(index) {
-    YYBaseListWidgetControl control = baseWidgetControl;
-
     YYLibrary library = control.data[index];
 
     return FlatButton( 
@@ -78,7 +76,7 @@ class _YYMineLibraryPageState extends State<YYMineLibraryPage>  with AutomaticKe
       height: MediaQuery.of(context).size.height,
       child: YYBaseListWidget(
         refreshKey: refreshIndicatorKey,
-        control: baseWidgetControl,
+        control: control,
         itemBuilder:(BuildContext context, int index)=>_renderListItem(index),
       )
     );

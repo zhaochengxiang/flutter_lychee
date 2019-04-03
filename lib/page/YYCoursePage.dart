@@ -90,7 +90,7 @@ class _YYCoursePageState extends State<YYCoursePage> with AutomaticKeepAliveClie
 
   @override
   Widget build(BuildContext context) {
-    courseHome = baseWidgetControl.data;
+    courseHome = control.data;
 
     return new Scaffold(
       appBar: new AppBar(
@@ -112,7 +112,7 @@ class _YYCoursePageState extends State<YYCoursePage> with AutomaticKeepAliveClie
         ]
       ),
       body: YYBaseScrollWidget(
-        control:baseWidgetControl,
+        control:control,
         onRefresh:handleRefresh,
         refreshKey: refreshIndicatorKey,
         child: new Column(

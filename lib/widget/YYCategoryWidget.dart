@@ -59,7 +59,7 @@ class _YYCategoryWidgetPageState extends State<YYCategoryWidget>  with Automatic
           });
         });
       },
-      itemCount: baseWidgetControl.data.length,
+      itemCount: control.data.length,
     );
   }
 
@@ -100,10 +100,10 @@ class _YYCategoryWidgetPageState extends State<YYCategoryWidget>  with Automatic
 
   @override
   Widget build(BuildContext context) {
-    allCategories = baseWidgetControl.data;
+    allCategories = control.data;
 
     return YYBaseWidget(
-        control: baseWidgetControl,
+        control: control,
         onRefresh: handleRefresh,
         child: Row(
           children: <Widget>[

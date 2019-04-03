@@ -38,8 +38,6 @@ class _YYMineShareBookPageState extends State<YYMineShareBookPage> with Automati
 
   @override
   Widget build(BuildContext context) {
-    YYBaseBookListWidgetControl control = baseWidgetControl;
-
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(

@@ -41,7 +41,7 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
 
   @override
   Widget build(BuildContext context) {
-    richBook = baseWidgetControl.data;
+    richBook = control.data;
 
     return new Scaffold(
       appBar: new AppBar(
@@ -63,7 +63,7 @@ class _YYBookDetailPageState extends State<YYBookDetailPage> with AutomaticKeepA
         ]
       ),
       body: YYBaseScrollWidget(
-        control:baseWidgetControl,
+        control:control,
         onRefresh:handleRefresh,
         refreshKey: refreshIndicatorKey,
         child: (richBook==null)?new Container():new Column(

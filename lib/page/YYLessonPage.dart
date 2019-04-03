@@ -90,7 +90,6 @@ class _YYLessonPageState extends State<YYLessonPage> with AutomaticKeepAliveClie
 
   @override
   Widget build(BuildContext context) {
-    YYBaseScrollWidgetControl control = baseWidgetControl;
     lessonHome = control.data;
 
     return new Scaffold(

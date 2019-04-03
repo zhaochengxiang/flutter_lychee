@@ -48,8 +48,6 @@ class _YYMineFramePageState extends State<YYMineFramePage>  with AutomaticKeepAl
   }
 
   _renderListItem(index) {
-    YYBaseListWidgetControl control = baseWidgetControl;
-
     YYFrame frame;
     if (index == 0) {
       frame = new YYFrame(1, 0, 0, "默认书架");
@@ -85,7 +83,7 @@ class _YYMineFramePageState extends State<YYMineFramePage>  with AutomaticKeepAl
       height: MediaQuery.of(context).size.height,
       child: YYBaseListWidget(
         refreshKey: refreshIndicatorKey,
-        control: baseWidgetControl,
+        control: control,
         itemBuilder:(BuildContext context, int index)=>_renderListItem(index),
       )
     );

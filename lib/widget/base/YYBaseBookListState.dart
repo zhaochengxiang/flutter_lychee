@@ -35,7 +35,6 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
   @override
   generateRemoteParams() {
     Map<String,dynamic> params = new Map();
-    YYBaseBookListWidgetControl control = baseWidgetControl;
     if (control.options&YYBaseBookListWidgetControl.ShowCategory > 0) {
       params["category"] = control.cid;
     }
@@ -57,7 +56,6 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
   @override
   generateMoreRemoteParams() {
     Map<String,dynamic> params = new Map();
-    YYBaseBookListWidgetControl control = baseWidgetControl;
     if (control.options&YYBaseBookListWidgetControl.ShowCategory > 0) {
       params["category"] = control.cid;
     }
@@ -83,7 +81,6 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
   @override
   handleRefreshData(data) {
     if (data is Map) {
-      YYBaseBookListWidgetControl control = baseWidgetControl;
       control.data = new List();
       YYBookResult bookResult = jsonConvertToModel(data);
       control.total = bookResult.total;
@@ -100,7 +97,6 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
 
   @override
   handleMoreData(data) {
-    YYBaseBookListWidgetControl control = baseWidgetControl;
     if (data is Map) {
       YYBookResult bookResult = jsonConvertToModel(data);
       control.total = bookResult.total;
@@ -117,7 +113,6 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
 
   @protected
   renderListItem(context,index) {
-    YYBaseBookListWidgetControl control = baseWidgetControl;
     YYBook book = control.data[index];
     return YYBookItem(book:book,onPressed: (){
       YYCommonUtils.openPage(context, YYBookDetailPage({"lid":0,"uuid":book.uuid}));
@@ -126,14 +121,14 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
 
   @override
   void initControl() {
-    YYBaseBookListWidgetControl control = new YYBaseBookListWidgetControl();
-    control.needHeader = needHeader;
-    control.needRefreshHeader = needRefreshHeader;
-    control.needRefreshFooter = needRefreshFooter;
-    control.data = getData;
+    control = new YYBaseBookListWidgetControl();
+  }
+
+  @override
+  void setControl() {
+    super.setControl();
     control.options = options();
     control.categoryRemotePath = categoryRemotePath;
     control.libraryRemotePath = libraryRemotePath;
-    baseWidgetControl = control;   
   }
 }

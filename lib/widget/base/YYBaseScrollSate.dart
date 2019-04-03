@@ -13,9 +13,12 @@ mixin YYBaseScrollState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKee
 
   @override
   void initControl() {
-    YYBaseScrollWidgetControl control = new YYBaseScrollWidgetControl();
+    control = new YYBaseScrollWidgetControl();
+  }
+
+  @override
+  void setControl() {
+    super.setControl();
     control.needRefreshHeader = needRefreshHeader;
-    control.data = getData;
-    baseWidgetControl = control;
   }
 }

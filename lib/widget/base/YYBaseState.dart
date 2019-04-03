@@ -12,7 +12,7 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
   bool isShow = false;
 
   @protected
-  YYBaseWidgetControl baseWidgetControl;
+  dynamic control;
   @protected
   final dynamic data = null;
   @protected
@@ -48,24 +48,24 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
   @protected
   handleRefreshData(data) {
     if (data is Map) {
-      baseWidgetControl.data = jsonConvertToModel(data);
+      control.data = jsonConvertToModel(data);
     } else if (data is List) {
-      baseWidgetControl.data = new List();
+      control.data = new List();
       for (int i = 0; i < data.length; i++) {
-        baseWidgetControl.data.add(jsonConvertToModel(data[i]));
+        control.data.add(jsonConvertToModel(data[i]));
       }
     }
   }
 
   @protected
   Future<Null> handleRefresh() async {
-    if (baseWidgetControl.isLoading) {
+    if (control.isLoading) {
       return null;
     }
     if (isShow) {
       setState(() {
-        baseWidgetControl.isLoading = true;    
-        baseWidgetControl.errorMessage = "";  
+        control.isLoading = true;    
+        control.errorMessage = "";  
       });
     }
 
@@ -83,14 +83,14 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
     } else if (res != null && !res.result) {
       if (isShow) {
         setState(() {
-          baseWidgetControl.errorMessage = res.data;        
+          control.errorMessage = res.data;        
         });
       }
     }
 
     if (isShow) {
       setState(() {
-        baseWidgetControl.isLoading = false;
+        control.isLoading = false;
       });
     }
 
@@ -100,7 +100,7 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
   ///与刷新无关的网络请求
   @protected
   Future<YYResultData> handleNotAssociatedWithRefreshRequest(BuildContext context,String url, Map<String, dynamic> params) async {
-    if (baseWidgetControl.isLoading) {
+    if (control.isLoading) {
       return new YYResultData(null, false);
     }
 
@@ -114,8 +114,12 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
 
   @protected
   void initControl() {
-    baseWidgetControl = new YYBaseWidgetControl();
-    baseWidgetControl.data = getData;
+    control = new YYBaseWidgetControl();
+  }
+
+  @protected
+  void setControl() {
+    control.data = getData;
   }
 
   @override
@@ -123,6 +127,7 @@ mixin YYBaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClien
     isShow = true;
     super.initState();
     initControl();
+    setControl();
 
     needNetworkRequest().then((res) {
       if (res == true) {

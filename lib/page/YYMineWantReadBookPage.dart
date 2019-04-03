@@ -35,7 +35,6 @@ class _YYMineWantReadBookPageState extends State<YYMineWantReadBookPage> with Au
   @override
   generateRemoteParams() {
     Map<String,dynamic> params = new Map();
-    YYBaseBookListWidgetControl control = baseWidgetControl;
     params["category"] = control.cid;
     params["lid"] = control.lid.toInt();
     params["state"] = 0;
@@ -48,7 +47,6 @@ class _YYMineWantReadBookPageState extends State<YYMineWantReadBookPage> with Au
   @override
   generateMoreRemoteParams() {
     Map<String,dynamic> params = new Map();
-    YYBaseBookListWidgetControl control = baseWidgetControl;
     params["category"] = control.cid;
     params["lid"] = control.lid.toInt();
     params["state"] = 0;
@@ -60,8 +58,6 @@ class _YYMineWantReadBookPageState extends State<YYMineWantReadBookPage> with Au
 
   @override
   Widget build(BuildContext context) {
-    YYBaseBookListWidgetControl control = baseWidgetControl;
-
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(

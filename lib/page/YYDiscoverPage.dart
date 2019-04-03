@@ -35,7 +35,6 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
   dynamic get getData => [{"image":"found_fav.png","title":"大家都收藏"},{"image":"found_cut.png","title":"大家都在读"},{"image":"found_read.png","title":"大家都读过"},{"image":"found_location.png","title":"附近图书馆"}];
 
   _renderListItem(index) {
-    YYBaseListWidgetControl control = baseWidgetControl;
     var data = control.data[index];
 
     return FlatButton( 
@@ -77,7 +76,7 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
         centerTitle: true,
       ),
       body: YYBaseListWidget(
-        control: baseWidgetControl,
+        control: control,
         itemBuilder: (BuildContext context, int index) => _renderListItem(index),
         refreshKey: refreshIndicatorKey,
       ),

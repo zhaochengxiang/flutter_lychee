@@ -49,10 +49,10 @@ class YYBookItem extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Expanded(child:Text("想读"+book.wantReadQuantity.toString(),style:TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.small),overflow: TextOverflow.ellipsis)),
-                      Expanded(child:Text("读过"+book.haveReadQuantity.toString(),style:TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.small),overflow: TextOverflow.ellipsis)),
-                      Expanded(child:Text("收藏"+book.collectionQuantity.toString(),style:TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.small),overflow: TextOverflow.ellipsis)),
-                      Expanded(child:Text("笔记"+book.noteQuantity.toString(),style:TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.small),overflow: TextOverflow.ellipsis)),
+                      Expanded(child:Text("想读"+((book.wantReadQuantity==null)?"0":book.wantReadQuantity.toString()),style:TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.small),overflow: TextOverflow.ellipsis)),
+                      Expanded(child:Text("读过"+((book.haveReadQuantity==null)?"0":book.haveReadQuantity.toString()),style:TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.small),overflow: TextOverflow.ellipsis)),
+                      Expanded(child:Text("收藏"+((book.collectionQuantity==null)?"0":book.collectionQuantity.toString()),style:TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.small),overflow: TextOverflow.ellipsis)),
+                      Expanded(child:Text("笔记"+((book.noteQuantity==null)?"0":book.noteQuantity.toString()),style:TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.small),overflow: TextOverflow.ellipsis)),
                     ],
                   )
                 ],

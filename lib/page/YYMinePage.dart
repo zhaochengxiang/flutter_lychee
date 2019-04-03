@@ -49,13 +49,13 @@ class _YYMinePageState extends State<YYMinePage> with AutomaticKeepAliveClientMi
   }
 
   topPressed() {
-    if (baseWidgetControl.data == null) {
+    if (control.data == null) {
       YYCommonUtils.openPage(context, YYLoginPage());
     } 
   }
 
   Widget _buildTop(BuildContext context) {
-    YYUser user = baseWidgetControl.data;
+    YYUser user = control.data;
 
     return FlatButton(
       padding: EdgeInsets.all(0), 

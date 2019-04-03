@@ -36,8 +36,6 @@ mixin YYBaseBookRadioListState<T extends StatefulWidget> on YYBaseBookListState<
   }
 
   _headerItemOnSelected(receiptResult,index) {
-    YYBaseBookRadioListWidgetControl control = baseWidgetControl;
-
     if (control.section == index) {
       setState(() {
         control.section = -1;
@@ -71,8 +69,6 @@ mixin YYBaseBookRadioListState<T extends StatefulWidget> on YYBaseBookListState<
   }
 
   _renderBookRadioItem(receipt,section,row) {
-    YYBaseBookRadioListWidgetControl control = baseWidgetControl;
-
     bool isNotSamePerson = false, isExist = false;
     int existIndex = -1;
 
@@ -108,7 +104,6 @@ mixin YYBaseBookRadioListState<T extends StatefulWidget> on YYBaseBookListState<
 
   @protected
   renderListItem(context,index) {
-    YYBaseBookRadioListWidgetControl control = baseWidgetControl;
     YYReceiptResult receiptResult = control.data[index]; 
     return Column(
       children: <Widget>[
@@ -128,16 +123,13 @@ mixin YYBaseBookRadioListState<T extends StatefulWidget> on YYBaseBookListState<
 
   @override
   void initControl() {
-    YYBaseBookRadioListWidgetControl control = new YYBaseBookRadioListWidgetControl();
-    control.needHeader = needHeader;
-    control.needRefreshHeader = needRefreshHeader;
-    control.needRefreshFooter = needRefreshFooter;
-    control.data = getData;
-    control.options = options();
-    control.categoryRemotePath = categoryRemotePath;
-    control.libraryRemotePath = libraryRemotePath;
+    control = new YYBaseBookRadioListWidgetControl();
+  }
+
+  @override
+  void setControl() {
+    super.setControl();
     control.buttonName = buttonName;
     control.buttonOnPressed = buttonOnPressed;
-    baseWidgetControl = control;   
   }
 }

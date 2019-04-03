@@ -37,7 +37,6 @@ class _YYMineBookPageState extends State<YYMineBookPage>  with AutomaticKeepAliv
   dynamic get getData => [{"image":"found_read.png","title":"我的藏书"},{"image":"found_want.png","title":"我想读的"},{"image":"found_location.png","title":"我共享的"},{"image":"found_mark.png","title":"我想借的"},{"image":"found_fav.png","title":"我借到的"},{"image":"found_cut.png","title":"我借出的"}];
 
   _renderListItem(index) {
-    YYBaseListWidgetControl control = baseWidgetControl;
     var data = control.data[index];
 
     return FlatButton( 
@@ -94,7 +93,7 @@ class _YYMineBookPageState extends State<YYMineBookPage>  with AutomaticKeepAliv
         centerTitle: true,
       ),
       body: YYBaseListWidget(
-        control: baseWidgetControl,
+        control: control,
         itemBuilder: (BuildContext context, int index) => _renderListItem(index),
         refreshKey: refreshIndicatorKey,
       ),

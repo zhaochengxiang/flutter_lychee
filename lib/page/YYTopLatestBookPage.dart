@@ -29,8 +29,6 @@ class _YYTopLatestBookPageState extends State<YYTopLatestBookPage> with Automati
   @override
   generateRemoteParams() {
     Map<String,dynamic> params = new Map();
-    YYBaseBookListWidgetControl control = baseWidgetControl;
-
     params["category"] = control.cid;
     params["scope"] = 0;
     params["last"] = control.last.toInt();
@@ -41,8 +39,6 @@ class _YYTopLatestBookPageState extends State<YYTopLatestBookPage> with Automati
   @override
   generateMoreRemoteParams() {
     Map<String,dynamic> params = new Map();
-    YYBaseBookListWidgetControl control = baseWidgetControl;
-
     params["category"] = control.cid;
     params["scope"] = 0;
     params["last"] = control.last.toInt();
@@ -52,8 +48,6 @@ class _YYTopLatestBookPageState extends State<YYTopLatestBookPage> with Automati
 
   @override
   Widget build(BuildContext context) {
-    YYBaseBookListWidgetControl control = baseWidgetControl;
-
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(

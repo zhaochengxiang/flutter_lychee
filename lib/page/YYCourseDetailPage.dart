@@ -42,7 +42,7 @@ class _YYCourseDetailPageState extends State<YYCourseDetailPage> with AutomaticK
 
   @override
   Widget build(BuildContext context) {
-    course = baseWidgetControl.data;
+    course = control.data;
 
     return new Scaffold(
       appBar: new AppBar(
@@ -64,7 +64,7 @@ class _YYCourseDetailPageState extends State<YYCourseDetailPage> with AutomaticK
         ]
       ),
       body: YYBaseScrollWidget(
-        control:baseWidgetControl,
+        control:control,
         onRefresh:handleRefresh,
         refreshKey: refreshIndicatorKey,
         child: (course==null)?new Container():new Column(

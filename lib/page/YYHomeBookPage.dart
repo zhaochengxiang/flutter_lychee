@@ -37,9 +37,9 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
   }
 
   _buildBannelWidget() {
-    if (baseWidgetControl.data==null) return new Container();
+    if (control.data==null) return new Container();
 
-    var fineBooks = baseWidgetControl.data.fineList;
+    var fineBooks = control.data.fineList;
     List urls = List();
     if (fineBooks != null) {
       for (int i=0;i<fineBooks.length;i++) {
@@ -60,9 +60,9 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
   }
 
   _buildLatestBookWidget() {
-    if (baseWidgetControl.data == null) return new Container();
+    if (control.data == null) return new Container();
     
-    var latestBooks = baseWidgetControl.data.latestList;
+    var latestBooks = control.data.latestList;
     return (latestBooks==null||latestBooks.length==0)?new Container():new Column(
       children: <Widget>[
         YYSectionWidget(
@@ -78,9 +78,9 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
   }
 
   _buildPopularBookWidget() {
-    if (baseWidgetControl.data == null) return new Container();
+    if (control.data == null) return new Container();
     
-    var popularBooks = baseWidgetControl.data.topPopularList;
+    var popularBooks = control.data.topPopularList;
     return (popularBooks==null||popularBooks.length==0)?new Container():new Column(
       children: <Widget>[
         YYSectionWidget(
@@ -97,8 +97,6 @@ class _YYHomeBookPageState extends State<YYHomeBookPage> with AutomaticKeepAlive
 
   @override
   Widget build(BuildContext context) {
-    YYBaseScrollWidgetControl control = baseWidgetControl;
-
     return new Scaffold(
       appBar: new AppBar(
         title:Text("图书"),

@@ -182,7 +182,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
 
   @override
   Widget build(BuildContext context) {
-    homeIndex = baseWidgetControl.data;
+    homeIndex = control.data;
 
     return new Scaffold(
       appBar: new AppBar(
@@ -202,7 +202,7 @@ class _YYHomePageState extends State<YYHomePage> with AutomaticKeepAliveClientMi
         ],
       ),
       body: YYBaseScrollWidget(
-        control:baseWidgetControl,
+        control:control,
         onRefresh:handleRefresh,
         refreshKey: refreshIndicatorKey,
         child: new Column(

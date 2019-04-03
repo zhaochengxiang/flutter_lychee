@@ -12,6 +12,9 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
   bool get needHeader => false;
 
   @protected
+  bool get needSlide => false;
+
+  @protected
   bool get needRefreshHeader => true;
 
   @protected
@@ -24,7 +27,6 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
 
   @override
   handleRefreshData(data) {
-    YYBaseListWidgetControl control = baseWidgetControl;
     control.data = new List();
     if (data is List) {
       for (int i = 0; i < data.length; i++) {
@@ -35,7 +37,6 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
 
   @protected
   handleMoreData(data) {
-    YYBaseListWidgetControl control = baseWidgetControl;
     if (data is List) {
       for (int i = 0; i < data.length; i++) {
         control.data.add(jsonConvertToModel(data[i]));
@@ -45,12 +46,12 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
 
   @protected
   Future<Null> onLoadMore() async {
-    if (baseWidgetControl.isLoading) {
+    if (control.isLoading) {
       return null;
     }
     if (isShow) {
       setState(() {
-        baseWidgetControl.isLoading = true;
+        control.isLoading = true;
       });
     }
 
@@ -67,7 +68,7 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
 
     if (isShow) {
       setState(() {
-        baseWidgetControl.isLoading = false;
+        control.isLoading = false;
       });
     }
     return null;
@@ -75,12 +76,14 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
 
   @override
   void initControl() {
-    YYBaseListWidgetControl control = new YYBaseListWidgetControl();
+    control = new YYBaseListWidgetControl();
+  }
+
+  @override
+  void setControl() {
+    super.setControl();
     control.needHeader = needHeader;
     control.needRefreshHeader = needRefreshHeader;
     control.needRefreshFooter = needRefreshFooter;
-    control.data = getData;
-    baseWidgetControl = control;   
   }
-
 }
