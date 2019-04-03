@@ -9,6 +9,7 @@ import 'package:lychee/common/style/YYStyle.dart';
 import './YYTopCollectionBookPage.dart';
 import './YYTopReadingBookPage.dart';
 import './YYTopReadBookPage.dart';
+import 'package:lychee/widget/YYSeparatorWidget.dart';
 
 class YYDiscoverPage extends StatefulWidget {
   @override
@@ -31,11 +32,11 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
   bool get needRefreshFooter => false;
 
   @override
-  List get getDataList => [{"image":"found_fav.png","title":"大家都收藏"},{"image":"found_cut.png","title":"大家都在读"},{"image":"found_read.png","title":"大家都读过"},{"image":"found_location.png","title":"附近图书馆"}];
+  dynamic get getData => [{"image":"found_fav.png","title":"大家都收藏"},{"image":"found_cut.png","title":"大家都在读"},{"image":"found_read.png","title":"大家都读过"},{"image":"found_location.png","title":"附近图书馆"}];
 
   _renderListItem(index) {
     YYBaseListWidgetControl control = baseWidgetControl;
-    var data = control.dataList[index];
+    var data = control.data[index];
 
     return FlatButton( 
       padding: EdgeInsets.all(0),
@@ -51,10 +52,7 @@ class _YYDiscoverPageState extends State<YYDiscoverPage>  with AutomaticKeepAliv
                 trailing: new Icon(Icons.keyboard_arrow_right),
               )
             ),
-            Padding(
-              padding:EdgeInsets.only(left:10.5,right:10.5),
-              child:Divider(height: 0.5,color:Color(YYColors.divider)),
-            )
+            YYSeparatorWidget()
           ],
         )
       ),

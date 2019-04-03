@@ -7,6 +7,11 @@ import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import './YYMineCollectionBookPage.dart';
+import './YYMineWantReadBookPage.dart';
+import './YYMineShareBookPage.dart';
+import './YYMineWantBorrowBookPage.dart';
+import './YYMineBorrowedBookPage.dart';
+import './YYMineLentBookPage.dart';
 
 class YYMineBookPage extends StatefulWidget {
   @override
@@ -29,11 +34,11 @@ class _YYMineBookPageState extends State<YYMineBookPage>  with AutomaticKeepAliv
   bool get needRefreshFooter => false;
 
   @override
-  List get getDataList => [{"image":"found_read.png","title":"我的藏书"},{"image":"found_want.png","title":"我想读的"},{"image":"found_location.png","title":"我共享的"},{"image":"found_mark.png","title":"我想借的"},{"image":"found_fav.png","title":"我借到的"},{"image":"found_cut.png","title":"我借出的"}];
+  dynamic get getData => [{"image":"found_read.png","title":"我的藏书"},{"image":"found_want.png","title":"我想读的"},{"image":"found_location.png","title":"我共享的"},{"image":"found_mark.png","title":"我想借的"},{"image":"found_fav.png","title":"我借到的"},{"image":"found_cut.png","title":"我借出的"}];
 
   _renderListItem(index) {
     YYBaseListWidgetControl control = baseWidgetControl;
-    var data = control.dataList[index];
+    var data = control.data[index];
 
     return FlatButton( 
       padding: EdgeInsets.all(0),
@@ -59,6 +64,16 @@ class _YYMineBookPageState extends State<YYMineBookPage>  with AutomaticKeepAliv
       onPressed: () {
         if (index == 0) {
           YYCommonUtils.openPage(context, YYMineCollectionBookPage());
+        } else if (index == 1) {
+          YYCommonUtils.openPage(context, YYMineWantReadBookPage());
+        } else if (index == 2) {
+          YYCommonUtils.openPage(context, YYMineShareBookPage());
+        } else if (index == 3) {
+          YYCommonUtils.openPage(context, YYMineWantBorrowBookPage());
+        } else if (index == 4) {
+          YYCommonUtils.openPage(context, YYMineBorrowedBookPage());
+        } else if (index == 5) {
+          YYCommonUtils.openPage(context, YYMineLentBookPage());
         }
       },
     );

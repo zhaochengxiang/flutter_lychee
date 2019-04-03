@@ -8,9 +8,6 @@ import 'package:lychee/widget/base/YYBaseState.dart';
 mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepAliveClientMixin<T>  {
   final GlobalKey<EasyRefreshState> refreshIndicatorKey = new GlobalKey<EasyRefreshState>();
 
-  final List dataList = new List();
-
-  ///是否需要头部
   @protected
   bool get needHeader => false;
 
@@ -20,8 +17,6 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
   @protected
   bool get needRefreshFooter => true;
 
-  List get getDataList => dataList;
-
   @protected
   generateMoreRemoteParams() {
     return null;
@@ -30,10 +25,10 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
   @override
   handleRefreshData(data) {
     YYBaseListWidgetControl control = baseWidgetControl;
-    control.dataList.clear();
+    control.data = new List();
     if (data is List) {
       for (int i = 0; i < data.length; i++) {
-        control.dataList.add(jsonConvertToModel(data[i]));
+        control.data.add(jsonConvertToModel(data[i]));
       }
     }
   }
@@ -43,7 +38,7 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
     YYBaseListWidgetControl control = baseWidgetControl;
     if (data is List) {
       for (int i = 0; i < data.length; i++) {
-        control.dataList.add(jsonConvertToModel(data[i]));
+        control.data.add(jsonConvertToModel(data[i]));
       }
     }
   }
@@ -84,7 +79,7 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
     control.needHeader = needHeader;
     control.needRefreshHeader = needRefreshHeader;
     control.needRefreshFooter = needRefreshFooter;
-    control.dataList = getDataList;
+    control.data = getData;
     baseWidgetControl = control;   
   }
 

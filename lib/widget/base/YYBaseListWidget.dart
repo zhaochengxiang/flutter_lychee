@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:lychee/widget/base/YYBaseDecorationState.dart';
-import 'package:lychee/Widget/base/YYBaseScrollWidget.dart';
 import 'package:lychee/widget/YYSeparatorWidget.dart';
+import 'package:lychee/widget/base/YYBaseWidget.dart';
 
 class YYBaseListWidget extends StatefulWidget {
   ///item渲染
@@ -38,26 +38,26 @@ class _YYBaseListWidgetState extends State<YYBaseListWidget> with YYBaseDecorati
     if (widget.control.needHeader) {
       ///是否需要头部
       ///如果需要头部，用Item 0 的 Widget 作为ListView的头部
-      return widget.control.dataList.length + 1;
+      return widget.control.data.length + 1;
     } else {
       ///如果不需要头部，在没有数据时，固定返回数量1用于空页面呈现
-      if (widget.control.dataList.length == 0) {
+      if (widget.control.data.length == 0) {
         return 1;
       }
 
       ///如果有数据,因为部加载更多选项，需要对列表数据总数+1
-      return widget.control.dataList.length;
+      return widget.control.data.length;
     }
   }
 
   @override
   Widget buildDecoration(control, onRefresh, emptyTip) {
-    if (control.isLoading&&control.dataList.length==0) {
+    if (control.isLoading && control.data==null) {
       return buildActivityIndicator();
-    } else if (!control.isLoading&&control.errorMessage.length!=0) {
+    } else if (!control.isLoading && control.errorMessage.length!=0) {
       ///网络请求出错显示提示框
       return buildErrorTip(control.errorMessage,onRefresh);
-    } else if (!control.needHeader && control.dataList.length == 0) {
+    } else if (!control.needHeader && control.data!=null && control.data.length == 0) {
       ///如果不需要头部，并且数据为0，渲染空页面
       return buildEmpty(emptyTip);
     } 
@@ -109,19 +109,15 @@ class _YYBaseListWidgetState extends State<YYBaseListWidget> with YYBaseDecorati
           },
 
           ///根据状态返回数量
-          itemCount: _getListCount(),
+          itemCount: (widget.control.data==null)?0:_getListCount(),
         ),
       )
     );
   }
 }
 
-class YYBaseListWidgetControl extends YYBaseScrollWidgetControl {
-  ///数据，对齐增减，不能替换
-  List dataList = new List();
-
-  ///是否需要上拉刷新
+class YYBaseListWidgetControl extends YYBaseWidgetControl {
+  bool needRefreshHeader = true;
   bool needRefreshFooter = true;
-  ///是否需要头部
   bool needHeader = false;
 }

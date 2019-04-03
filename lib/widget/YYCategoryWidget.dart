@@ -10,9 +10,8 @@ typedef CategoryItemCallback = void Function(YYCategory category);
 
 class YYCategoryWidget extends StatefulWidget {
   final String remotePath;
-  final Map remoteParams;
   final CategoryItemCallback onPressed;
-  YYCategoryWidget({this.remotePath="/category/findAll",this.remoteParams,this.onPressed});
+  YYCategoryWidget({this.remotePath="/category/findAll",this.onPressed});
 
   @override
   _YYCategoryWidgetPageState createState() => _YYCategoryWidgetPageState();
@@ -33,7 +32,7 @@ class _YYCategoryWidgetPageState extends State<YYCategoryWidget>  with Automatic
 
   @override
   generateRemoteParams() {
-    return widget.remoteParams;
+    return {};
   }
 
   @override

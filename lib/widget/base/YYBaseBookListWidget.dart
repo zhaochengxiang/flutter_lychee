@@ -4,7 +4,9 @@ import 'package:lychee/widget/base/YYBaseListWidget.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:lychee/widget/YYCategoryWidget.dart';
+import 'package:lychee/page/YYMineFramePage.dart';
 import 'package:lychee/common/event/YYNeedRefreshEvent.dart';
+import 'package:lychee/page/YYMineLibraryPage.dart';
 
 class YYBaseBookListWidget extends StatefulWidget {
   ///item渲染
@@ -53,8 +55,14 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
       widget.control.isFrameSelected = false;
       if (widget.control.isLibrarySelected==true) {
         widget.control.stackIndex = 2;
+        widget.control.curLibraryName = "不限";
       } else {
         widget.control.stackIndex = 0;
+        widget.control.lid = 0;
+        widget.control.offset = 0;
+        widget.control.last = 0;
+        widget.control.curLibraryName = "图书馆";
+        YYNeedRefreshEvent.refreshHandleFunction(widget.widgetName);
       }
     });
   }
@@ -66,8 +74,14 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
       widget.control.isFrameSelected = !widget.control.isFrameSelected;
       if (widget.control.isFrameSelected==true) {
         widget.control.stackIndex = 3;
+        widget.control.curFrameName = "不限";
       } else {
         widget.control.stackIndex = 0;
+        widget.control.fid = 0;
+        widget.control.offset = 0;
+        widget.control.last = 0;
+        widget.control.curFrameName = "书架";
+        YYNeedRefreshEvent.refreshHandleFunction(widget.widgetName);
       }
     });
   }
@@ -77,6 +91,30 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
       widget.control.isCategorySelected = false;
       widget.control.curCategoryName = category.name;
       widget.control.cid = category.id;
+      widget.control.last = 0;
+      widget.control.offset = 0;
+      widget.control.stackIndex = 0;
+    });
+    YYNeedRefreshEvent.refreshHandleFunction(widget.widgetName??"");
+  }
+
+  _frameWidgetOnPressed(frame) {
+    setState(() {
+      widget.control.isFrameSelected = false;
+      widget.control.curFrameName = frame.name;
+      widget.control.fid = frame.id;
+      widget.control.last = 0;
+      widget.control.offset = 0;
+      widget.control.stackIndex = 0;
+    });
+    YYNeedRefreshEvent.refreshHandleFunction(widget.widgetName??"");
+  }
+
+  _libraryWidgetOnPressed(library) {
+    setState(() {
+      widget.control.isLibrarySelected = false;
+      widget.control.curLibraryName = library.name;
+      widget.control.lid = library.id;
       widget.control.last = 0;
       widget.control.offset = 0;
       widget.control.stackIndex = 0;
@@ -95,7 +133,12 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(title,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large,),maxLines: 1,overflow: TextOverflow.ellipsis),
+                Container(
+                  constraints:BoxConstraints(
+                    maxWidth: 70
+                  ),
+                  child: Text(title,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),maxLines: 1,overflow: TextOverflow.ellipsis,softWrap: false),
+                ),
                 Image.asset(YYCommonUtils.Local_Icon_prefix+"drop_down.png",width: 10,height: 10,fit: BoxFit.fill)
               ],
             ),
@@ -107,6 +150,14 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
   }
 
   _buildTopWidget() {
+    if (widget.control.options&YYBaseBookListWidgetControl.ShowCategory==0 &&
+        widget.control.options&YYBaseBookListWidgetControl.ShowFrame==0 &&
+        widget.control.options&YYBaseBookListWidgetControl.ShowLibrary==0 &&
+        widget.control.options&YYBaseBookListWidgetControl.ShowCount==0
+    ) {
+      return Container();
+    }
+
     return Container(
       height: 42,
       color: Color(YYColors.gray),
@@ -141,11 +192,15 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
             child: IndexedStack(
               children: <Widget>[
                 new YYBaseListWidget(control: widget.control,itemBuilder: widget.itemBuilder,onRefresh: widget.onRefresh,onLoadMore: widget.onLoadMore,emptyTip: widget.emptyTip??"没有搜索到相关图书",refreshKey: widget.refreshKey),
-                (widget.control.options&YYBaseBookListWidgetControl.ShowCategory>0)?new YYCategoryWidget(onPressed: (category){
+                (widget.control.options&YYBaseBookListWidgetControl.ShowCategory>0)?new YYCategoryWidget(remotePath:widget.control.categoryRemotePath, onPressed: (category){
                   _categoryWidgetOnPressed(category);
                 }):new Container(),
-                new Container(),
-                new Container(),
+                new YYMineLibraryPage(remotePath: widget.control.libraryRemotePath, onPressed: (library){
+                  _libraryWidgetOnPressed(library);
+                }),
+                new YYMineFramePage(onPressed: (frame){
+                  _frameWidgetOnPressed(frame);
+                }),
               ],
               index: widget.control.stackIndex,
             )
@@ -161,6 +216,7 @@ class YYBaseBookListWidgetControl extends YYBaseListWidgetControl {
   static const int ShowLibrary = 1 << 1;
   static const int ShowFrame = 1 << 2;
   static const int ShowCount = 1 << 3;
+  static const int ShowSearch = 1 << 4;
 
   int options = 0;
   int cid = 0;
@@ -179,4 +235,7 @@ class YYBaseBookListWidgetControl extends YYBaseListWidgetControl {
   String curFrameName = "书架";
 
   int stackIndex = 0;
+
+  String categoryRemotePath;
+  String libraryRemotePath;
 }

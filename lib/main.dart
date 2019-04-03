@@ -26,7 +26,7 @@ class _LycheeAppState extends State<LycheeApp> {
   void initState() {
     super.initState();
 
-    YYLocalStorage.save(YYCommonUtils.TOKEN_KEY, "303ddfbd03d78d14d5fde13129cc8b0e");
+    YYLocalStorage.save(YYCommonUtils.TOKEN_KEY, "962e3e198187abcda3af749f2d29de98");
 
     YYShareManager.init();
     YYPushManager.init();

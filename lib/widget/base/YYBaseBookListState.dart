@@ -17,6 +17,12 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
   bool get needRefreshFooter => true;
 
   @protected
+  String get categoryRemotePath => "/category/findAll";
+
+  @protected
+  String get libraryRemotePath => "/library/findMyself";
+
+  @protected
   options() {
     int options = 0;
     options = options | YYBaseBookListWidgetControl.ShowCategory;
@@ -39,6 +45,10 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
     if (control.options&YYBaseBookListWidgetControl.ShowFrame > 0) {
       params["fid"] =control.fid.toInt();
     }
+    if (control.options&YYBaseBookListWidgetControl.ShowSearch > 0) {
+      params["keyword"] = "";
+    }
+    
     params["last"] = control.last.toInt();
     params["offset"] = control.offset;
     return params;
@@ -57,6 +67,9 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
     if (control.options&YYBaseBookListWidgetControl.ShowFrame > 0) {
       params["fid"] =control.fid.toInt();
     }
+    if (control.options&YYBaseBookListWidgetControl.ShowSearch > 0) {
+      params["keyword"] = "";
+    }
     params["last"] = control.last.toInt();
     params["offset"] = control.offset;
     return params;
@@ -69,17 +82,19 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
 
   @override
   handleRefreshData(data) {
-    YYBaseBookListWidgetControl control = baseWidgetControl;
-    control.dataList.clear();
     if (data is Map) {
+      YYBaseBookListWidgetControl control = baseWidgetControl;
+      control.data = new List();
       YYBookResult bookResult = jsonConvertToModel(data);
       control.total = bookResult.total;
       control.last = bookResult.last;
       control.offset = bookResult.offset;
       control.hasNext = bookResult.hasNext;
       if (bookResult.list!=null&&bookResult.list.length>0) {
-        control.dataList.addAll(bookResult.list);
+        control.data.addAll(bookResult.list);
       }
+    } else if (data is List) {
+      super.handleRefreshData(data);
     }
   }
 
@@ -93,15 +108,17 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
       control.offset = bookResult.offset;
       control.hasNext = bookResult.hasNext;
       if (bookResult.list!=null&&bookResult.list.length>0) {
-        control.dataList.addAll(bookResult.list);
+        control.data.addAll(bookResult.list);
       }
+    } else if (data is List) {
+      super.handleMoreData(data);
     }
   }
 
   @protected
   renderListItem(context,index) {
     YYBaseBookListWidgetControl control = baseWidgetControl;
-    YYBook book = control.dataList[index];
+    YYBook book = control.data[index];
     return YYBookItem(book:book,onPressed: (){
       YYCommonUtils.openPage(context, YYBookDetailPage({"lid":0,"uuid":book.uuid}));
     });
@@ -113,8 +130,10 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
     control.needHeader = needHeader;
     control.needRefreshHeader = needRefreshHeader;
     control.needRefreshFooter = needRefreshFooter;
-    control.dataList = getDataList;
+    control.data = getData;
     control.options = options();
+    control.categoryRemotePath = categoryRemotePath;
+    control.libraryRemotePath = libraryRemotePath;
     baseWidgetControl = control;   
   }
 }
