@@ -87,10 +87,10 @@ class _YYMineCollectionBookPageState extends State<YYMineCollectionBookPage> wit
   _delete(context,index) async{
     YYBook book = control.data[index];
     var res = await handleNotAssociatedWithRefreshRequest(context, "/collection/delete", {"bid":book.id.toInt()});
-    if (res!=null && res.result && res.data!=null) {
+    if (res!=null && res.result) {
       if (isShow) {
         setState(() {
-          control.data = control.data.removeAt(index);
+          control.data.removeAt(index);
         });
       }
     }

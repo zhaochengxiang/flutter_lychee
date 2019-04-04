@@ -69,15 +69,16 @@ class _YYMineWantReadBookPageState extends State<YYMineWantReadBookPage> with Au
 
   _delete(context,index) async{
     YYBook book = control.data[index];
-    handleNotAssociatedWithRefreshRequest(context, "/label/deleteWant", {"bid":book.id.toInt()}).then((res) {
-      if (res!=null && res.result && res.data!=null) {
-        if (isShow) {
-          setState(() {
-            control.data.remove(book);
-          });
-        }
+
+    var res = await handleNotAssociatedWithRefreshRequest(context, "/label/deleteWant", {"bid":book.id.toInt()});
+
+    if (res!=null && res.result) {
+      if (isShow) {
+        setState(() {
+          control.data.removeAt(index);
+        });
       }
-    });
+    }
   }
 
   @override

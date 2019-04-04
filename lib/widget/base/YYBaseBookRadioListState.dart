@@ -106,7 +106,7 @@ mixin YYBaseBookRadioListState<T extends StatefulWidget> on YYBaseBookListState<
       } else {
         if (isExist) {
           setState(() {
-            control.indexPaths = control.indexPaths.removeAt(existIndex);
+            control.indexPaths.removeAt(existIndex);
           });
         } else {
           setState(() {
