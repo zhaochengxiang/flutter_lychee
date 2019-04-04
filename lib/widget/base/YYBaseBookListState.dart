@@ -17,34 +17,39 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
   bool get needRefreshFooter => true;
 
   @protected
+  bool get needCategory => true;
+
+  @protected
+  bool get needLibrary => true;
+
+  @protected
+  bool get needFrame => true;
+
+  @protected
+  bool get needCount => true;
+
+  @protected
+  bool get needSearch => true;
+
+  @protected
   String get categoryRemotePath => "/category/findAll";
 
   @protected
   String get libraryRemotePath => "/library/findMyself";
 
-  @protected
-  options() {
-    int options = 0;
-    options = options | YYBaseBookListWidgetControl.ShowCategory;
-    options = options | YYBaseBookListWidgetControl.ShowLibrary;
-    options = options | YYBaseBookListWidgetControl.ShowFrame;
-    options = options | YYBaseBookListWidgetControl.ShowCount;
-    return options;
-  } 
-
   @override
   generateRemoteParams() {
     Map<String,dynamic> params = new Map();
-    if (control.options&YYBaseBookListWidgetControl.ShowCategory > 0) {
+    if (control.needCategory) {
       params["category"] = control.cid;
     }
-    if (control.options&YYBaseBookListWidgetControl.ShowLibrary > 0) {
+    if (control.needLibrary) {
       params["lid"] = control.lid.toInt();
     }
-    if (control.options&YYBaseBookListWidgetControl.ShowFrame > 0) {
+    if (control.needFrame) {
       params["fid"] =control.fid.toInt();
     }
-    if (control.options&YYBaseBookListWidgetControl.ShowSearch > 0) {
+    if (control.needSearch) {
       params["keyword"] = "";
     }
     
@@ -56,16 +61,16 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
   @override
   generateMoreRemoteParams() {
     Map<String,dynamic> params = new Map();
-    if (control.options&YYBaseBookListWidgetControl.ShowCategory > 0) {
+    if (control.needCategory) {
       params["category"] = control.cid;
     }
-    if (control.options&YYBaseBookListWidgetControl.ShowLibrary > 0) {
+    if (control.needLibrary) {
       params["lid"] = control.lid.toInt();
     }
-    if (control.options&YYBaseBookListWidgetControl.ShowFrame > 0) {
+    if (control.needFrame) {
       params["fid"] =control.fid.toInt();
     }
-    if (control.options&YYBaseBookListWidgetControl.ShowSearch > 0) {
+    if (control.needSearch) {
       params["keyword"] = "";
     }
     params["last"] = control.last.toInt();
@@ -127,7 +132,11 @@ mixin YYBaseBookListState<T extends StatefulWidget> on YYBaseListState<T>,Automa
   @override
   void setControl() {
     super.setControl();
-    control.options = options();
+    control.needCategory = needCategory;
+    control.needLibrary = needLibrary;
+    control.needFrame = needFrame;
+    control.needCount = needCount;
+    control.needSearch = needSearch;
     control.categoryRemotePath = categoryRemotePath;
     control.libraryRemotePath = libraryRemotePath;
   }

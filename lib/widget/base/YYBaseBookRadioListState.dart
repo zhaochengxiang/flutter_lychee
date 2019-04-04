@@ -16,6 +16,21 @@ mixin YYBaseBookRadioListState<T extends StatefulWidget> on YYBaseBookListState<
   @override
   bool get needRefreshFooter => false;
 
+  @override
+  bool get needCategory => false;
+
+  @override
+  bool get needLibrary => false;
+
+  @override
+  bool get needFrame => false;
+
+  @override
+  bool get needCount => false;
+
+  @override
+  bool get needSearch => false;
+
   @protected
   String get buttonName => "";
 
@@ -91,7 +106,7 @@ mixin YYBaseBookRadioListState<T extends StatefulWidget> on YYBaseBookListState<
       } else {
         if (isExist) {
           setState(() {
-            control.indexPaths.removeAt(existIndex);
+            control.indexPaths = control.indexPaths.removeAt(existIndex);
           });
         } else {
           setState(() {

@@ -14,12 +14,16 @@ class YYTopPopularBookPage extends StatefulWidget {
 class _YYTopPopularBookPageState extends State<YYTopPopularBookPage> with AutomaticKeepAliveClientMixin<YYTopPopularBookPage>,YYBaseState<YYTopPopularBookPage>, YYBaseListState<YYTopPopularBookPage>,YYBaseBookListState<YYTopPopularBookPage> {
 
   @override
-  options() {
-    int options = 0;
-    options = options | YYBaseBookListWidgetControl.ShowCategory;
- 
-    return options;
-  } 
+  bool get needLibrary => false;
+
+  @override
+  bool get needFrame => false;
+
+  @override
+  bool get needCount => false;
+
+  @override
+  bool get needSearch => false; 
 
   @override
   remotePath() {

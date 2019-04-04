@@ -15,16 +15,8 @@ class YYMineShareBookPage extends StatefulWidget {
 class _YYMineShareBookPageState extends State<YYMineShareBookPage> with AutomaticKeepAliveClientMixin<YYMineShareBookPage>,YYBaseState<YYMineShareBookPage>, YYBaseListState<YYMineShareBookPage>,YYBaseBookListState<YYMineShareBookPage> {
 
   @override
-  options() {
-    int options = 0;
-    options = options | YYBaseBookListWidgetControl.ShowCategory;
-    options = options | YYBaseBookListWidgetControl.ShowLibrary;
-    options = options | YYBaseBookListWidgetControl.ShowCount; 
-    options = options | YYBaseBookListWidgetControl.ShowSearch;
- 
-    return options;
-  } 
-
+  bool get needFrame => false;
+  
   @override
   remotePath() {
     return "/copy/findMyShare";

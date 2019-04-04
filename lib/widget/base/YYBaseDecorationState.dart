@@ -50,10 +50,9 @@ mixin YYBaseDecorationState<T extends StatefulWidget> on State<T> {
     if (control.isLoading&&control.data==null) {
       return buildActivityIndicator();
     } else if (!control.isLoading&&control.errorMessage.length!=0) {
-      ///网络请求出错显示提示框
       return buildErrorTip(control.errorMessage,onRefresh);
-    } else if (control.data==null) {
-      ///如果不需要头部，并且数据为0，渲染空页面
+    } else {
+      if (control.data==null|| ((control.data is Map)&&control.data.isEmpty) || ((control.data is List)&&control.data.length==0))
       return buildEmpty(emptyTip);
     } 
 

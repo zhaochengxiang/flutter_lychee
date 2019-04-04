@@ -9,13 +9,9 @@ import 'package:lychee/common/event/YYNeedRefreshEvent.dart';
 import 'package:lychee/page/YYMineLibraryPage.dart';
 
 class YYBaseBookListWidget extends StatefulWidget {
-  ///item渲染
   final IndexedWidgetBuilder itemBuilder;
-  ///加载更多回调
   final RefreshCallback onLoadMore;
-  ///下拉刷新回调
   final RefreshCallback onRefresh;
-  ///控制器，比如数据和一些配置
   final YYBaseBookListWidgetControl control;
   final String emptyTip;
   final Key refreshKey;
@@ -150,11 +146,10 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
   }
 
   _buildTopWidget() {
-    if (widget.control.options&YYBaseBookListWidgetControl.ShowCategory==0 &&
-        widget.control.options&YYBaseBookListWidgetControl.ShowFrame==0 &&
-        widget.control.options&YYBaseBookListWidgetControl.ShowLibrary==0 &&
-        widget.control.options&YYBaseBookListWidgetControl.ShowCount==0
-    ) {
+    if (!widget.control.needCategory &&
+        !widget.control.needFrame &&
+        !widget.control.needLibrary &&
+        !widget.control.needCount) {
       return Container();
     }
 
@@ -165,13 +160,13 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
         padding: EdgeInsets.only(left: 10.5,right: 10.5),
         child: Row(
           children: <Widget>[
-            (widget.control.options&YYBaseBookListWidgetControl.ShowCategory>0)?_buildTopOptionWidget(widget.control.curCategoryName, _topCategoryOnPressed):new Container(),
+            (widget.control.needCategory)?_buildTopOptionWidget(widget.control.curCategoryName, _topCategoryOnPressed):new Container(),
 
-            (widget.control.options&YYBaseBookListWidgetControl.ShowLibrary  > 0)?_buildTopOptionWidget(widget.control.curLibraryName, _topLibraryOnPressed):new Container(),
+            (widget.control.needLibrary)?_buildTopOptionWidget(widget.control.curLibraryName, _topLibraryOnPressed):new Container(),
 
-            (widget.control.options&YYBaseBookListWidgetControl.ShowFrame>0)?_buildTopOptionWidget(widget.control.curFrameName, _topFrameOnPressed):new Container(),
+            (widget.control.needFrame)?_buildTopOptionWidget(widget.control.curFrameName, _topFrameOnPressed):new Container(),
 
-            (widget.control.options&YYBaseBookListWidgetControl.ShowCount>0)?Expanded(
+            (widget.control.needCount)?Expanded(
               child: Text("共"+widget.control.total.toString()+"本",style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),maxLines: 1,overflow: TextOverflow.ellipsis,textAlign: TextAlign.end,),
             ):new Container(),
           ],
@@ -192,15 +187,15 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
             child: IndexedStack(
               children: <Widget>[
                 new YYBaseListWidget(control: widget.control,itemBuilder: widget.itemBuilder,onRefresh: widget.onRefresh,onLoadMore: widget.onLoadMore,emptyTip: widget.emptyTip??"没有搜索到相关图书",refreshKey: widget.refreshKey),
-                (widget.control.options&YYBaseBookListWidgetControl.ShowCategory>0)?new YYCategoryWidget(remotePath:widget.control.categoryRemotePath, onPressed: (category){
+                (widget.control.needCategory)?new YYCategoryWidget(remotePath:widget.control.categoryRemotePath, onPressed: (category){
                   _categoryWidgetOnPressed(category);
                 }):new Container(),
-                new YYMineLibraryPage(remotePath: widget.control.libraryRemotePath, onPressed: (library){
+                (widget.control.needLibrary)?new YYMineLibraryPage(remotePath: widget.control.libraryRemotePath, onPressed: (library){
                   _libraryWidgetOnPressed(library);
-                }),
-                new YYMineFramePage(onPressed: (frame){
+                }):new Container(),
+                (widget.control.needFrame)?new YYMineFramePage(onPressed: (frame){
                   _frameWidgetOnPressed(frame);
-                }),
+                }):new Container(),
               ],
               index: widget.control.stackIndex,
             )
@@ -212,13 +207,12 @@ class _YYBaseBookListWidgetState extends State<YYBaseBookListWidget> {
 }
 
 class YYBaseBookListWidgetControl extends YYBaseListWidgetControl {
-  static const int ShowCategory = 1 << 0;
-  static const int ShowLibrary = 1 << 1;
-  static const int ShowFrame = 1 << 2;
-  static const int ShowCount = 1 << 3;
-  static const int ShowSearch = 1 << 4;
+  bool needCategory = true;
+  bool needLibrary = true;
+  bool needFrame = true;
+  bool needCount = true;
+  bool needSearch = true;
 
-  int options = 0;
   int cid = 0;
   double lid = 0;
   double fid = 0; 

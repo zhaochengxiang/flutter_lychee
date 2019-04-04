@@ -15,6 +15,11 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
   bool get needSlide => false;
 
   @protected
+  List<Widget> slideActions(context,index) {
+    return List();
+  }
+
+  @protected
   bool get needRefreshHeader => true;
 
   @protected
@@ -85,5 +90,7 @@ mixin YYBaseListState<T extends StatefulWidget> on YYBaseState<T>,AutomaticKeepA
     control.needHeader = needHeader;
     control.needRefreshHeader = needRefreshHeader;
     control.needRefreshFooter = needRefreshFooter;
+    control.needSlide = needSlide;
+    control.slideActions = slideActions;
   }
 }

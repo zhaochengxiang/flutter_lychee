@@ -20,7 +20,6 @@ class YYCategoryWidget extends StatefulWidget {
 class _YYCategoryWidgetPageState extends State<YYCategoryWidget>  with AutomaticKeepAliveClientMixin<YYCategoryWidget>,YYBaseState<YYCategoryWidget> {
 
   int leftIndex = 0;
-  List<dynamic> allCategories;
   List<YYCategory> rightCategories;
   int rightSectionIndex = -1;
   int rightItemIndex = -1;
@@ -42,15 +41,15 @@ class _YYCategoryWidgetPageState extends State<YYCategoryWidget>  with Automatic
 
   @protected
   Widget _buildLeftListView() {
-    if (allCategories == null) return new Container();
+    if (control.data == null||control.data.length==0) return new Container();
 
     return new ListView.builder(
       physics: ClampingScrollPhysics(),
       itemBuilder: (context, index) {
-        return YYCategoryLeftItem(category: allCategories[index],highlight: (index==leftIndex),onPress: (){
+        return YYCategoryLeftItem(category: control.data[index],highlight: (index==leftIndex),onPress: (){
           setState(() {
             if (leftIndex == index) {
-              widget.onPressed?.call(allCategories[index]);
+              widget.onPressed?.call(control.data[index]);
             } else {
               leftIndex = index;
               rightSectionIndex = -1;
@@ -65,9 +64,9 @@ class _YYCategoryWidgetPageState extends State<YYCategoryWidget>  with Automatic
 
   @protected
   Widget _buildRightListView() {
-    if (allCategories == null) return new Container();
+    if (control.data==null || control.data.length==0) return new Container();
 
-    rightCategories = allCategories[leftIndex].children;
+    rightCategories = control.data[leftIndex].children;
 
     return new ListView.builder(
       physics: ClampingScrollPhysics(),
@@ -100,7 +99,6 @@ class _YYCategoryWidgetPageState extends State<YYCategoryWidget>  with Automatic
 
   @override
   Widget build(BuildContext context) {
-    allCategories = control.data;
 
     return YYBaseWidget(
         control: control,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:lychee/widget/base/YYBaseListState.dart';
 import 'package:lychee/widget/base/YYBaseState.dart';
 import 'package:lychee/widget/base/YYBaseBookListState.dart';
 import 'package:lychee/widget/base/YYBaseBookListWidget.dart';
 import 'package:lychee/common/util/YYCommonUtils.dart';
+import 'package:lychee/common/model/YYBook.dart';
 
 class YYMineWantReadBookPage extends StatefulWidget {
   @override
@@ -14,15 +16,24 @@ class YYMineWantReadBookPage extends StatefulWidget {
 class _YYMineWantReadBookPageState extends State<YYMineWantReadBookPage> with AutomaticKeepAliveClientMixin<YYMineWantReadBookPage>,YYBaseState<YYMineWantReadBookPage>, YYBaseListState<YYMineWantReadBookPage>,YYBaseBookListState<YYMineWantReadBookPage> {
 
   @override
-  options() {
-    int options = 0;
-    options = options | YYBaseBookListWidgetControl.ShowCategory;
-    options = options | YYBaseBookListWidgetControl.ShowLibrary;
-    options = options | YYBaseBookListWidgetControl.ShowCount; 
-    options = options | YYBaseBookListWidgetControl.ShowSearch;
- 
-    return options;
-  } 
+  bool get needFrame => false;
+
+  @override
+  bool get needSlide => true;
+
+  @override
+  List<Widget> slideActions(context,index) {
+    return <Widget>[
+      IconSlideAction(
+        caption: '删除',
+        color: Colors.red,
+        icon: Icons.delete,
+        onTap: () {
+          _delete(context, index);
+        },
+      ),
+    ];
+  }
 
   @override
   remotePath() {
@@ -54,6 +65,19 @@ class _YYMineWantReadBookPageState extends State<YYMineWantReadBookPage> with Au
     params["last"] = control.last.toInt();
     params["offset"] = control.offset;
     return params;
+  }
+
+  _delete(context,index) async{
+    YYBook book = control.data[index];
+    handleNotAssociatedWithRefreshRequest(context, "/label/deleteWant", {"bid":book.id.toInt()}).then((res) {
+      if (res!=null && res.result && res.data!=null) {
+        if (isShow) {
+          setState(() {
+            control.data.remove(book);
+          });
+        }
+      }
+    });
   }
 
   @override

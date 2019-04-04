@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:lychee/common/style/YYStyle.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -65,6 +66,27 @@ class _YYBaseListWidgetState extends State<YYBaseListWidget> with YYBaseDecorati
     return null;
   }
 
+  Widget buildListView(context) {
+
+    return new ListView.separated(
+      shrinkWrap: true,
+      physics: new NeverScrollableScrollPhysics(),
+      separatorBuilder: (context, index)=>YYSeparatorWidget(),
+      itemBuilder: (context, index) {
+        if (widget.control.needSlide) {
+          return Slidable(
+            delegate: SlidableScrollDelegate(),
+            actionExtentRatio: 0.18,
+            secondaryActions: widget.control.slideActions(context,index),
+            child: widget.itemBuilder(context, index)
+          );
+        } else {
+          return widget.itemBuilder(context, index);
+        }
+      },
+      itemCount: (widget.control.data==null)?0:_getListCount(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,22 +124,19 @@ class _YYBaseListWidgetState extends State<YYBaseListWidget> with YYBaseDecorati
         ),
         onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
         loadMore:(widget.control.needRefreshFooter)?widget.onLoadMore:null,
-        child: new ListView.separated(
-          separatorBuilder: (context, index)=>YYSeparatorWidget(),
-          itemBuilder: (context, index) {
-            return widget.itemBuilder(context, index);
-          },
-
-          ///根据状态返回数量
-          itemCount: (widget.control.data==null)?0:_getListCount(),
-        ),
+        child: buildListView(context),
       )
     );
   }
 }
 
+typedef SlideActionsFunction = List<Widget> Function(BuildContext context,int index);
+
 class YYBaseListWidgetControl extends YYBaseWidgetControl {
   bool needRefreshHeader = true;
   bool needRefreshFooter = true;
   bool needHeader = false;
+  bool needSlide = false;
+  
+  SlideActionsFunction slideActions;
 }
