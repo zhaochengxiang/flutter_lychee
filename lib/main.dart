@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:lychee/common/event/YYHttpErrorEvent.dart';
-import 'package:lychee/page/YYHomeTabBarPage.dart';
-import 'package:lychee/common/util/YYCommonUtils.dart';
-import 'package:lychee/common/manager/YYShareManager.dart';
-import 'package:lychee/common/manager/YYPushManager.dart';
-import 'package:lychee/common/xservice/loader/YYServiceLoader.dart';
-import 'package:lychee/common/local/YYLocalStorage.dart';
+import 'package:lychee/common/event/HttpErrorEvent.dart';
+import 'package:lychee/page/HomeTabBarPage.dart';
+import 'package:lychee/common/util/CommonUtils.dart';
+import 'package:lychee/common/manager/ShareManager.dart';
+import 'package:lychee/common/manager/PushManager.dart';
+import 'package:lychee/common/xservice/loader/ServiceLoader.dart';
+import 'package:lychee/common/local/LocalStorage.dart';
 
 void main() => runApp(LycheeApp());
 
@@ -26,13 +26,13 @@ class _LycheeAppState extends State<LycheeApp> {
   void initState() {
     super.initState();
 
-    YYLocalStorage.save(YYCommonUtils.TOKEN_KEY, "962e3e198187abcda3af749f2d29de98");
+    LocalStorage.save(CommonUtils.TOKEN_KEY, "962e3e198187abcda3af749f2d29de98");
 
-    YYShareManager.init();
-    YYPushManager.init();
-    YYServiceLoader.load();
+    ShareManager.init();
+    PushManager.init();
+    ServiceLoader.load();
     
-    stream =  YYCommonUtils.eventBus.on<YYHttpErrorEvent>().listen((event) {
+    stream =  CommonUtils.eventBus.on<HttpErrorEvent>().listen((event) {
       errorHandleFunction(event.message);
     });
   }
@@ -55,7 +55,7 @@ class _LycheeAppState extends State<LycheeApp> {
 
     return new MaterialApp(
       theme: new ThemeData(primaryColor: Colors.white,canvasColor: Colors.white),
-      home: YYHomeTabBarPage()
+      home: HomeTabBarPage()
     );
   }
 }
