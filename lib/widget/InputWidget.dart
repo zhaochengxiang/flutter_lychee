@@ -11,13 +11,17 @@ class InputWidget extends StatefulWidget {
 
   final ValueChanged<String> onChanged;
 
+  final ValueChanged<String> onSubmitted;
+
   final TextStyle textStyle;
 
   final TextEditingController controller;
 
   final TextInputType textInputType;
 
-  InputWidget({Key key, this.hintText, this.icon, this.onChanged, this.textStyle, this.controller, this.obscureText = false, this.textInputType = TextInputType.text}) : super(key: key);
+  final bool autofocus;
+
+  InputWidget({Key key, this.hintText, this.icon, this.onChanged,this.onSubmitted, this.textStyle, this.controller, this.obscureText = false, this.textInputType = TextInputType.text,this.autofocus = false}) : super(key: key);
 
   @override
   _InputWidgetState createState() => new _InputWidgetState();
@@ -33,9 +37,12 @@ class _InputWidgetState extends State<InputWidget> {
     return new TextField(
       controller: widget.controller,
       onChanged: widget.onChanged,
+      onSubmitted: widget.onSubmitted,
       obscureText: widget.obscureText,
+      autofocus: widget.autofocus,
       keyboardType: widget.textInputType,
       cursorColor: Color(YYColors.primary),
+      style: widget.textStyle,
       decoration: new InputDecoration(
         hintText: widget.hintText,
         icon: widget.icon == null ? null : widget.icon,

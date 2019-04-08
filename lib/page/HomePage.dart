@@ -22,6 +22,7 @@ import './LessonDetailPage.dart';
 import './CoursePage.dart';
 import './CourseDetailPage.dart';
 import './BookDetailPage.dart';
+import './SearchPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -197,7 +198,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
           IconButton(
           icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search.png",width: 24.0,height: 24.0),
           onPressed: () {
-
+            CommonUtils.openPage(context, SearchPage());
           })
         ],
       ),

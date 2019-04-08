@@ -14,6 +14,7 @@ class YYColors {
   
   static const int disable = 0xFFCCCCCC;
   static const int gray = 0xFFF9F9F9;
+  static const int gray_light = 0xFFF2F2F2;
   static const int border = 0xFFEEEEEE;
 }
 

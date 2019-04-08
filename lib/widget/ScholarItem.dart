@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lychee/common/model/Lesson.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/style/Style.dart';
 
