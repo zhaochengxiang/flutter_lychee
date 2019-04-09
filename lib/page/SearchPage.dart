@@ -5,7 +5,7 @@ import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/common/db/provider/SearchDbProvider.dart';
 import 'package:lychee/common/model/Search.dart';
 
-typedef SearchCallback = void Function(Search search);
+typedef SearchCallback = void Function(String keyword);
 
 class SearchPage extends StatefulWidget {
   final int type;
@@ -43,13 +43,14 @@ class _SearchPagetState extends State<SearchPage> {
     });
   }
 
-  _buildWrapChildren() {
+  _buildWrapChildren(context) {
     List<Widget> widgets = [];
     searchs.forEach((search) {
       widgets.add(new InkWell(
         onTap: () async {
           await provider.insert(widget.type, search.keyword);
-          widget.onPressed?.call(search);
+          CommonUtils.closePage(context);
+          widget.onPressed?.call(search.keyword);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -67,13 +68,12 @@ class _SearchPagetState extends State<SearchPage> {
     return widgets;
   }
 
-  _searchDone(value) async {
+  _searchDone(context,value) async {
+    if (value==null || value.length==0) return;
+
     await provider.insert(widget.type, value);
-    provider.getSearchs(widget.type).then((value) {
-      setState(() {
-        searchs = value;
-      });
-    });
+    CommonUtils.closePage(context);
+    widget.onPressed?.call(value);
   }
 
   _clearHistory() {
@@ -124,7 +124,7 @@ class _SearchPagetState extends State<SearchPage> {
               
                       },
                       onSubmitted: (String value) {
-                        _searchDone(value);
+                        _searchDone(context,value);
                       },
                       controller: searchController,
                     ),                       
@@ -160,7 +160,7 @@ class _SearchPagetState extends State<SearchPage> {
                 child: Wrap(
                   spacing: 10.5,
                   runSpacing: 5.0,
-                  children: _buildWrapChildren(),
+                  children: _buildWrapChildren(context),
                )
               ),
             ),

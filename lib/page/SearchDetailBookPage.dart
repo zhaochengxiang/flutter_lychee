@@ -4,14 +4,17 @@ import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseBookListState.dart';
 import 'package:lychee/widget/base/BaseBookListWidget.dart';
-import 'package:lychee/common/util/CommonUtils.dart';
+import './SearchDetailPage.dart';
 
-class TopLatestBookPage extends StatefulWidget {
+class SearchDetailBookPage extends StatefulWidget {
   @override
-  _TopLatestBookPageState createState() => _TopLatestBookPageState();
+  _SearchDetailBookPageState createState() => _SearchDetailBookPageState();
 }
 
-class _TopLatestBookPageState extends State<TopLatestBookPage> with AutomaticKeepAliveClientMixin<TopLatestBookPage>,BaseState<TopLatestBookPage>, BaseListState<TopLatestBookPage>,BaseBookListState<TopLatestBookPage> {
+class _SearchDetailBookPageState extends State<SearchDetailBookPage> with AutomaticKeepAliveClientMixin<SearchDetailBookPage>,BaseState<SearchDetailBookPage>, BaseListState<SearchDetailBookPage>,BaseBookListState<SearchDetailBookPage> {
+
+  @override
+  bool get needCategory => false;
 
   @override
   bool get needLibrary => false;
@@ -24,17 +27,19 @@ class _TopLatestBookPageState extends State<TopLatestBookPage> with AutomaticKee
 
   @override
   bool get needSearch => false;
-
+  
   @override
   remotePath() {
-    return "/book/findLatest";
+    return "/book/search";
   }
 
-  @override
+   @override
   generateRemoteParams() {
     Map<String,dynamic> params = new Map();
-    params["category"] = control.cid;
-    params["scope"] = 0;
+    params["category"] = SearchDetailModel.of(context).currentCid;
+    params["lid"] = 0;
+    params["keyword"] = SearchDetailModel.of(context).currentKeyword;
+    
     params["last"] = 0;
     params["offset"] = 0;
     return params;
@@ -43,8 +48,10 @@ class _TopLatestBookPageState extends State<TopLatestBookPage> with AutomaticKee
   @override
   generateMoreRemoteParams() {
     Map<String,dynamic> params = new Map();
-    params["category"] = control.cid;
-    params["scope"] = 0;
+    params["category"] = SearchDetailModel.of(context).currentCid;
+    params["lid"] = 0;
+    params["keyword"] = SearchDetailModel.of(context).currentKeyword;
+    
     params["last"] = control.last;
     params["offset"] = control.offset;
     return params;
@@ -53,15 +60,6 @@ class _TopLatestBookPageState extends State<TopLatestBookPage> with AutomaticKee
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        leading: IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 24.0,height: 24.0),
-          onPressed: () {
-            CommonUtils.closePage(context);
-          }),
-        title:Text("新书推荐"),
-        centerTitle: true,
-      ),
       body: BaseBookListWidget(
         control:control,
         onRefresh: handleRefresh,

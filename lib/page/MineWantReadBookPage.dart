@@ -50,8 +50,8 @@ class _MineWantReadBookPageState extends State<MineWantReadBookPage> with Automa
     params["lid"] = control.lid;
     params["state"] = 0;
     params["keyword"] = "";
-    params["last"] = control.last;
-    params["offset"] = control.offset;
+    params["last"] = 0;
+    params["offset"] = 0;
     return params;
   }
 

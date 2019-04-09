@@ -53,8 +53,8 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
       params["keyword"] = "";
     }
     
-    params["last"] = control.last;
-    params["offset"] = control.offset;
+    params["last"] = 0;
+    params["offset"] = 0;
     return params;
   }
 

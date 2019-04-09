@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:lychee/common/model/Book.dart';
-
 part 'BookResult.g.dart';
 
 @JsonSerializable()
