@@ -12,6 +12,9 @@ import 'package:lychee/common/model/Course.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
 import 'package:lychee/page/CourseDetailPage.dart';
+import './SearchPage.dart';
+import './SearchCoursePage.dart';
+import 'package:lychee/common/model/Search.dart';
 
 class CoursePage extends StatefulWidget {
   @override
@@ -105,9 +108,11 @@ class _CoursePageState extends State<CoursePage> with AutomaticKeepAliveClientMi
         ),
         actions: <Widget>[
           IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search.png",width: 24.0,height: 24.0),
+          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search_gray.png",width: 18.0,height: 18.0),
           onPressed: () {
-
+            CommonUtils.openPage(context, SearchPage(type:Search.SEARCH_COURSE,onPressed:(keyword) {
+              CommonUtils.openPage(context, SearchCoursePage(keyword: keyword));
+            }));
           })
         ]
       ),

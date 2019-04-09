@@ -55,7 +55,7 @@ class _TopLatestBookPageState extends State<TopLatestBookPage> with AutomaticKee
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 24.0,height: 24.0),
+          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18.0,height: 18.0),
           onPressed: () {
             CommonUtils.closePage(context);
           }),

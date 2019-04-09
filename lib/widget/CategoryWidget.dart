@@ -43,6 +43,8 @@ class _CategoryWidgetPageState extends State<CategoryWidget>  with AutomaticKeep
   Widget _buildLeftListView() {
     if (control.data == null||control.data.length==0) return new Container();
 
+    rightCategories = control.data[leftIndex].children;
+
     return new ListView.builder(
       physics: ClampingScrollPhysics(),
       itemBuilder: (context, index) {
@@ -65,8 +67,6 @@ class _CategoryWidgetPageState extends State<CategoryWidget>  with AutomaticKeep
   @protected
   Widget _buildRightListView() {
     if (control.data==null || control.data.length==0) return new Container();
-
-    rightCategories = control.data[leftIndex].children;
 
     return new ListView.builder(
       physics: ClampingScrollPhysics(),

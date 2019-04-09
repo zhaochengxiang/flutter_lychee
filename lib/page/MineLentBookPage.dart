@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseBookListState.dart';
-import 'package:lychee/widget/base/BaseBookListWidget.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/widget/base/BaseBookRadioListState.dart';
 import 'package:lychee/widget/base/BaseBookRadioListWidget.dart';
@@ -34,7 +33,7 @@ BaseBookRadioListState<MineLentBookPage> {
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 24.0,height: 24.0),
+          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18.0,height: 18.0),
           onPressed: () {
             CommonUtils.closePage(context);
           }),

@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"scan.png",width: 24.0,height: 24.0),
+          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"scan.png",width: 18.0,height: 18.0),
           onPressed: () {
 
           }),
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search.png",width: 24.0,height: 24.0),
+          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search.png",width: 18.0,height: 18.0),
           onPressed: () {
             CommonUtils.openPage(context, SearchPage(onPressed:(keyword) {
               CommonUtils.openPage(context, SearchDetailPage(keyword: keyword));

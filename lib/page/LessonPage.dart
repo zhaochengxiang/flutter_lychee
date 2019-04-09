@@ -12,6 +12,10 @@ import 'package:lychee/common/model/Lesson.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
 import './LessonDetailPage.dart';
+import './SearchPage.dart';
+import './SearchLessonPage.dart';
+import 'package:lychee/common/model/Search.dart';
+import './LessonAllPage.dart';
 
 class LessonPage extends StatefulWidget {
   @override
@@ -60,7 +64,7 @@ class _LessonPageState extends State<LessonPage> with AutomaticKeepAliveClientMi
     );
   }
 
-  _buildRecommendCourseWidget() {
+  _buildRecommendCourseWidget(context) {
     if (lessonHome == null) return new Container();
 
     var recommends = lessonHome.recommendList;
@@ -70,7 +74,7 @@ class _LessonPageState extends State<LessonPage> with AutomaticKeepAliveClientMi
         SectionWidget(
           title: "推荐小讲",
           subtitle: "全部小讲",
-          onPressed: (){},
+          onPressed: (){CommonUtils.openPage(context, LessonAllPage());},
         ),
         new ListView.separated(
           shrinkWrap: true,
@@ -105,9 +109,11 @@ class _LessonPageState extends State<LessonPage> with AutomaticKeepAliveClientMi
         ),
         actions: <Widget>[
           IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search.png",width: 24.0,height: 24.0),
+          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search_gray.png",width: 18.0,height: 18.0),
           onPressed: () {
-
+            CommonUtils.openPage(context, SearchPage(type:Search.SEARCH_LESSON,onPressed:(keyword) {
+              CommonUtils.openPage(context, SearchLessonPage(keyword: keyword));
+            }));
           })
         ]
       ),
@@ -120,7 +126,7 @@ class _LessonPageState extends State<LessonPage> with AutomaticKeepAliveClientMi
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildBannerWidget(),
-            _buildRecommendCourseWidget(),
+            _buildRecommendCourseWidget(context),
           ]
         ),
       ),

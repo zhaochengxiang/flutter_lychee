@@ -32,6 +32,9 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
   bool get needSearch => true;
 
   @protected
+  String get searchKeyword => "";
+
+  @protected
   String get categoryRemotePath => "/category/findAll";
 
   @protected
@@ -50,7 +53,7 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
       params["fid"] =control.fid;
     }
     if (control.needSearch) {
-      params["keyword"] = "";
+      params["keyword"] = control.keyword;
     }
     
     params["last"] = 0;
@@ -71,7 +74,7 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
       params["fid"] =control.fid;
     }
     if (control.needSearch) {
-      params["keyword"] = "";
+      params["keyword"] = control.keyword;
     }
     params["last"] = control.last;
     params["offset"] = control.offset;
@@ -137,6 +140,7 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
     control.needFrame = needFrame;
     control.needCount = needCount;
     control.needSearch = needSearch;
+    control.keyword = searchKeyword;
     control.categoryRemotePath = categoryRemotePath;
     control.libraryRemotePath = libraryRemotePath;
   }

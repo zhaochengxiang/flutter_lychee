@@ -57,7 +57,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> with AutomaticKeepA
         ),
         actions: <Widget>[
           IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"more.png",width: 24.0,height: 24.0),
+          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"more.png",width: 18.0,height: 18.0),
           onPressed: () {
 
           })

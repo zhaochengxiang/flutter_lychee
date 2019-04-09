@@ -10,9 +10,12 @@ import 'package:lychee/widget/BookGrid.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/widget/SwiperWidget.dart';
 import 'package:lychee/widget/SectionWdiget.dart';
+import 'package:lychee/common/model/Search.dart';
 import './BookDetailPage.dart';
 import './TopPopularBookPage.dart';
 import './TopLatestBookPage.dart';
+import './SearchPage.dart';
+import './SearchBookPage.dart';
 
 class HomeBookPage extends StatefulWidget {
   @override
@@ -107,7 +110,16 @@ class _HomeBookPageState extends State<HomeBookPage> with AutomaticKeepAliveClie
           onPressed: (){
             CommonUtils.closePage(context);
           },
-        )
+        ),
+        actions: <Widget>[
+          IconButton(
+          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search_gray.png",width: 18.0,height: 18.0),
+          onPressed: () {
+            CommonUtils.openPage(context, SearchPage(type:Search.SEARCH_BOOK, onPressed:(keyword) {
+              CommonUtils.openPage(context, SearchBookPage(keyword: keyword));
+            }));
+          })
+        ]
       ),
       body: BaseScrollWidget(
         control:control,

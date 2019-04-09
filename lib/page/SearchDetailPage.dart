@@ -13,8 +13,9 @@ import 'package:lychee/common/event/NeedRefreshEvent.dart';
 
 class SearchDetailPage extends StatefulWidget {
   final String keyword;
+  final int cid;
 
-  SearchDetailPage({@required this.keyword});
+  SearchDetailPage({this.keyword="",this.cid=-1});
 
   @override
   _SearchDetailPagetState createState() => new _SearchDetailPagetState();
@@ -34,7 +35,7 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
    @override
   void initState() {
     super.initState();
-    searchDetailModel.setCurrentCid(0);
+    searchDetailModel.setCurrentCid(widget.cid);
     searchDetailModel.setCurrentKeyword(widget.keyword);
 
     _tabController =  TabController(vsync: this, length: tabTitles.length);

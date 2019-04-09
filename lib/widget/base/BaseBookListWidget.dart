@@ -220,6 +220,7 @@ class BaseBookListWidgetControl extends BaseListWidgetControl {
   int offset = 0;
   int total = 0;
   bool hasNext = false;
+  String keyword = "";
 
   bool isCategorySelected = false;
   String curCategoryName = "分类" ;
