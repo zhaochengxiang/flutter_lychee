@@ -6,19 +6,21 @@ import 'package:lychee/widget/base/BaseBookListState.dart';
 import 'package:lychee/widget/base/BaseBookListWidget.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import './SearchPage.dart';
-import 'package:lychee/common/model/LessonResult.dart';
-import 'package:lychee/common/model/Lesson.dart';
-import 'package:lychee/widget/LessonItem.dart';
-import './LessonDetailPage.dart';
+import 'package:lychee/common/model/CourseResult.dart';
+import 'package:lychee/common/model/Course.dart';
+import 'package:lychee/widget/CourseItem.dart';
+import './CourseDetailPage.dart';
 import 'package:lychee/common/model/Search.dart';
-import './SearchLessonPage.dart';
+import './SearchCoursePage.dart';
 
-class LessonAllPage extends StatefulWidget {
+class CourseAllPage extends StatefulWidget {
+  CourseAllPage();
+
   @override
-  _LessonAllPageState createState() => _LessonAllPageState();
+  _CourseAllPageState createState() => _CourseAllPageState();
 }
 
-class _LessonAllPageState extends State<LessonAllPage> with AutomaticKeepAliveClientMixin<LessonAllPage>,BaseState<LessonAllPage>, BaseListState<LessonAllPage>,BaseBookListState<LessonAllPage> {
+class _CourseAllPageState extends State<CourseAllPage> with AutomaticKeepAliveClientMixin<CourseAllPage>,BaseState<CourseAllPage>, BaseListState<CourseAllPage>,BaseBookListState<CourseAllPage> {
 
   @override
   bool get needFrame => false;
@@ -31,42 +33,42 @@ class _LessonAllPageState extends State<LessonAllPage> with AutomaticKeepAliveCl
 
   @override
   remotePath() {
-    return "/lesson/search";
+    return "/course/search";
   }
 
   @override
   jsonConvertToModel(Map<String,dynamic> json) {
-    return LessonResult.fromJson(json);
+    return CourseResult.fromJson(json);
   }
 
   @override
   handleRefreshData(data) {
     control.data = new List();
-    LessonResult lessonResult = jsonConvertToModel(data);
-    control.last = lessonResult.last;
-    control.offset = lessonResult.offset;
-    control.hasNext = lessonResult.hasNext;
-    if (lessonResult.list!=null&&lessonResult.list.length>0) {
-      control.data.addAll(lessonResult.list);
+    CourseResult courseResult = jsonConvertToModel(data);
+    control.last = courseResult.last;
+    control.offset = courseResult.offset;
+    control.hasNext = courseResult.hasNext;
+    if (courseResult.list!=null&&courseResult.list.length>0) {
+      control.data.addAll(courseResult.list);
     }
   }
 
   @override
   handleMoreData(data) {
-    LessonResult lessonResult = jsonConvertToModel(data);
-    control.last = lessonResult.last;
-    control.offset = lessonResult.offset;
-    control.hasNext = lessonResult.hasNext;
-    if (lessonResult.list!=null&&lessonResult.list.length>0) {
-      control.data.addAll(lessonResult.list);
+    CourseResult courseResult = jsonConvertToModel(data);
+    control.last = courseResult.last;
+    control.offset = courseResult.offset;
+    control.hasNext = courseResult.hasNext;
+    if (courseResult.list!=null&&courseResult.list.length>0) {
+      control.data.addAll(courseResult.list);
     }
   }
 
   @override
   renderListItem(context,index) {
-    Lesson lesson = control.data[index];
-    return new LessonItem(lesson,onPressed: (){
-      CommonUtils.openPage(context, LessonDetailPage({"uuid":lesson.uuid}));
+    Course course = control.data[index];
+    return new CourseItem(course,onPressed: (){
+      CommonUtils.openPage(context, CourseDetailPage({"uuid":course.uuid}));
     });
   }
 
@@ -79,14 +81,14 @@ class _LessonAllPageState extends State<LessonAllPage> with AutomaticKeepAliveCl
           onPressed: () {
             CommonUtils.closePage(context);
           }),
-        title:Text("全部小讲"),
+        title:Text("全部短课"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
           icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search_gray.png",width: 18.0,height: 18.0),
           onPressed: () {
-            CommonUtils.openPage(context, SearchPage(type: Search.SEARCH_LESSON,onPressed:(keyword) {
-              CommonUtils.openPage(context, SearchLessonPage(keyword: keyword));
+            CommonUtils.openPage(context, SearchPage(type: Search.SEARCH_COURSE,onPressed:(keyword) {
+              CommonUtils.openPage(context, SearchCoursePage(keyword: keyword));
             }));
           })
         ],
@@ -97,7 +99,7 @@ class _LessonAllPageState extends State<LessonAllPage> with AutomaticKeepAliveCl
         onLoadMore: onLoadMore,
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
-        emptyTip: "没有搜索到相关小讲",
+        emptyTip: "没有搜索到相关短课",
         itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
       )
     );

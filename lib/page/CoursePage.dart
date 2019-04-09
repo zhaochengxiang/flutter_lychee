@@ -15,6 +15,7 @@ import 'package:lychee/page/CourseDetailPage.dart';
 import './SearchPage.dart';
 import './SearchCoursePage.dart';
 import 'package:lychee/common/model/Search.dart';
+import './CourseAllPage.dart';
 
 class CoursePage extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _CoursePageState extends State<CoursePage> with AutomaticKeepAliveClientMi
     );
   }
 
-  _buildRecommendCourseWidget() {
+  _buildRecommendCourseWidget(context) {
     if (courseHome == null) return new Container();
 
     var recommends = courseHome.recommendList;
@@ -73,7 +74,7 @@ class _CoursePageState extends State<CoursePage> with AutomaticKeepAliveClientMi
         SectionWidget(
           title: "推荐短课",
           subtitle: "全部短课",
-          onPressed: (){},
+          onPressed: (){CommonUtils.openPage(context, CourseAllPage());},
         ),
         new ListView.separated(
           shrinkWrap: true,
@@ -125,7 +126,7 @@ class _CoursePageState extends State<CoursePage> with AutomaticKeepAliveClientMi
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildBannerWidget(),
-            _buildRecommendCourseWidget(),
+            _buildRecommendCourseWidget(context),
           ]
         ),
       ),

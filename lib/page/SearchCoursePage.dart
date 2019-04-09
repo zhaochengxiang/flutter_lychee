@@ -122,6 +122,7 @@ class _SearchCoursePageState extends State<SearchCoursePage> with AutomaticKeepA
         onLoadMore: onLoadMore,
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
+        emptyTip: "没有搜索到相关短课",
         itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
       )
     );
