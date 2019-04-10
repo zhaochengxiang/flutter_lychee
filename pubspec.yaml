@@ -32,7 +32,8 @@ dependencies:
   flutter_spinkit: ^3.1.0
   flutter_swiper: ^1.1.4
   flutter_easyrefresh: ^1.2.7
-  sharesdk: ^1.0.8
+  sharesdk: 
+    path: plugins/sharesdk-1.0.8
   jpush_flutter: 0.0.11
   image_picker: ^0.4.12 
   xservice_kit: ^0.026

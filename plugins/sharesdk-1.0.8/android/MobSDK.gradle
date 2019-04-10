@@ -1,0 +1,15 @@
+apply plugin: 'com.mob.sdk'
+
+MobSDK {
+    appKey "2a6869394af80"
+    appSecret "796421d6838fe1ecbef3b419d2c2bcb0"
+
+    ShareSDK {
+        devInfo {
+            Wechat {
+                appId "wxcb24d644e340e9cc"
+                appSecret "34a7656f86280f75e16cd9094a8a1f54"
+            }
+        }
+    }
+}

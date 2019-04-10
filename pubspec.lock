@@ -443,10 +443,10 @@ packages:
   sharesdk:
     dependency: "direct main"
     description:
-      name: sharesdk
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.9"
+      path: "plugins/sharesdk-1.0.8"
+      relative: true
+    source: path
+    version: "1.0.8"
   shelf:
     dependency: transitive
     description:
