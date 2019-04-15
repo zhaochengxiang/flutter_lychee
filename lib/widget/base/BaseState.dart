@@ -14,8 +14,6 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
   @protected
   dynamic control;
   @protected
-  final dynamic data = null;
-  @protected
   StreamSubscription refreshEventStream;
 
   ///是否需要保持
@@ -23,7 +21,7 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
   bool get wantKeepAlive => true;
 
   @protected
-  dynamic get getData => data;
+  dynamic get getData => null;
 
   @protected
   Future<bool> needNetworkRequest() async {

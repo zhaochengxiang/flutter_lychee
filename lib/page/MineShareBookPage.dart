@@ -39,13 +39,6 @@ class _MineShareBookPageState extends State<MineShareBookPage> with AutomaticKee
           }),
         title:Text("我共享的"),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search_gray.png",width: 18.0,height: 18.0),
-          onPressed: () {
-
-          })
-        ]
       ),
       body: SafeArea(
         child: Column(

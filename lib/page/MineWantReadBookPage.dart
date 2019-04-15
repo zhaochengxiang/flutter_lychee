@@ -92,13 +92,6 @@ class _MineWantReadBookPageState extends State<MineWantReadBookPage> with Automa
           }),
         title:Text("我想读的"),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search.png",width: 24.0,height: 24.0),
-          onPressed: () {
-
-          })
-        ]
       ),
       body: BaseBookListWidget(
         control:control,

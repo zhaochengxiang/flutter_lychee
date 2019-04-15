@@ -30,16 +30,6 @@ mixin BaseListState<T extends StatefulWidget> on BaseState<T>,AutomaticKeepAlive
     return null;
   }
 
-  @override
-  handleRefreshData(data) {
-    control.data = new List();
-    if (data is List) {
-      for (int i = 0; i < data.length; i++) {
-        control.data.add(jsonConvertToModel(data[i]));
-      }
-    }
-  }
-
   @protected
   handleMoreData(data) {
     if (data is List) {

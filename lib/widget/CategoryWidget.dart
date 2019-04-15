@@ -5,24 +5,33 @@ import 'package:lychee/widget/base/BaseWidget.dart';
 import 'package:lychee/common/model/Category.dart';
 import 'package:lychee/widget/CategoryLeftItem.dart';
 import 'package:lychee/widget/CategoryRightItem.dart';
+import 'package:lychee/common/util/CommonUtils.dart';
+import 'package:lychee/common/event/CategoryIndexChangeEvent.dart';
+import 'package:lychee/page/SearchDetailPage.dart';
 
-typedef CategoryItemCallback = void Function(Category category);
+typedef CategoryItemCallback = void Function(Category category,int leftIndex,int rightSection,int rightIndex);
 
 class CategoryWidget extends StatefulWidget {
   final String remotePath;
   final CategoryItemCallback onPressed;
-  CategoryWidget({this.remotePath="/category/findAll",this.onPressed});
+  final int leftIndex;
+  final int rightSection;
+  final int rightIndex;
+
+  CategoryWidget({this.remotePath="/category/findAll",this.leftIndex=0,this.rightSection=-1,this.rightIndex=-1,this.onPressed});
 
   @override
-  _CategoryWidgetPageState createState() => _CategoryWidgetPageState();
+  _CategoryWidgetPageState createState() => _CategoryWidgetPageState(leftIndex:this.leftIndex,rightSection:this.rightSection,rightIndex:this.rightIndex);
 }
 
 class _CategoryWidgetPageState extends State<CategoryWidget>  with AutomaticKeepAliveClientMixin<CategoryWidget>,BaseState<CategoryWidget> {
 
-  int leftIndex = 0;
+  int leftIndex;
   List<Category> rightCategories;
-  int rightSectionIndex = -1;
-  int rightItemIndex = -1;
+  int rightSection;
+  int rightIndex;
+
+  _CategoryWidgetPageState({this.leftIndex,this.rightSection,this.rightIndex});
 
   @override
   remotePath() {
@@ -51,11 +60,11 @@ class _CategoryWidgetPageState extends State<CategoryWidget>  with AutomaticKeep
         return CategoryLeftItem(category: control.data[index],highlight: (index==leftIndex),onPress: (){
           setState(() {
             if (leftIndex == index) {
-              widget.onPressed?.call(control.data[index]);
+              widget.onPressed?.call(control.data[index],leftIndex,rightSection,rightIndex);
             } else {
               leftIndex = index;
-              rightSectionIndex = -1;
-              rightItemIndex = -1;
+              rightSection = -1;
+              rightIndex = -1;
             }
           });
         });
@@ -73,28 +82,40 @@ class _CategoryWidgetPageState extends State<CategoryWidget>  with AutomaticKeep
       itemBuilder: (context, index) {
         return CategoryRightItem(
           category: rightCategories[index],
-          isSectionHighlight: (index==rightSectionIndex&&rightItemIndex==-1),
-          itemHighlightIndex: (index==rightSectionIndex)?rightItemIndex:-1,
+          isSectionHighlight: (index==rightSection&&rightIndex==-1),
+          itemHighlightIndex: (index==rightSection)?rightIndex:-1,
           onSectionPress: () {
             setState(() {
-              rightSectionIndex = index;
-              rightItemIndex = -1;
-              widget.onPressed?.call(rightCategories[index]);
+              rightSection = index;
+              rightIndex = -1;
+              widget.onPressed?.call(rightCategories[index],leftIndex,rightSection,rightIndex);
             });
           },
           onItemPress: (_index) {
             setState(() {
-              rightSectionIndex = index;
-              rightItemIndex = _index;
+              rightSection = index;
+              rightIndex = _index;
 
               Category section = rightCategories[index];
-              widget.onPressed?.call(section.children[_index]);
+              widget.onPressed?.call(section.children[_index],leftIndex,rightSection,rightIndex);
             });
           },
         );
       },
       itemCount: rightCategories.length,
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    refreshEventStream =  CommonUtils.eventBus.on<CategoryIndexChangeEvent>().listen((event) {
+      setState(() {
+        leftIndex = SearchDetailModel.of(context).currentCategoryLeftIndex;
+        rightSection =SearchDetailModel.of(context).currentCategoryRightSection;
+        rightIndex =SearchDetailModel.of(context).currentCategoryRightIndex;
+      });
+    });
   }
 
   @override

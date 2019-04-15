@@ -23,8 +23,8 @@ class CategoryPage extends StatelessWidget {
         ],
         iconTheme: new IconThemeData(color: Colors.black),
       ),
-      body: CategoryWidget(onPressed: (category) {
-        CommonUtils.openPage(context, SearchDetailPage(cid: category.id));
+      body: CategoryWidget(onPressed: (category,leftIndex,rightSection,rightIndex) {
+        CommonUtils.openPage(context, SearchDetailPage(category: category,leftIndex: leftIndex,rightSection: rightSection,rightIndex: rightIndex));
       }),
     );
   }

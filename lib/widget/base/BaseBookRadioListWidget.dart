@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:lychee/widget/base/BaseListWidget.dart';
-import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/style/Style.dart';
-import 'package:lychee/widget/CategoryWidget.dart';
-import 'package:lychee/page/MineFramePage.dart';
-import 'package:lychee/common/event/NeedRefreshEvent.dart';
-import 'package:lychee/page/MineLibraryPage.dart';
 import 'package:lychee/widget/base/BaseBookListWidget.dart';
 
 class BaseBookRadioListWidget extends StatefulWidget {

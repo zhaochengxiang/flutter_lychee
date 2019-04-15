@@ -187,7 +187,7 @@ class _BaseBookListWidgetState extends State<BaseBookListWidget> {
             child: IndexedStack(
               children: <Widget>[
                 new BaseListWidget(control: widget.control,itemBuilder: widget.itemBuilder,onRefresh: widget.onRefresh,onLoadMore: widget.onLoadMore,emptyTip: widget.emptyTip??"没有搜索到相关图书",refreshKey: widget.refreshKey),
-                (widget.control.needCategory)?new CategoryWidget(remotePath:widget.control.categoryRemotePath, onPressed: (category){
+                (widget.control.needCategory)?new CategoryWidget(remotePath:widget.control.categoryRemotePath, onPressed: (category,leftIndex,rightSection,rightIndex){
                   _categoryWidgetOnPressed(category);
                 }):new Container(),
                 (widget.control.needLibrary)?new MineLibraryPage(remotePath: widget.control.libraryRemotePath, onPressed: (library){

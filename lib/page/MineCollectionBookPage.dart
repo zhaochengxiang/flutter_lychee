@@ -107,13 +107,6 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
           }),
         title:Text("我的藏书"),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-          icon: new Image.asset(CommonUtils.Local_Icon_prefix+"search_gray.png",width: 18.0,height: 18.0),
-          onPressed: () {
-
-          })
-        ]
       ),
       body: SafeArea(
         child: Column(

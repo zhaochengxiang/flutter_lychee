@@ -40,12 +40,6 @@ mixin BaseBookRadioListState<T extends StatefulWidget> on BaseBookListState<T>,A
   }
 
   @override
-  options() {
-    int options = 0;
-    return options;
-  } 
-
-  @override
   jsonConvertToModel(Map<String,dynamic> json) {
     return ReceiptResult.fromJson(json);
   }

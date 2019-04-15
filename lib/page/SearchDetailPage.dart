@@ -10,19 +10,25 @@ import './SearchDetailBookPage.dart';
 import './SearchDetailLessonPage.dart';
 import './SearchDetailCoursePage.dart';
 import 'package:lychee/common/event/NeedRefreshEvent.dart';
+import 'package:lychee/common/model/Category.dart';
+import 'package:lychee/common/event/CategoryIndexChangeEvent.dart';
 
 class SearchDetailPage extends StatefulWidget {
   final String keyword;
-  final int cid;
+  final Category category;
+  final int leftIndex;
+  final int rightSection;
+  final int rightIndex;
 
-  SearchDetailPage({this.keyword="",this.cid=-1});
+  SearchDetailPage({this.keyword="",this.category,this.leftIndex,this.rightSection,this.rightIndex});
 
   @override
-  _SearchDetailPagetState createState() => new _SearchDetailPagetState();
+  _SearchDetailPagetState createState() => new _SearchDetailPagetState(curCategoryName: (this.category==null)?"分类":this.category.name,cid:(this.category==null)?-1:this.category.id);
 }
 
 class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerProviderStateMixin {
-  String curCategoryName = "分类" ;
+  String curCategoryName;
+  int cid;
   bool isCategorySelected = false;
   int stackIndex = 0;
   List tabTitles = ["综合","图书","小讲","短课"];
@@ -30,13 +36,14 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
   TabController _tabController;
   final SearchDetailModel searchDetailModel = new SearchDetailModel();
 
-  _SearchDetailPagetState();
+  _SearchDetailPagetState({this.curCategoryName,this.cid});
 
    @override
   void initState() {
     super.initState();
-    searchDetailModel.setCurrentCid(widget.cid);
+    searchDetailModel.setCurrentCid(cid);
     searchDetailModel.setCurrentKeyword(widget.keyword);
+    searchDetailModel.setCategoryIndex(widget.leftIndex, widget.rightSection, widget.rightIndex);
 
     _tabController =  TabController(vsync: this, length: tabTitles.length);
     _tabController.addListener((){
@@ -102,6 +109,8 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
         curCategoryName = "分类";
         searchDetailModel.setCurrentCid(0);
         _childWidgetsNeedRefresh();
+        searchDetailModel.setCategoryIndex(0, -1, -1);
+        CategoryIndexChangeEvent.changeHandleFunction();
       }
     });
   }
@@ -154,7 +163,7 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
                       Image.asset(CommonUtils.Local_Icon_prefix+'search_gray.png',width: 13,height: 14,fit: BoxFit.fill),
                       SizedBox(width: 5.0),
                       Expanded(
-                        child:Text(searchDetailModel.currentKeyword,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.tip),overflow: TextOverflow.ellipsis,maxLines: 1)                   
+                        child:Text(model.currentKeyword,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.tip),overflow: TextOverflow.ellipsis,maxLines: 1)                   
                       ),
                       SizedBox(width: 5.0)
                     ],
@@ -196,7 +205,7 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
                           SearchDetailLessonPage(),
                           SearchDetailCoursePage(),
                         ]),
-                        new CategoryWidget(onPressed: (category){
+                        new CategoryWidget(leftIndex: model.currentCategoryLeftIndex,rightSection:model.currentCategoryRightSection,rightIndex: model.currentCategoryRightIndex,onPressed: (category,_leftIndex,_rightSection,_rightIndex){
                           _categoryWidgetOnPressed(category);
                         })
                       ],
@@ -216,10 +225,15 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
 class SearchDetailModel extends Model {
   int _cid;
   String _keyword;
+  int _categoryLeftIndex;
+  int _categoryRightSection;
+  int _categoryRightIndex;
 
   String get currentKeyword => _keyword;
-
   int get currentCid => _cid;
+  int get currentCategoryLeftIndex => _categoryLeftIndex;
+  int get currentCategoryRightSection => _categoryRightSection;
+  int get currentCategoryRightIndex => _categoryRightIndex;
 
   static SearchDetailModel of(BuildContext context) => ScopedModel.of<SearchDetailModel>(context,rebuildOnChange: true);
 
@@ -231,6 +245,12 @@ class SearchDetailModel extends Model {
   void setCurrentCid(int cid) {
     _cid = cid;
     notifyListeners();
+  }
+
+  void setCategoryIndex(int leftIndex,int rightSection,int rightIndex) {
+    _categoryLeftIndex =leftIndex;
+    _categoryRightSection =rightSection;
+    _categoryRightIndex =rightIndex;
   }
 }
 
