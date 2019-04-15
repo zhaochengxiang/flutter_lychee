@@ -6,6 +6,8 @@ import 'package:lychee/widget/base/BaseBookListState.dart';
 import 'package:lychee/widget/base/BaseBookListWidget.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/style/Style.dart';
+import 'package:lychee/common/model/Library.dart';
+import './MineUnShareBookPage.dart';
 
 class MineShareBookPage extends StatefulWidget {
   @override
@@ -27,6 +29,44 @@ class _MineShareBookPageState extends State<MineShareBookPage> with AutomaticKee
 
   @override
   String get libraryRemotePath => "/library/findOpenShare";
+
+  _share() async {
+    var res = await handleNotAssociatedWithRefreshRequest(context, "/library/findOpenShare", {});
+    if (res!=null && res.result && res.data!=null) {
+      List<Widget> childWidgets = List();
+      for (int i = 0; i < res.data.length; i++) {
+        Library library = Library.fromJson(res.data[i]);
+        childWidgets.add(
+          FlatButton(
+            padding: EdgeInsets.zero,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(library.name,style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),overflow: TextOverflow.ellipsis)
+            ),
+            onPressed: (){
+              Navigator.of(context).pop();
+              CommonUtils.openPage(context, MineUnShareBookPage(library.id));
+            }
+          )
+        );
+      }
+
+      showDialog<void>(
+        context: context,
+        barrierDismissible: true, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('请选择图书馆'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: childWidgets,
+              ),
+            ),
+          );
+        }
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +109,7 @@ class _MineShareBookPageState extends State<MineShareBookPage> with AutomaticKee
                       )
                     ),
                     onPressed: () {
-                      
+                      _share();
                     }
                 ),
               )

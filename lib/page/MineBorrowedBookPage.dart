@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseBookListState.dart';
-import 'package:lychee/widget/base/BaseBookListWidget.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/widget/base/BaseBookRadioListState.dart';
 import 'package:lychee/widget/base/BaseBookRadioListWidget.dart';
+import 'package:lychee/common/model/QRCode.dart';
+import 'package:lychee/common/model/ReceiptResult.dart';
+import 'package:lychee/common/model/Receipt.dart';
+import './QRCodePage.dart';
 
 class MineBorrowedBookPage extends StatefulWidget {
   @override
@@ -26,7 +29,18 @@ BaseBookRadioListState<MineBorrowedBookPage> {
 
   @override
   buttonOnPressed() {
+    Map firstMap = control.indexPaths[0];
+    ReceiptResult receiptResult = control.data[firstMap["section"]]; 
+    List<Receipt> receipts =receiptResult.receiptList;
+
+    List<int> ids = new List();
+    control.indexPaths.forEach((map){
+      Receipt receipt =receipts[map["row"]];
+      ids.add(receipt.id);
+    });
     
+    QRCode qrCode = QRCode((receiptResult.personal==true)?QRCode.TYPE_RETURN_TO_PERSON:QRCode.TYPE_RETURN_TO_ORGANIZE, receiptResult.lid, ids);
+    CommonUtils.openPage(context, QRCodePage(qrCode));
   }
 
   @override

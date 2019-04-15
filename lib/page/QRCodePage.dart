@@ -6,6 +6,7 @@ import 'package:lychee/common/model/Shadow.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseWidget.dart';
+import 'package:lychee/common/style/Style.dart';
 
 class QRCodePage extends StatefulWidget {
   final QRCode qrCode;
@@ -41,6 +42,19 @@ class _QRCodePageState extends State<QRCodePage> with AutomaticKeepAliveClientMi
   Widget build(BuildContext context) {
     Shadow shadow = control.data;
 
+    String _title = "",_desc = "";
+    if (widget.qrCode.type == QRCode.TYPE_BORROW_FROM_ORGANIZE || widget.qrCode.type == QRCode.TYPE_BORROW_FROM_PERSON) {
+      _title = "借书";
+    } else if (widget.qrCode.type ==QRCode.TYPE_RETURN_TO_ORGANIZE || widget.qrCode.type == QRCode.TYPE_RETURN_TO_PERSON) {
+      _title = "还书";
+    }
+
+    if (widget.qrCode.type == QRCode.TYPE_BORROW_FROM_ORGANIZE || widget.qrCode.type == QRCode.TYPE_RETURN_TO_ORGANIZE) {
+      _desc = "请将二维码给图书管理员扫描";
+    } else if (widget.qrCode.type == QRCode.TYPE_BORROW_FROM_PERSON || widget.qrCode.type == QRCode.TYPE_RETURN_TO_PERSON) {
+      _desc = "请将二维码给图书主人扫描";
+    }
+
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(
@@ -48,17 +62,26 @@ class _QRCodePageState extends State<QRCodePage> with AutomaticKeepAliveClientMi
           onPressed: () {
             CommonUtils.closePage(context);
           }),
-        title:Text("借书"),
+        title:Text(_title),
         centerTitle: true,
       ),
       body: BaseWidget(
         control:control,
         onRefresh:handleRefresh,
-        child: new QrImage(
-          data: (shadow==null)?"":CommonUtils.QRCode_Prefix+shadow.type.toString()+shadow.id,
-          size: 200.0,
+        child: Center( 
+          child: new Column(
+            children: <Widget>[
+              SizedBox(height: 52),
+              QrImage(
+                data: (shadow==null)?"":CommonUtils.QRCode_Prefix+shadow.type.toString()+shadow.id,
+                size: 208.0
+              ),
+              SizedBox(height: 21),
+              Text(_desc,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.tip),overflow: TextOverflow.ellipsis)
+            ],
+          )
         ),
-      ),
+      )
     );
   }
 }
