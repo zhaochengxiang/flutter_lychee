@@ -54,7 +54,7 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
     } 
   }
 
-  Widget _buildTop(BuildContext context) {
+  Widget _buildTop() {
     User user = control.data;
 
     return FlatButton(
@@ -139,7 +139,7 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
     return new Scaffold(
       body: Column( 
         children: <Widget>[
-          _buildTop(context),
+          _buildTop(),
           Padding(padding: EdgeInsets.all(10.5)),
           new Container(
             height:40.5,

@@ -48,7 +48,7 @@ class _TopReadBookPageState extends State<TopReadBookPage> with AutomaticKeepAli
         onLoadMore: onLoadMore,
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
-        itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
+        itemBuilder: (BuildContext context, int index) => renderListItem(index),
       )
     );
   }

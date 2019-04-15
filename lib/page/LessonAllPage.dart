@@ -63,7 +63,7 @@ class _LessonAllPageState extends State<LessonAllPage> with AutomaticKeepAliveCl
   }
 
   @override
-  renderListItem(context,index) {
+  renderListItem(index) {
     Lesson lesson = control.data[index];
     return new LessonItem(lesson,onPressed: (){
       CommonUtils.openPage(context, LessonDetailPage({"uuid":lesson.uuid}));
@@ -98,7 +98,7 @@ class _LessonAllPageState extends State<LessonAllPage> with AutomaticKeepAliveCl
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
         emptyTip: "没有搜索到相关小讲",
-        itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
+        itemBuilder: (BuildContext context, int index) => renderListItem(index),
       )
     );
   }

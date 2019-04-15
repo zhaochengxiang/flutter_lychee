@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
     return false;
   }
 
-  capthaPressd(context) async {
+  capthaPressd() async {
     if (isPhoneValid) {
 
       var res = await handleNotAssociatedWithRefreshRequest(context,'/user/sendCaptcha',{"phone":phone.replaceAll(' ', '').replaceAll('-', '')});
@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
     }
   }
 
-  loginPressed(context) async {
+  loginPressed() async {
     if (isLoginValid) {
       var res = await handleNotAssociatedWithRefreshRequest(context,'/user/validateCaptcha',{'phone':phone.replaceAll(' ', '').replaceAll('-', ''),'captcha':captha});
       
@@ -149,7 +149,7 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
                     )
                   ):FlatButton(
                     padding:EdgeInsets.all(0),
-                    onPressed: (){capthaPressd?.call(context);},
+                    onPressed: (){capthaPressd?.call();},
                     child: Container(
                       width: 104,
                       height: 41.5,
@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
               Padding(padding: EdgeInsets.all(20)),
               FlatButton(
                 padding:EdgeInsets.all(0),
-                onPressed: (){loginPressed?.call(context);},
+                onPressed: (){loginPressed?.call();},
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 47,

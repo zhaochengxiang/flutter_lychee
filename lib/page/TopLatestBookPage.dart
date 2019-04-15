@@ -68,7 +68,7 @@ class _TopLatestBookPageState extends State<TopLatestBookPage> with AutomaticKee
         onLoadMore: onLoadMore,
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
-        itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
+        itemBuilder: (BuildContext context, int index) => renderListItem(index),
       )
     );
   }

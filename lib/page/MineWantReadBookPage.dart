@@ -22,14 +22,14 @@ class _MineWantReadBookPageState extends State<MineWantReadBookPage> with Automa
   bool get needSlide => true;
 
   @override
-  List<Widget> slideActions(context,index) {
+  List<Widget> slideActions(index) {
     return <Widget>[
       IconSlideAction(
         caption: '删除',
         color: Colors.red,
         icon: Icons.delete,
         onTap: () {
-          _delete(context, index);
+          _delete(index);
         },
       ),
     ];
@@ -67,7 +67,7 @@ class _MineWantReadBookPageState extends State<MineWantReadBookPage> with Automa
     return params;
   }
 
-  _delete(context,index) async{
+  _delete(index) async{
     Book book = control.data[index];
 
     var res = await handleNotAssociatedWithRefreshRequest(context, "/label/deleteWant", {"bid":book.id});
@@ -99,7 +99,7 @@ class _MineWantReadBookPageState extends State<MineWantReadBookPage> with Automa
         onLoadMore: onLoadMore,
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
-        itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
+        itemBuilder: (BuildContext context, int index) => renderListItem(index),
       )
     );
   }

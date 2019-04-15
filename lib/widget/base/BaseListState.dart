@@ -15,7 +15,7 @@ mixin BaseListState<T extends StatefulWidget> on BaseState<T>,AutomaticKeepAlive
   bool get needSlide => false;
 
   @protected
-  List<Widget> slideActions(context,index) {
+  List<Widget> slideActions(index) {
     return List();
   }
 

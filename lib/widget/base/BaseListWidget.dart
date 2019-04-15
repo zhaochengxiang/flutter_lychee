@@ -66,7 +66,7 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
     return null;
   }
 
-  Widget buildListView(context) {
+  Widget buildListView() {
 
     return new ListView.separated(
       shrinkWrap: true,
@@ -77,7 +77,7 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
           return Slidable(
             delegate: SlidableScrollDelegate(),
             actionExtentRatio: 0.18,
-            secondaryActions: widget.control.slideActions(context,index),
+            secondaryActions: widget.control.slideActions(index),
             child: widget.itemBuilder(context, index)
           );
         } else {
@@ -124,13 +124,13 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
         ),
         onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
         loadMore:(widget.control.needRefreshFooter)?widget.onLoadMore:null,
-        child: buildListView(context),
+        child: buildListView(),
       )
     );
   }
 }
 
-typedef SlideActionsFunction = List<Widget> Function(BuildContext context,int index);
+typedef SlideActionsFunction = List<Widget> Function(int index);
 
 class BaseListWidgetControl extends BaseWidgetControl {
   bool needRefreshHeader = true;

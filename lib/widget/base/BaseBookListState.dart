@@ -120,7 +120,7 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
   }
 
   @protected
-  renderListItem(context,index) {
+  renderListItem(index) {
     Book book = control.data[index];
     return BookItem(book:book,onPressed: (){
       CommonUtils.openPage(context, BookDetailPage({"lid":0,"uuid":book.uuid}));

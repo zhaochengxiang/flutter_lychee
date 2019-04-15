@@ -43,7 +43,7 @@ class _SearchPagetState extends State<SearchPage> {
     });
   }
 
-  _buildWrapChildren(context) {
+  _buildWrapChildren() {
     List<Widget> widgets = [];
     searchs.forEach((search) {
       widgets.add(new InkWell(
@@ -68,7 +68,7 @@ class _SearchPagetState extends State<SearchPage> {
     return widgets;
   }
 
-  _searchDone(context,value) async {
+  _searchDone(value) async {
     if (value==null || value.length==0) return;
 
     await provider.insert(widget.type, value);
@@ -124,7 +124,7 @@ class _SearchPagetState extends State<SearchPage> {
               
                       },
                       onSubmitted: (String value) {
-                        _searchDone(context,value);
+                        _searchDone(value);
                       },
                       controller: searchController,
                     ),                       
@@ -160,7 +160,7 @@ class _SearchPagetState extends State<SearchPage> {
                 child: Wrap(
                   spacing: 10.5,
                   runSpacing: 5.0,
-                  children: _buildWrapChildren(context),
+                  children: _buildWrapChildren(),
                )
               ),
             ),

@@ -77,7 +77,7 @@ class _SearchLessonPageState extends State<SearchLessonPage> with AutomaticKeepA
   }
 
   @override
-  renderListItem(context,index) {
+  renderListItem(index) {
     Lesson lesson = control.data[index];
     return new LessonItem(lesson,onPressed: (){
       CommonUtils.openPage(context, LessonDetailPage({"uuid":lesson.uuid}));
@@ -123,7 +123,7 @@ class _SearchLessonPageState extends State<SearchLessonPage> with AutomaticKeepA
         refreshKey: refreshIndicatorKey,
         widgetName: widget.runtimeType.toString(),
         emptyTip: "没有搜索到相关小讲",
-        itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
+        itemBuilder: (BuildContext context, int index) => renderListItem(index),
       )
     );
   }

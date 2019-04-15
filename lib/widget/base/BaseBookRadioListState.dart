@@ -112,7 +112,7 @@ mixin BaseBookRadioListState<T extends StatefulWidget> on BaseBookListState<T>,A
   }
 
   @protected
-  renderListItem(context,index) {
+  renderListItem(index) {
     ReceiptResult receiptResult = control.data[index]; 
     return Column(
       children: <Widget>[

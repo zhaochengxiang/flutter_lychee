@@ -28,14 +28,14 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
   bool get needSlide => true;
 
   @override
-  List<Widget> slideActions(context,index) {
+  List<Widget> slideActions(index) {
     return <Widget>[
       IconSlideAction(
         caption: '定位',
         color: Color(YYColors.primary),
         icon: Icons.location_on,
         onTap: () {
-          _location(context,index);
+          _location(index);
         },
       ),
       IconSlideAction(
@@ -43,7 +43,7 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
         color: Colors.red,
         icon: Icons.delete,
         onTap: () {
-          _delete(context, index);
+          _delete(index);
         },
       ),
     ];
@@ -52,7 +52,7 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
   @override
   String get categoryRemotePath => "/category/findCollection";
 
-  _location(context,index) async{
+  _location(index) async{
     Book book = control.data[index];
     var res = await handleNotAssociatedWithRefreshRequest(context, "/frame/findMyByBid", {"bid":book.id});
     if (res!=null && res.result && res.data!=null) {
@@ -84,7 +84,7 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
     }
   }
 
-  _delete(context,index) async{
+  _delete(index) async{
     Book book = control.data[index];
     var res = await handleNotAssociatedWithRefreshRequest(context, "/collection/delete", {"bid":book.id});
     if (res!=null && res.result) {
@@ -118,7 +118,7 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
                 onLoadMore: onLoadMore,
                 refreshKey: refreshIndicatorKey,
                 widgetName: widget.runtimeType.toString(),
-                itemBuilder: (BuildContext context, int index) => renderListItem(context,index),
+                itemBuilder: (BuildContext context, int index) => renderListItem(index),
               ),
             ),
             Container(

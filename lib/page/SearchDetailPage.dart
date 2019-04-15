@@ -20,7 +20,7 @@ class SearchDetailPage extends StatefulWidget {
   final int rightSection;
   final int rightIndex;
 
-  SearchDetailPage({this.keyword="",this.category,this.leftIndex,this.rightSection,this.rightIndex});
+  SearchDetailPage({this.keyword="",this.category,this.leftIndex=0,this.rightSection=-1,this.rightIndex=-1});
 
   @override
   _SearchDetailPagetState createState() => new _SearchDetailPagetState(curCategoryName: (this.category==null)?"分类":this.category.name,cid:(this.category==null)?-1:this.category.id);

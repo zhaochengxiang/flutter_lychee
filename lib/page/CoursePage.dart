@@ -64,7 +64,7 @@ class _CoursePageState extends State<CoursePage> with AutomaticKeepAliveClientMi
     );
   }
 
-  _buildRecommendCourseWidget(context) {
+  _buildRecommendCourseWidget() {
     if (courseHome == null) return new Container();
 
     var recommends = courseHome.recommendList;
@@ -126,7 +126,7 @@ class _CoursePageState extends State<CoursePage> with AutomaticKeepAliveClientMi
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildBannerWidget(),
-            _buildRecommendCourseWidget(context),
+            _buildRecommendCourseWidget(),
           ]
         ),
       ),
