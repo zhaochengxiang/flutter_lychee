@@ -6,6 +6,9 @@ import 'package:lychee/common/model/User.dart';
 import 'package:lychee/common/local/LocalStorage.dart';
 import './LoginPage.dart';
 import './MineBookPage.dart';
+import './MineLessonPage.dart';
+import './MineCoursePage.dart';
+import './MineFramePage.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -125,6 +128,16 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
         onPressed: (){
           if (i==0) {
             CommonUtils.openPage(context, MineBookPage());
+          } else if (i==1) {
+
+          } else if (i==2) {
+
+          } else if (i==3) {
+            CommonUtils.openPage(context, MineLessonPage());
+          } else if (i==4) {
+            CommonUtils.openPage(context, MineCoursePage());
+          } else if (i==5) {
+            CommonUtils.openPage(context, MineFramePage());
           }
         },
       );

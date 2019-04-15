@@ -4,9 +4,9 @@ import 'package:lychee/widget/base/BaseListWidget.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/widget/CategoryWidget.dart';
-import 'package:lychee/page/MineFramePage.dart';
+import 'package:lychee/widget/MineFrame.dart';
 import 'package:lychee/common/event/NeedRefreshEvent.dart';
-import 'package:lychee/page/MineLibraryPage.dart';
+import 'package:lychee/widget/MineLibrary.dart';
 
 class BaseBookListWidget extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
@@ -190,10 +190,10 @@ class _BaseBookListWidgetState extends State<BaseBookListWidget> {
                 (widget.control.needCategory)?new CategoryWidget(remotePath:widget.control.categoryRemotePath, onPressed: (category,leftIndex,rightSection,rightIndex){
                   _categoryWidgetOnPressed(category);
                 }):new Container(),
-                (widget.control.needLibrary)?new MineLibraryPage(remotePath: widget.control.libraryRemotePath, onPressed: (library){
+                (widget.control.needLibrary)?new MineLibrary(remotePath: widget.control.libraryRemotePath, onPressed: (library){
                   _libraryWidgetOnPressed(library);
                 }):new Container(),
-                (widget.control.needFrame)?new MineFramePage(onPressed: (frame){
+                (widget.control.needFrame)?new MineFrame(onPressed: (frame){
                   _frameWidgetOnPressed(frame);
                 }):new Container(),
               ],

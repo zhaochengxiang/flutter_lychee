@@ -10,19 +10,19 @@ import 'package:lychee/widget/SeparatorWidget.dart';
 
 typedef LibraryItemCallback = void Function(Library library);
 
-class MineLibraryPage extends StatefulWidget {
+class MineLibrary extends StatefulWidget {
 
   final String remotePath;
   final LibraryItemCallback onPressed;
-  MineLibraryPage({@required this.remotePath,this.onPressed});
+  MineLibrary({@required this.remotePath,this.onPressed});
 
   @override
-  State<MineLibraryPage> createState() {
-    return _MineLibraryPageState();
+  State<MineLibrary> createState() {
+    return _MineLibraryState();
   }
 }
 
-class _MineLibraryPageState extends State<MineLibraryPage>  with AutomaticKeepAliveClientMixin<MineLibraryPage>,BaseState<MineLibraryPage>, BaseListState<MineLibraryPage> {
+class _MineLibraryState extends State<MineLibrary>  with AutomaticKeepAliveClientMixin<MineLibrary>,BaseState<MineLibrary>, BaseListState<MineLibrary> {
 
   @override
   bool get needRefreshHeader => false;

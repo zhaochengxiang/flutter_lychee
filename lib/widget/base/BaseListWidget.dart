@@ -31,6 +31,7 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
 
   final GlobalKey<RefreshHeaderState> _refreshHeaderKey = new GlobalKey<RefreshHeaderState>();
   final GlobalKey<RefreshFooterState> _refreshFooterKey = new GlobalKey<RefreshFooterState>();
+  SlidableController slidableController = new SlidableController();
 
   ///根据配置状态返回实际列表数量
   ///实际上这里可以根据你的需要做更多的处理
@@ -73,8 +74,9 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
       physics: new NeverScrollableScrollPhysics(),
       separatorBuilder: (context, index)=>SeparatorWidget(),
       itemBuilder: (context, index) {
-        if (widget.control.needSlide) {
+        if (widget.control.needSlide && widget.control.canNotSlideRows.contains(index) == false) {
           return Slidable(
+            controller: slidableController,
             delegate: SlidableScrollDelegate(),
             actionExtentRatio: 0.18,
             secondaryActions: widget.control.slideActions(index),
@@ -139,4 +141,5 @@ class BaseListWidgetControl extends BaseWidgetControl {
   bool needSlide = false;
   
   SlideActionsFunction slideActions;
+  List<int> canNotSlideRows = List(); 
 }
