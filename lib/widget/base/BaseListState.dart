@@ -20,6 +20,9 @@ mixin BaseListState<T extends StatefulWidget> on BaseState<T>,AutomaticKeepAlive
   }
 
   @protected
+  List<int> get canNotSlideRows => List();
+
+  @protected
   bool get needRefreshHeader => true;
 
   @protected
@@ -82,5 +85,6 @@ mixin BaseListState<T extends StatefulWidget> on BaseState<T>,AutomaticKeepAlive
     control.needRefreshFooter = needRefreshFooter;
     control.needSlide = needSlide;
     control.slideActions = slideActions;
+    control.canNotSlideRows = canNotSlideRows;
   }
 }

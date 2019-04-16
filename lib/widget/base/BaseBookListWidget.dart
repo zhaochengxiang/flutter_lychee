@@ -167,7 +167,7 @@ class _BaseBookListWidgetState extends State<BaseBookListWidget> {
             (widget.control.needFrame)?_buildTopOptionWidget(widget.control.curFrameName, _topFrameOnPressed):new Container(),
 
             (widget.control.needCount)?Expanded(
-              child: Text("共"+widget.control.total.toString()+"本",style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),maxLines: 1,overflow: TextOverflow.ellipsis,textAlign: TextAlign.end,),
+              child: Text("共"+widget.control.total.toString()+widget.control.unit,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),maxLines: 1,overflow: TextOverflow.ellipsis,textAlign: TextAlign.end,),
             ):new Container(),
           ],
         ),
@@ -233,4 +233,5 @@ class BaseBookListWidgetControl extends BaseListWidgetControl {
 
   String categoryRemotePath;
   String libraryRemotePath;
+  String unit;
 }

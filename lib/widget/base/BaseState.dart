@@ -16,7 +16,6 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
   @protected
   StreamSubscription refreshEventStream;
 
-  ///是否需要保持
   @override
   bool get wantKeepAlive => true;
 

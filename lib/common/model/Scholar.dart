@@ -19,7 +19,7 @@ class Scholar {
    List<Lesson> lessonList;
    List<Book> bookList;
 
-  Scholar(
+  Scholar({
     this.id,
     this.type,
     this.name,
@@ -30,8 +30,8 @@ class Scholar {
     this.followed,
     this.courseList,
     this.lessonList,
-    this.bookList,
-  );
+    this.bookList
+  });
 
   factory Scholar.fromJson(Map<String, dynamic> json) => _$ScholarFromJson(json);
 

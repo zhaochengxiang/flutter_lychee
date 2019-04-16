@@ -9,6 +9,7 @@ import './MineBookPage.dart';
 import './MineLessonPage.dart';
 import './MineCoursePage.dart';
 import './MineFramePage.dart';
+import './MineFollowPage.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -138,6 +139,8 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
             CommonUtils.openPage(context, MineCoursePage());
           } else if (i==5) {
             CommonUtils.openPage(context, MineFramePage());
+          } else if (i==6) {
+            CommonUtils.openPage(context, MineFollowPage());
           }
         },
       );

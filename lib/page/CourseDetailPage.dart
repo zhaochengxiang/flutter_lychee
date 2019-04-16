@@ -11,6 +11,7 @@ import 'package:lychee/widget/SeparatorWidget.dart';
 import 'package:lychee/widget/SectionWdiget.dart';
 import 'package:lychee/widget/CourseDetailItem.dart';
 import 'package:lychee/common/model/Lesson.dart';
+import 'package:lychee/common/model/Scholar.dart';
 import 'package:lychee/page/LessonDetailPage.dart';
 
 class CourseDetailPage extends StatefulWidget {
@@ -75,7 +76,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> with AutomaticKeepA
               padding: EdgeInsets.all(10.5),
               child: Text(course.title,style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),overflow: TextOverflow.ellipsis,maxLines: 1)
             ),
-            ScholarItem(avatar: course.avatar,author: course.author,honor: course.honor,onPressed: (){
+            ScholarItem(Scholar(avatar:course.avatar,name:course.author,honor:course.honor),onPressed:(){
 
             }),
             SeparatorWidget(),

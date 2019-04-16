@@ -29,6 +29,9 @@ BaseBookRadioListState<MineUnShareBookPage> {
   bool get needCount => true;
 
   @override
+  int get lid => widget.lid;
+
+  @override
   remotePath() {
     return "/copy/findMyUnShare";
   }
@@ -66,12 +69,6 @@ BaseBookRadioListState<MineUnShareBookPage> {
   @override
   jsonConvertToModel(Map<String,dynamic> json) {
     return BookResult.fromJson(json);
-  }
-
-  @override
-  void setControl() {
-    super.setControl();
-    control.lid = widget.lid;
   }
 
   @protected

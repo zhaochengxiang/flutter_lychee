@@ -8,6 +8,7 @@ import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/widget/ScholarItem.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
+import 'package:lychee/common/model/Scholar.dart';
 
 class LessonDetailPage extends StatefulWidget {
   final Map params;
@@ -71,7 +72,7 @@ class _LessonDetailPageState extends State<LessonDetailPage> with AutomaticKeepA
               padding: EdgeInsets.all(10.5),
               child: Text(lesson.title,style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),overflow: TextOverflow.ellipsis,maxLines: 1)
             ),
-            ScholarItem(avatar: lesson.avatar,author: lesson.author,honor: lesson.honor,onPressed: (){
+            ScholarItem(Scholar(avatar:lesson.avatar,name:lesson.author,honor:lesson.honor),onPressed:(){
 
             }),
             SeparatorWidget(),

@@ -93,10 +93,7 @@ class _MineFrameState extends State<MineFrame>  with AutomaticKeepAliveClientMix
   }
 
   @override
-  void setControl() {
-    super.setControl();
-    control.canNotSlideRows.add(0);
-  }
+  List<int> get canNotSlideRows => [0];
 
   _renderListItem(index) {
     Frame frame;

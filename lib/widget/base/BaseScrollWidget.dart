@@ -31,7 +31,6 @@ class _BaseScrollWidgetState extends State<BaseScrollWidget> with BaseDecoration
 
     return new SafeArea( 
       child: new EasyRefresh(
-        ///GlobalKey，用户外部获取RefreshIndicator的State，做显示刷新
         key: widget.refreshKey,
         refreshHeader: ClassicsHeader(
           key: _refreshHeaderKey,

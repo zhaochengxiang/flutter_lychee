@@ -32,6 +32,9 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
   bool get needSearch => true;
 
   @protected
+  int get lid => 0;
+
+  @protected
   String get searchKeyword => "";
 
   @protected
@@ -39,6 +42,9 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
 
   @protected
   String get libraryRemotePath => "/library/findMyself";
+  
+  @protected
+  String get unit => "本";
 
   @override
   generateRemoteParams() {
@@ -140,8 +146,10 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
     control.needFrame = needFrame;
     control.needCount = needCount;
     control.needSearch = needSearch;
+    control.lid = lid;
     control.keyword = searchKeyword;
     control.categoryRemotePath = categoryRemotePath;
     control.libraryRemotePath = libraryRemotePath;
+    control.unit = unit;
   }
 }

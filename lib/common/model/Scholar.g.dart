@@ -8,23 +8,23 @@ part of 'Scholar.dart';
 
 Scholar _$ScholarFromJson(Map<String, dynamic> json) {
   return Scholar(
-      json['id'] as int,
-      json['type'] as int,
-      json['name'] as String,
-      json['verified'] as int,
-      json['avatar'] as String,
-      json['honor'] as String,
-      json['resume'] as String,
-      json['followed'] as bool,
-      (json['courseList'] as List)
+      id: json['id'] as int,
+      type: json['type'] as int,
+      name: json['name'] as String,
+      verified: json['verified'] as int,
+      avatar: json['avatar'] as String,
+      honor: json['honor'] as String,
+      resume: json['resume'] as String,
+      followed: json['followed'] as bool,
+      courseList: (json['courseList'] as List)
           ?.map((e) =>
               e == null ? null : Course.fromJson(e as Map<String, dynamic>))
           ?.toList(),
-      (json['lessonList'] as List)
+      lessonList: (json['lessonList'] as List)
           ?.map((e) =>
               e == null ? null : Lesson.fromJson(e as Map<String, dynamic>))
           ?.toList(),
-      (json['bookList'] as List)
+      bookList: (json['bookList'] as List)
           ?.map((e) =>
               e == null ? null : Book.fromJson(e as Map<String, dynamic>))
           ?.toList());
