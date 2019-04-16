@@ -62,10 +62,9 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
 
   Widget buildListView() {
 
-    return new ListView.separated(
+    return new ListView.builder(
       shrinkWrap: true,
       physics: new NeverScrollableScrollPhysics(),
-      separatorBuilder: (context, index)=>SeparatorWidget(),
       itemBuilder: (context, index) {
         if (widget.control.needSlide && widget.control.canNotSlideRows.contains(index) == false) {
           return Slidable(
@@ -73,10 +72,20 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
             delegate: SlidableScrollDelegate(),
             actionExtentRatio: 0.18,
             secondaryActions: widget.control.slideActions(index),
-            child: widget.itemBuilder(context, index)
+            child: Column(
+               children: <Widget>[
+                 widget.itemBuilder(context, index),
+                 SeparatorWidget()
+               ],
+            )
           );
         } else {
-          return widget.itemBuilder(context, index);
+          return Column(
+            children: <Widget>[
+              widget.itemBuilder(context, index),
+              SeparatorWidget()
+            ],
+          );
         }
       },
       itemCount: (widget.control.data==null)?0:_getListCount(),

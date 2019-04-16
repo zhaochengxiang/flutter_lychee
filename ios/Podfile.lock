@@ -40,6 +40,8 @@ PODS:
     - mob_sharesdk/ShareSDK
     - MOBFoundation
   - MOBFoundation (3.2.1)
+  - package_info (0.0.1):
+    - Flutter
   - Reachability (3.2)
   - shared_preferences (0.0.1):
     - Flutter
@@ -55,6 +57,8 @@ PODS:
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
+  - webview_flutter (0.0.1):
+    - Flutter
   - xservice_kit (0.0.1):
     - Flutter
 
@@ -64,9 +68,11 @@ DEPENDENCIES:
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - jpush_flutter (from `.symlinks/plugins/jpush_flutter/ios`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sharesdk (from `.symlinks/plugins/sharesdk/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
   - xservice_kit (from `.symlinks/plugins/xservice_kit/ios`)
 
 SPEC REPOS:
@@ -89,12 +95,16 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker/ios"
   jpush_flutter:
     :path: ".symlinks/plugins/jpush_flutter/ios"
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   sharesdk:
     :path: ".symlinks/plugins/sharesdk/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
+  webview_flutter:
+    :path: ".symlinks/plugins/webview_flutter/ios"
   xservice_kit:
     :path: ".symlinks/plugins/xservice_kit/ios"
 
@@ -109,10 +119,12 @@ SPEC CHECKSUMS:
   jpush_flutter: 1cc882286b5cac7a307a635fbd2a7c296730ca59
   mob_sharesdk: 78dbad90fdb227017c27097be9090180da4b042a
   MOBFoundation: ce2ba976fd435b0cb06897466b2746e639895b7d
+  package_info: d7c98b64f60add4c2908b9d94d82a45d3c8827ad
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
   sharesdk: dc69ef855c237227a575efebc71fe2132c35df01
   sqflite: d1612813fa7db7c667bed9f1d1b508deffc56999
+  webview_flutter: 9bd234c07e99632356cba112df56fd1d47d6b6e3
   xservice_kit: a86c64372b3e41e7d8e9b1a0b9139866680f525c
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09

@@ -6,7 +6,6 @@ import 'package:lychee/widget/base/BaseListWidget.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/common/model/Library.dart';
-import 'package:lychee/widget/SeparatorWidget.dart';
 
 typedef LibraryItemCallback = void Function(Library library);
 
@@ -52,16 +51,8 @@ class _MineLibraryState extends State<MineLibrary>  with AutomaticKeepAliveClien
       padding: EdgeInsets.all(0),
       child:Container(
         height: 47.0, 
-        child:new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child:ListTile(
-                title: Text(library.name,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
-              )
-            ),
-            SeparatorWidget()
-          ],
+        child: ListTile(
+          title: Text(library.name,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
         )
       ),
       onPressed: () {

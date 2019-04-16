@@ -7,7 +7,6 @@ import 'package:lychee/widget/base/BaseListWidget.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/common/model/Frame.dart';
-import 'package:lychee/widget/SeparatorWidget.dart';
 
 typedef FrameItemCallback = void Function(Frame frame);
 
@@ -15,7 +14,7 @@ class MineFrame extends StatefulWidget {
 
   final bool needSlide;
   final FrameItemCallback onPressed;
-  MineFrame({this.needSlide,this.onPressed});
+  MineFrame({this.needSlide=false,this.onPressed});
 
   @override
   State<MineFrame> createState() {
@@ -107,16 +106,8 @@ class _MineFrameState extends State<MineFrame>  with AutomaticKeepAliveClientMix
       padding: EdgeInsets.all(0),
       child:Container(
         height: 47.0, 
-        child:new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child:ListTile(
-                title: Text(frame.name,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
-              )
-            ),
-            SeparatorWidget()
-          ],
+        child: ListTile(
+          title: Text(frame.name,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
         )
       ),
       onPressed: () {

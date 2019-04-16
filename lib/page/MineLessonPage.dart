@@ -36,6 +36,9 @@ class _MineLessonPageState extends State<MineLessonPage> with AutomaticKeepAlive
   bool get needSearch => true;
 
   @override
+  String get unit => "讲";
+
+  @override
   remotePath() {
     return "/lesson/findMy";
   }
