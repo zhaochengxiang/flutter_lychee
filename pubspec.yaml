@@ -35,7 +35,7 @@ dependencies:
   sharesdk: 
     path: plugins/sharesdk-1.0.8
   jpush_flutter: 0.0.11
-  image_picker: ^0.4.12 
+  image_picker: ^0.5.3+1 
   xservice_kit: ^0.026
   flutter_slidable: "^0.4.9"
   qr_flutter: ^2.0.0
