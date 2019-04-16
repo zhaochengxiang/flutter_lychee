@@ -11,4 +11,4 @@ flutter run
 
 ### 示例效果
 
-![1.jpeg](https://github.com/zhaochengxiang/flutter_lychee/效果图/1.jpeg)
+![1.jpeg](https://raw.githubusercontent.com/zhaochengxiang/flutter_lychee/master/效果图/1.jpeg)
