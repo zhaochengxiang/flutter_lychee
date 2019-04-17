@@ -113,7 +113,7 @@ SPEC CHECKSUMS:
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
   fluttertoast: 0a20dcbbb8ecfd1a61b6285651ff2d5989d033fb
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  image_picker: ee00aab0487cedc80a304085219503cc6d0f2e22
+  image_picker: 86b84c4fe89267356a1f17297a45b5d317ebd2e7
   JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7
   JPush: d0cead70ba223a6a3b52749899ebda830dfbc49a
   jpush_flutter: 1cc882286b5cac7a307a635fbd2a7c296730ca59

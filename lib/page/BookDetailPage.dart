@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseScrollSate.dart';
@@ -10,6 +11,7 @@ import 'package:lychee/widget/SectionWdiget.dart';
 import 'package:lychee/widget/BookGrid.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/common/event/NeedRefreshEvent.dart';
+import 'package:lychee/common/manager/ShareManager.dart';
 
 class BookDetailPage extends StatefulWidget {
   final Map params;
@@ -22,6 +24,7 @@ class BookDetailPage extends StatefulWidget {
 class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAliveClientMixin<BookDetailPage>,BaseState<BookDetailPage>, BaseScrollState<BookDetailPage> {
   Map params;
   RichBook richBook;
+  ShareManager shareManager =ShareManager();
 
   _BookDetailPageState(this.params) :super();
   @override
@@ -37,6 +40,37 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
   @override
   jsonConvertToModel(Map<String,dynamic> json) {
     return RichBook.fromJson(json);
+  }
+
+  @protected
+  _share() {
+    List<Widget> customMenuItems = List();
+    if (richBook != null) {
+      customMenuItems.add(FlatButton(
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(CommonUtils.Local_Icon_prefix+((richBook.wantRead==true)?'icon_heart_green.png':'icon_heart.png'),width:65.0,height:65.0),
+            Text((richBook.wantRead==true)?'取消想读':'想读此书',style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium), overflow: TextOverflow.ellipsis,),
+          ],
+        ),
+        onPressed: () async {
+          var res = await handleNotAssociatedWithRefreshRequest(context, (richBook.wantRead==true)?"/label/deleteWant":"/label/saveWant", {"bid":richBook.book.id});
+
+          Navigator.pop(context);
+          if (res!=null && res.result) {
+            if (isShow) {
+              setState(() {
+                richBook.wantRead = !richBook.wantRead;
+              });
+            }
+            Fluttertoast.showToast(msg: (richBook.wantRead==true)?"添加成功":"取消成功",gravity: ToastGravity.CENTER);
+            NeedRefreshEvent.refreshHandleFunction("MineWantReadBookPage");
+          }
+        },
+      ));
+    }
+    shareManager.showMenu(context,customMenuItems:customMenuItems,title:richBook.book.title??"",desc:richBook.book.summary??"",url:'http://lizhiketang.com/h5/book/'+params["uuid"]);
   }
 
   @override
@@ -58,7 +92,7 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
           IconButton(
           icon: new Image.asset(CommonUtils.Local_Icon_prefix+"more.png",width: 18.0,height: 18.0),
           onPressed: () {
-
+            _share();
           })
         ]
       ),

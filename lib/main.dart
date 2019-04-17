@@ -5,7 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lychee/common/event/HttpErrorEvent.dart';
 import 'package:lychee/page/HomeTabBarPage.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
-import 'package:lychee/common/manager/ShareManager.dart';
 import 'package:lychee/common/manager/PushManager.dart';
 import 'package:lychee/common/xservice/loader/ServiceLoader.dart';
 import 'package:lychee/common/local/LocalStorage.dart';
@@ -28,7 +27,6 @@ class _LycheeAppState extends State<LycheeApp> {
 
     LocalStorage.save(CommonUtils.TOKEN_KEY, "962e3e198187abcda3af749f2d29de98");
 
-    ShareManager.init();
     PushManager.init();
     ServiceLoader.load();
     
