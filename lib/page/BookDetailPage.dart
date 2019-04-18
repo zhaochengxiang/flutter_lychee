@@ -50,7 +50,7 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(CommonUtils.Local_Icon_prefix+((richBook.wantRead==true)?'icon_heart_green.png':'icon_heart.png'),width:65.0,height:65.0),
+            Image.asset(CommonUtils.Local_Icon_prefix+((richBook.wantRead==true)?'icon_heart_green.png':'icon_heart.png'),width:30.0,height:30.0,fit: BoxFit.fill),
             Text((richBook.wantRead==true)?'取消想读':'想读此书',style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium), overflow: TextOverflow.ellipsis,),
           ],
         ),

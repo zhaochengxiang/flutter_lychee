@@ -49,7 +49,7 @@ class ShareManager {
       child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset(CommonUtils.Local_Icon_prefix+assetName,width:65.0,height:65.0),
+          Image.asset(CommonUtils.Local_Icon_prefix+assetName,width:30.0,height:30.0,fit: BoxFit.fill),
           Text(name,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium), overflow: TextOverflow.ellipsis,),
         ],
       ),

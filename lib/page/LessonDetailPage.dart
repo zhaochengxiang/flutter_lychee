@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseScrollSate.dart';
@@ -9,6 +10,8 @@ import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/widget/ScholarItem.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
 import 'package:lychee/common/model/Scholar.dart';
+import 'package:lychee/common/manager/ShareManager.dart';
+import 'package:lychee/common/event/NeedRefreshEvent.dart';
 
 class LessonDetailPage extends StatefulWidget {
   final Map params;
@@ -21,6 +24,7 @@ class LessonDetailPage extends StatefulWidget {
 class _LessonDetailPageState extends State<LessonDetailPage> with AutomaticKeepAliveClientMixin<LessonDetailPage>,BaseState<LessonDetailPage>, BaseScrollState<LessonDetailPage> {
 
   Lesson lesson;
+  ShareManager shareManager =ShareManager();
 
   @override
   remotePath() {
@@ -35,6 +39,37 @@ class _LessonDetailPageState extends State<LessonDetailPage> with AutomaticKeepA
   @override
   jsonConvertToModel(Map<String,dynamic> json) {
     return Lesson.fromJson(json);
+  }
+
+  @protected
+  _share() {
+    List<Widget> customMenuItems = List();
+    if (lesson != null) {
+      customMenuItems.add(FlatButton(
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(CommonUtils.Local_Icon_prefix+((lesson.favorite==true)?'favorite_red.png':'favorite_gray.png'),width:30.0,height:30.0,fit: BoxFit.fill),
+            Text((lesson.favorite==true)?'取消收藏':'收藏',style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium), overflow: TextOverflow.ellipsis,),
+          ],
+        ),
+        onPressed: () async {
+          var res = await handleNotAssociatedWithRefreshRequest(context, (lesson.favorite==true)?"/favorite/delete":"/favorite/save", {"id":lesson.id,"type":1});
+
+          Navigator.pop(context);
+          if (res!=null && res.result) {
+            if (isShow) {
+              setState(() {
+                lesson.favorite = !lesson.favorite;
+              });
+            }
+            Fluttertoast.showToast(msg: (lesson.favorite==true)?"收藏成功":"取消收藏成功",gravity: ToastGravity.CENTER);
+            NeedRefreshEvent.refreshHandleFunction("MineLessonPage");
+          }
+        },
+      ));
+    }
+    shareManager.showMenu(context,customMenuItems:customMenuItems,title:lesson.title??"",desc:(lesson.salePrice>0)?(lesson.introduction??""):(lesson.content??""),url:'http://lizhiketang.com/h5/lesson/'+lesson.uuid);
   }
 
   @override
@@ -56,7 +91,7 @@ class _LessonDetailPageState extends State<LessonDetailPage> with AutomaticKeepA
           IconButton(
           icon: new Image.asset(CommonUtils.Local_Icon_prefix+"more.png",width: 18.0,height: 18.0),
           onPressed: () {
-
+            _share();
           })
         ]
       ),
