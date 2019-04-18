@@ -63,11 +63,12 @@ class ShareManager {
     );
   }
 
-  showMenu(context,{platforms=const ['wechat_session','wechat_timeline'],customMenuItems,title='我正在使用“荔枝课堂”，推荐给你。',desc='打造个人专属知识管理和分享平台，轻松重启学习之路',url='https://lizhiketang.com/download.html',type = 3}) {
+  showMenu(context,{platforms=const ['wechat_session','wechat_timeline'],customMenuItems,title='我正在使用“荔枝课堂”，推荐给你。',desc='打造个人专属知识管理和分享平台，轻松重启学习之路',url='https://lizhiketang.com/download.html',thumbImage,type = 3}) {
     SSDKMap params = SSDKMap()
                 ..setGeneral(
                     title,
                     desc,
+                    thumbImage,
                     null,
                     null,
                     null,

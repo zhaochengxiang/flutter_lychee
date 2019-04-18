@@ -92,6 +92,7 @@ class SSDKMap {
   void setGeneral(
       String title,
       String text,
+      String thumbImage,
       dynamic images,
       String imageUrlAndroid,
       String imagePathAndroid,
@@ -103,6 +104,7 @@ class SSDKMap {
     map[kType] = contentType.value;
     map[kText] = text;
     map[kTitle] = title;
+    map[kThumbImage] = thumbImage;
     map[kImages] = images;
     map[kUrl] = url;
     map[kTitleUrlAndroid] = titleUrlAndroid;

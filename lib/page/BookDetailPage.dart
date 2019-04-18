@@ -70,7 +70,7 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
         },
       ));
     }
-    shareManager.showMenu(context,customMenuItems:customMenuItems,title:richBook.book.title??"",desc:richBook.book.summary??"",url:'http://lizhiketang.com/h5/book/'+params["uuid"]);
+    shareManager.showMenu(context,customMenuItems:customMenuItems,title:richBook.book.title??"",desc:richBook.book.summary??"",url:'http://lizhiketang.com/h5/book/'+params["uuid"],thumbImage:'http://cover.lizhiketang.com/j/'+richBook.book.cover+'.jpg');
   }
 
   @override
