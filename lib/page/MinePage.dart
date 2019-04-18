@@ -11,6 +11,7 @@ import './MineCoursePage.dart';
 import './MineFramePage.dart';
 import './MineFollowPage.dart';
 import './AboutUsPage.dart';
+import './MineInfoPage.dart';
 import 'package:lychee/common/manager/ShareManager.dart';
 
 class MinePage extends StatefulWidget {
@@ -59,7 +60,9 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
   topPressed() {
     if (control.data == null) {
       CommonUtils.openPage(context, LoginPage());
-    } 
+    } else {
+      CommonUtils.openPage(context, MineInfoPage());
+    }
   }
 
   Widget _buildTop() {
