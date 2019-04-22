@@ -110,6 +110,66 @@ class HttpManager {
     return new ResultData(HttpErrorEvent.errorHandleFunction(responseData['message'], noTip), false);
   }
 
+  static imageNetFetch(url,File file, {noTip = false}) async {
+
+    var connectivityResult = await (new Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      return new ResultData(HttpErrorEvent.errorHandleFunction("无网络链接请检查网络", noTip), false);
+    }
+
+    if (optionParams["authorizationCode"] == null) {
+      var authorizationCode = await LocalStorage.get(CommonUtils.TOKEN_KEY);
+      if (authorizationCode != null) {
+        optionParams["authorizationCode"] = authorizationCode;
+      }
+    }
+
+    Options option = new Options(headers: {"Access-Token": optionParams["authorizationCode"]});
+
+    FormData formData = new FormData.from({
+      "file": new UploadFileInfo(file, file.uri.pathSegments.last)
+    });
+
+    Dio dio = new Dio();
+    Response response;
+    try {
+      response = await dio.post("$host$url", data: formData, options: option);
+    } on DioError catch (e) {      
+      if (e.type == DioErrorType.CONNECT_TIMEOUT) {
+        e.message = "与服务器连接超时";
+      } else {
+        e.message = "与服务器连接发生错误";
+      }
+
+      if (CommonUtils.DEBUG) {
+        print('请求异常: ' + e.toString());
+        print('请求异常url: ' + url);
+      }
+      return new ResultData(HttpErrorEvent.errorHandleFunction( e.message, noTip), false);
+    }
+
+    if (CommonUtils.DEBUG) {
+      print('请求url: ' + url);
+      print('请求头: ' + option.headers.toString());
+  
+      if (response != null) {
+        print('返回参数: ' + response.toString());
+      }
+      if (optionParams["authorizationCode"] != null) {
+        print('authorizationCode: ' + optionParams["authorizationCode"]);
+      }
+    }
+
+    var responseData = response.data;
+    if (responseData['code'] == 401) {
+
+    } else if (responseData['code'] == 200) {
+      return new ResultData(responseData['data'], true);
+    }
+
+    return new ResultData(HttpErrorEvent.errorHandleFunction(responseData['message'], noTip), false);
+  }
+
   ///清除授权
   static clearAuthorization() {
     optionParams["authorizationCode"] = null;

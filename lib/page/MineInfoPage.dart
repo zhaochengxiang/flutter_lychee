@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseListWidget.dart';
@@ -9,6 +11,8 @@ import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/model/User.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
+import 'package:lychee/common/manager/HttpManager.dart';
+import 'package:lychee/common/event/NeedRefreshEvent.dart';
 
 class MineInfoPage extends StatefulWidget {
   @override
@@ -18,6 +22,8 @@ class MineInfoPage extends StatefulWidget {
 }
 
 class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveClientMixin<MineInfoPage>,BaseState<MineInfoPage>,BaseListState<MineInfoPage> {
+
+  File _image;
 
   @override
   bool get needRefreshHeader => false;
@@ -39,7 +45,11 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
   handleRefreshData(data) {
     super.handleRefreshData(data);
     User user =control.data;
+    control.data = getItems(user);
+  }
 
+  @protected
+  List getItems(User user) {
     String sex = '';
     if (user.sex == 0) {
       sex = '女';
@@ -54,7 +64,107 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
       {'title':'性别','desc':sex},
       {'title':'退出'},
     ]);
-    control.data = items;
+    return items;
+  }
+
+  @protected
+  _uploadFile() async {
+    if (control.isLoading) {
+      return new ResultData(null, false);
+    }
+
+    CommonUtils.showLoadingDialog(context);
+    var res = await HttpManager.imageNetFetch('/user/uploadAvatar',_image);
+    Navigator.pop(context);
+    if (res!=null && res.result && res.data!=null) {
+      User user = User.fromJson(res.data);
+      if (isShow) {
+        setState(() {
+          control.data =getItems(user);     
+        });
+      }
+      NeedRefreshEvent.refreshHandleFunction("MinePage");
+    }
+  }
+
+  @protected
+  _openCamera() async{
+    PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.camera);
+    if (permission ==PermissionStatus.unknown) {
+
+      Navigator.pop(context);
+      await PermissionHandler().requestPermissions([PermissionGroup.camera]);
+      _openCamera();
+
+    } else if (permission ==PermissionStatus.denied || permission ==PermissionStatus.restricted) {
+
+      Navigator.pop(context);
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text("相机服务未开启"),
+            content: Text("请在系统设置中开启相机服务"),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                onPressed: (){Navigator.pop(context);},
+                child: Text("确定"),
+              )
+            ],
+          );
+        }
+      );
+
+    } else {
+  
+      _image =await ImagePicker.pickImage(source: ImageSource.camera,maxWidth: 200,maxHeight: 200);
+      Navigator.pop(context);
+      if (_image!=null) {
+        _uploadFile();
+      }
+  
+    }
+  }
+
+  @protected
+  _openGallery() async {
+    PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.photos);
+    if (permission ==PermissionStatus.unknown) {
+
+      Navigator.pop(context);
+      await PermissionHandler().requestPermissions([PermissionGroup.photos]);
+      _openGallery();
+
+    } else if (permission == PermissionStatus.denied || permission == PermissionStatus.restricted) {
+
+      Navigator.pop(context);
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text("照片服务未开启"),
+            content: Text("请在系统设置中开启照片服务"),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                onPressed: (){Navigator.pop(context);},
+                child: Text("确定"),
+              )
+            ],
+          );
+        }
+      );
+
+    } else {
+
+      _image =await ImagePicker.pickImage(source: ImageSource.gallery,maxWidth: 200,maxHeight: 200);
+      Navigator.pop(context);
+      if (_image!=null) {
+        _uploadFile();
+      }
+
+    }
   }
 
   _renderListItem(index) {
@@ -79,36 +189,27 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
               ),
             ),
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext sheetContext) {
-                  return new ListView.builder(
-                    shrinkWrap: true,
-                    physics: new NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      
-                      return Column(
-                        children: <Widget>[
-                          Container(
-                            height: 47,
-                            child: FlatButton(
-                              padding:EdgeInsets.zero,
-                              child: Center(
-                                child: Text((index==0)?'拍照':'从手机相册选择',style: TextStyle(color: Color(YYColors.red),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
-                              ),
-                              onPressed: () {
-                                
-                              },
-                            ),
-                          ),
-                          SeparatorWidget()
-                        ],
-                      );
-                    },
-                    itemCount: 2,
-                  );
-                }
-              );
+
+              showCupertinoModalPopup<int>(context: context, builder:(cxt){
+                return CupertinoActionSheet(
+                  cancelButton: CupertinoActionSheetAction(
+                    onPressed: (){}, 
+                    child: Text("取消")
+                  ),
+                  actions: <Widget>[
+                    CupertinoActionSheetAction(onPressed: (){
+
+                      _openCamera();
+
+                    }, child: Text('拍照')),
+                    CupertinoActionSheetAction(onPressed: (){
+
+                      _openGallery();
+
+                    }, child: Text('从手机相册选择')),
+                  ],
+                );
+              });
             },
           ),
         );

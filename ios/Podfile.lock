@@ -42,6 +42,8 @@ PODS:
   - MOBFoundation (3.2.1)
   - package_info (0.0.1):
     - Flutter
+  - permission_handler (3.0.0):
+    - Flutter
   - Reachability (3.2)
   - shared_preferences (0.0.1):
     - Flutter
@@ -69,6 +71,7 @@ DEPENDENCIES:
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - jpush_flutter (from `.symlinks/plugins/jpush_flutter/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sharesdk (from `.symlinks/plugins/sharesdk/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -97,6 +100,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/jpush_flutter/ios"
   package_info:
     :path: ".symlinks/plugins/package_info/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   sharesdk:
@@ -120,6 +125,7 @@ SPEC CHECKSUMS:
   mob_sharesdk: 78dbad90fdb227017c27097be9090180da4b042a
   MOBFoundation: ce2ba976fd435b0cb06897466b2746e639895b7d
   package_info: d7c98b64f60add4c2908b9d94d82a45d3c8827ad
+  permission_handler: 03dcf3ade9d5f398b8854b366cb9de718d3daa76
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
   sharesdk: dc69ef855c237227a575efebc71fe2132c35df01
@@ -127,6 +133,6 @@ SPEC CHECKSUMS:
   webview_flutter: 9bd234c07e99632356cba112df56fd1d47d6b6e3
   xservice_kit: a86c64372b3e41e7d8e9b1a0b9139866680f525c
 
-PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
+PODFILE CHECKSUM: 2722bdda3c9185812d22e47d32127be65435fd03
 
 COCOAPODS: 1.5.3
