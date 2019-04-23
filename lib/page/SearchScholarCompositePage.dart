@@ -11,48 +11,49 @@ import 'package:lychee/widget/SectionWdiget.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
 import 'package:lychee/common/model/Course.dart';
 import 'package:lychee/common/model/Lesson.dart';
-import 'package:lychee/common/model/Scholar.dart';
 import './LessonDetailPage.dart';
 import './CourseDetailPage.dart';
 import './BookDetailPage.dart';
-import 'package:lychee/common/style/Style.dart';
+import 'package:lychee/common/model/SearchResult.dart';
+import './SearchScholarPage.dart';
 
-class ScholarHomePage extends StatefulWidget {
+class SearchScholarCompositePage extends StatefulWidget {
 
   final int id;
-  ScholarHomePage({this.id}); 
+  final String keyword;
+  SearchScholarCompositePage({this.id,this.keyword}); 
 
   @override
-  _ScholarHomePageState createState() => new _ScholarHomePageState();
+  _SearchScholarCompositePageState createState() => new _SearchScholarCompositePageState();
 }
 
-class _ScholarHomePageState extends State<ScholarHomePage> with AutomaticKeepAliveClientMixin<ScholarHomePage>,BaseState<ScholarHomePage>, BaseScrollState<ScholarHomePage>  {
-  Scholar scholar;
+class _SearchScholarCompositePageState extends State<SearchScholarCompositePage> with AutomaticKeepAliveClientMixin<SearchScholarCompositePage>,BaseState<SearchScholarCompositePage>, BaseScrollState<SearchScholarCompositePage>  {
+  SearchResult searchResult;
 
   @override
   remotePath() {
-    return "/scholar/get";
+    return "/scholar/searchWriting";
   }
 
   @override
   generateRemoteParams() {
-    return {"id":widget.id};
+    return {"id":widget.id,"keyword":SearchScholarModel.of(context).currentKeyword};
   }
 
    @override
   jsonConvertToModel(Map<String,dynamic> json) {
-    return Scholar.fromJson(json);
+    return SearchResult.fromJson(json);
   }
 
   _buildChosenBookWidget() {
-    if (scholar == null) return new Container();
+    if (searchResult == null) return new Container();
 
-    var books = scholar.bookList;
+    var books = searchResult.bookList;
 
     return (books==null||books.length==0)?new Container():new Column(
       children: <Widget>[
         SectionWidget(
-          title: "TA的图书",
+          title: "图书",
         ),
         new BookGrid(books,onPressed: (book){
           CommonUtils.openPage(context, BookDetailPage({"lid":0,"uuid":book.uuid}));
@@ -62,14 +63,14 @@ class _ScholarHomePageState extends State<ScholarHomePage> with AutomaticKeepAli
   }
 
   _buildChosenLessonWidget() {
-    if (scholar == null) return new Container();
+    if (searchResult == null) return new Container();
 
-    var lessons = scholar.lessonList;
+    var lessons = searchResult.lessonList;
 
     return (lessons==null||lessons.length==0)?new Container():new Column(
       children: <Widget>[
         SectionWidget(
-          title: "TA的小讲",
+          title: "小讲",
         ),
         new ListView.separated(
           shrinkWrap: true,
@@ -89,14 +90,14 @@ class _ScholarHomePageState extends State<ScholarHomePage> with AutomaticKeepAli
   }
 
   _buildChosenCourseWidget() {
-    if (scholar == null) return new Container();
+    if (searchResult == null) return new Container();
 
-    var courses = scholar.courseList;
+    var courses = searchResult.courseList;
 
     return (courses==null||courses.length==0)?new Container():new Column(
       children: <Widget>[
         SectionWidget(
-          title: "TA的短课",
+          title: "短课",
         ),
         new ListView.separated(
           shrinkWrap: true,
@@ -117,7 +118,7 @@ class _ScholarHomePageState extends State<ScholarHomePage> with AutomaticKeepAli
   
   @override
   Widget build(BuildContext context) {
-    scholar = control.data;
+    searchResult = control.data;
 
     return BaseScrollWidget(
           control:control,
@@ -127,10 +128,6 @@ class _ScholarHomePageState extends State<ScholarHomePage> with AutomaticKeepAli
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              (scholar==null||scholar.resume==null||scholar.resume.length==0)?new Container():new Padding(
-                  padding: EdgeInsets.only(left: 10.5,right: 10.5),
-                  child: Text(scholar.resume,style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large,letterSpacing: 0,height:1.2)),
-              ),
               _buildChosenBookWidget(),
               _buildChosenLessonWidget(),
               _buildChosenCourseWidget(),

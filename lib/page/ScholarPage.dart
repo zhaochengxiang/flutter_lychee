@@ -8,6 +8,9 @@ import './ScholarHomePage.dart';
 import './ScholarBookPage.dart';
 import './ScholarLessonPage.dart';
 import './ScholarCoursePage.dart';
+import './SearchPage.dart';
+import './SearchScholarPage.dart';
+import 'package:lychee/common/model/Search.dart';
 
 class ScholarPage extends StatefulWidget {
 
@@ -99,7 +102,11 @@ class _ScholarPageState extends State<ScholarPage> with AutomaticKeepAliveClient
                     child: new Container(),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      CommonUtils.openPage(context, SearchPage(type: Search.SEARCH_SCHOLAR,onPressed:(keyword) {
+                        CommonUtils.openPage(context, SearchScholarPage(id:widget.id,keyword: keyword));
+                      }));
+                    },
                     child: Container(
                       width: 44,
                       height: 44,
@@ -175,10 +182,10 @@ class _ScholarPageState extends State<ScholarPage> with AutomaticKeepAliveClient
               ),
               Expanded(
                   child: (scholar==null)?new Container():new TabBarView(controller: _tabController, children: <Widget>[
-                      ScholarHomePage(widget.id),
-                      ScholarBookPage(widget.id),
-                      ScholarLessonPage(widget.id),
-                      ScholarCoursePage(widget.id),
+                      ScholarHomePage(id: widget.id),
+                      ScholarBookPage(id: widget.id),
+                      ScholarLessonPage(id: widget.id),
+                      ScholarCoursePage(id: widget.id),
                     ]
                   )
               )

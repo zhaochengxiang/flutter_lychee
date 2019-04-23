@@ -8,10 +8,13 @@ import './CourseDetailPage.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/model/CourseResult.dart';
 import 'package:lychee/widget/ScholarCourseItem.dart';
+import './SearchScholarPage.dart';
 
 class ScholarCoursePage extends StatefulWidget {
+  final int type;
   final int id;
-  ScholarCoursePage(this.id);
+  final String keyword;
+  ScholarCoursePage({this.type=0,this.id,this.keyword=""});
 
   @override
   _ScholarCoursePageState createState() => _ScholarCoursePageState();
@@ -38,12 +41,12 @@ class _ScholarCoursePageState extends State<ScholarCoursePage> with AutomaticKee
 
   @override
   generateRemoteParams() {
-    return {"sid":widget.id,"keyword":"","last":0,"offset":0};
+    return {"sid":widget.id,"keyword":(widget.type==0)?widget.keyword:SearchScholarModel.of(context).currentKeyword,"last":0,"offset":0};
   }
 
   @override
   generateMoreRemoteParams() {
-    return {"sid":widget.id,"keyword":"","last":last,"offset":offset};
+    return {"sid":widget.id,"keyword":(widget.type==0)?widget.keyword:SearchScholarModel.of(context).currentKeyword,"last":last,"offset":offset};
   }
 
   @override

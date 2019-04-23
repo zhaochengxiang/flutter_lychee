@@ -11,6 +11,7 @@ class Search {
   static int SEARCH_LIBRARY = 4;
   static int SEARCH_UID = 5;
   static int SEARCH_PHONE = 6;
+  static int SEARCH_SCHOLAR = 7;
 
   int type;
   String keyword;

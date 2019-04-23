@@ -4,10 +4,13 @@ import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseBookListState.dart';
 import 'package:lychee/widget/base/BaseBookListWidget.dart';
+import './SearchScholarPage.dart';
 
 class ScholarBookPage extends StatefulWidget {
+  final int type;
   final int id;
-  ScholarBookPage(this.id);
+  final String keyword;
+  ScholarBookPage({this.type=0,this.id,this.keyword=""});
   
   @override
   _ScholarBookPageState createState() => _ScholarBookPageState();
@@ -37,12 +40,12 @@ class _ScholarBookPageState extends State<ScholarBookPage> with AutomaticKeepAli
 
    @override
   generateRemoteParams() {
-    return {"sid":widget.id,"keyword":"","last":0,"offset":0};
+    return {"sid":widget.id,"keyword":(widget.type==0)?widget.keyword:SearchScholarModel.of(context).currentKeyword,"last":0,"offset":0};
   }
 
   @override
   generateMoreRemoteParams() {
-    return {"sid":widget.id,"keyword":"","last":control.last,"offset":control.offset};
+    return {"sid":widget.id,"keyword":(widget.type==0)?widget.keyword:SearchScholarModel.of(context).currentKeyword,"last":control.last,"offset":control.offset};
   }
 
   @override
