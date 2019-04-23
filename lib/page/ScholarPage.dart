@@ -13,6 +13,7 @@ import './ScholarCoursePage.dart';
 import './SearchPage.dart';
 import './SearchScholarPage.dart';
 import 'package:lychee/common/model/Search.dart';
+import 'package:lychee/common/event/NeedRefreshEvent.dart';
 
 class ScholarPage extends StatefulWidget {
 
@@ -165,6 +166,7 @@ class _ScholarPageState extends State<ScholarPage> with AutomaticKeepAliveClient
                       scholar.followed = !scholar.followed;
                       Fluttertoast.showToast(msg: (scholar.followed)?"关注成功":"取消关注成功",gravity: ToastGravity.CENTER);
                     });
+                    NeedRefreshEvent.refreshHandleFunction("MineFollowPage");
                   }
                 }
               },

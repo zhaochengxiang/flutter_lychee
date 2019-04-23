@@ -10,6 +10,7 @@ import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/model/ScholarResult.dart';
 import 'package:lychee/common/model/Scholar.dart';
 import 'package:lychee/widget/ScholarItem.dart';
+import './ScholarPage.dart';
 
 class MineFollowPage extends StatefulWidget {
   MineFollowPage();
@@ -109,7 +110,7 @@ class _MineFollowPageState extends State<MineFollowPage> with AutomaticKeepAlive
   renderListItem(index) {
     Scholar scholar = control.data[index];
     return new ScholarItem(scholar,onPressed: (){
-
+      CommonUtils.openPage(context, ScholarPage(scholar.id));
     });
   }
 
