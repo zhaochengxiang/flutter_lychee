@@ -24,6 +24,7 @@ import './CourseDetailPage.dart';
 import './BookDetailPage.dart';
 import './SearchPage.dart';
 import './SearchDetailPage.dart';
+import './WebViewPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -76,8 +77,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
     List imageUrls = List();
     if (banners != null) {
       for (int i=0;i<banners.length;i++) {
-        YYBanner.Banner book = banners[i];
-        imageUrls.add(book.image);
+        YYBanner.Banner banner = banners[i];
+        imageUrls.add(banner.image);
       }
     }
 
@@ -86,7 +87,30 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
       imageUrls: imageUrls,
       dotActiveColor: Color(YYColors.primary),
       selectItemChanged:(selectIndex) {
-       
+          YYBanner.Banner banner = banners[selectIndex];
+          String link = banner.link??"";
+          if (link.startsWith('http://') || link.startsWith('https://')) {
+
+            CommonUtils.openPage(context, WebViewPage(url:link));
+
+          } else {
+            List<String> separates = link.split(":");
+            String head = separates[0];
+            String trail = separates[1];
+            if (head == "book") {
+              
+              CommonUtils.openPage(context, BookDetailPage({'lid':0,'uuid':trail}));
+
+            } else if (head == "lesson") {
+
+              List<String> subSeparates = trail.split(",");
+              String subHead = subSeparates[0];
+              CommonUtils.openPage(context, LessonDetailPage({'uuid':subHead}));
+
+            } else if (head == "course") {
+              CommonUtils.openPage(context, CourseDetailPage({'uuid':trail}));
+            }
+          }
       },
     );
   } 

@@ -75,7 +75,9 @@ class _HomeBookPageState extends State<HomeBookPage> with AutomaticKeepAliveClie
             CommonUtils.openPage(context, TopLatestBookPage());
           },
         ),
-        new BookGrid(latestBooks),
+        new BookGrid(latestBooks,onPressed: (book){
+           CommonUtils.openPage(context, BookDetailPage({"lid":0,"uuid":book.uuid}));
+        }),
       ],
     ); 
   }
@@ -93,7 +95,9 @@ class _HomeBookPageState extends State<HomeBookPage> with AutomaticKeepAliveClie
             CommonUtils.openPage(context, TopPopularBookPage());
           },
         ),
-        new BookGrid(popularBooks),
+        new BookGrid(popularBooks,onPressed: (book) {
+           CommonUtils.openPage(context, BookDetailPage({"lid":0,"uuid":book.uuid}));
+        }),
       ],
     );
   }
