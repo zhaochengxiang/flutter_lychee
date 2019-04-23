@@ -67,7 +67,6 @@ class _MineLessonPageState extends State<MineLessonPage> with AutomaticKeepAlive
     control.last = lessonResult.last;
     control.offset = lessonResult.offset;
     control.hasNext = lessonResult.hasNext;
-    control.total =lessonResult.total;
 
     if (lessonResult.list!=null&&lessonResult.list.length>0) {
       control.data.addAll(lessonResult.list);

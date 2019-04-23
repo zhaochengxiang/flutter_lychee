@@ -53,7 +53,9 @@ class _CategoryRightItemState extends State<CategoryRightItem> {
         Container(
           height: sectionHeight,
           child: InkWell(
-            child: Text(widget.category.name,style: TextStyle(color: widget.isSectionHighlight?Color(YYColors.primary):Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis),
+            child: Center( 
+              child:Text(widget.category.name,style: TextStyle(color: widget.isSectionHighlight?Color(YYColors.primary):Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
+            ),
             onTap: () {widget.onSectionPress?.call();},
           )
         ),

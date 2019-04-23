@@ -113,7 +113,6 @@ mixin BaseBookListState<T extends StatefulWidget> on BaseListState<T>,AutomaticK
   handleMoreData(data) {
     if (data is Map) {
       BookResult bookResult = jsonConvertToModel(data);
-      control.total = bookResult.total;
       control.last = bookResult.last;
       control.offset = bookResult.offset;
       control.hasNext = bookResult.hasNext;

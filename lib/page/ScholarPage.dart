@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/widget/base/BaseState.dart';
@@ -148,6 +150,32 @@ class _ScholarPageState extends State<ScholarPage> with AutomaticKeepAliveClient
                 Padding(padding: EdgeInsets.all(2.5)),
                 Text(scholar.honor,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium), overflow: TextOverflow.ellipsis)
               ],
+            ),
+          ),
+          Positioned(
+            bottom: 10.5,
+            right: 10.5,
+            child: InkWell(
+              onTap: () async{
+                var res = await handleNotAssociatedWithRefreshRequest(context, (scholar.followed==true)?"/scholar/unfollow":"/scholar/follow", {"id":scholar.id});
+
+                if (res!=null && res.result) {
+                  if (isShow) {
+                    setState(() {
+                      scholar.followed = !scholar.followed;
+                      Fluttertoast.showToast(msg: (scholar.followed)?"关注成功":"取消关注成功",gravity: ToastGravity.CENTER);
+                    });
+                  }
+                }
+              },
+              child: Container(
+                padding: EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  color:Color(YYColors.primary),
+                ),
+                child: Text((scholar.followed==true)?"取消关注":"关注",style: TextStyle(color: Colors.white,fontSize: YYSize.medium)),
+              ),
             ),
           )
         ],

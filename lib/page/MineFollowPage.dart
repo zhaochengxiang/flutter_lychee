@@ -97,7 +97,6 @@ class _MineFollowPageState extends State<MineFollowPage> with AutomaticKeepAlive
     control.last = scholarResult.last;
     control.offset = scholarResult.offset;
     control.hasNext = scholarResult.hasNext;
-    control.total = scholarResult.total;
     if (scholarResult.list!=null&&scholarResult.list.length>0) {
       control.data.addAll(scholarResult.list);
     }
