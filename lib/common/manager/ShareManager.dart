@@ -45,7 +45,7 @@ class ShareManager {
       }
     });
 
-    return FlatButton(
+    return InkWell(
       child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -53,7 +53,7 @@ class ShareManager {
           Text(name,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium), overflow: TextOverflow.ellipsis,),
         ],
       ),
-      onPressed: () {
+      onTap: () {
         Navigator.pop(sheetContext);
         ShareSDK.share(ShareSDKPlatform(name: name, id: id), params, (SSDKResponseState state, Map userData, Map contentEntity, SSDKError error){
             showToast(state); 

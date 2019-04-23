@@ -35,9 +35,8 @@ class SectionWidget extends StatelessWidget {
       height: height,
       child: new Padding(
         padding: new EdgeInsets.only(left:10.5,right:10.5),
-        child: (onPressed==null)?_buildContent():FlatButton(
-          padding: EdgeInsets.all(0),
-          onPressed: () {onPressed?.call();},
+        child: (onPressed==null)?_buildContent():InkWell(
+          onTap: () {onPressed?.call();},
           child: _buildContent()
         )
       ),

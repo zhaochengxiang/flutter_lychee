@@ -11,9 +11,8 @@ class LessonItem extends StatelessWidget {
 
   @override
     Widget build(BuildContext context) {
-      return new FlatButton(
-        padding: EdgeInsets.all(0),
-        onPressed: (){onPressed?.call();},
+      return new InkWell(
+        onTap: (){onPressed?.call();},
         child: Container(
           height: 62.0,
           child: Row(

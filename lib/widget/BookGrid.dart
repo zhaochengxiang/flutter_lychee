@@ -19,8 +19,7 @@ class BookGrid extends StatelessWidget {
     List<Widget> lists = new List();
     for (int i=0;i<books.length;i++) {
       Book book = books[i];
-      Widget tile = new FlatButton( 
-        padding: EdgeInsets.all(0),
+      Widget tile = new InkWell( 
         child: Container( 
           child: new IconText(
               direction: IconTextDirection.column,
@@ -35,7 +34,7 @@ class BookGrid extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
             )
         ),
-        onPressed: () {onPressed?.call(book);},
+        onTap: () {onPressed?.call(book);},
       );
 
       lists.add(tile);

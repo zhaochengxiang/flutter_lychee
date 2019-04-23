@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:lychee/widget/base/BaseState.dart';
-import 'package:lychee/widget/base/BaseScrollSate.dart';
+import 'package:lychee/widget/base/BaseScrollState.dart';
 import 'package:lychee/widget/base/BaseScrollWidget.dart';
 import 'package:lychee/common/model/Course.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
@@ -16,6 +16,7 @@ import 'package:lychee/common/model/Scholar.dart';
 import 'package:lychee/page/LessonDetailPage.dart';
 import 'package:lychee/common/manager/ShareManager.dart';
 import 'package:lychee/common/event/NeedRefreshEvent.dart';
+import './ScholarPage.dart';
 
 class CourseDetailPage extends StatefulWidget {
   final Map params;
@@ -49,7 +50,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> with AutomaticKeepA
   _share() {
     List<Widget> customMenuItems = List();
     if (course != null) {
-      customMenuItems.add(FlatButton(
+      customMenuItems.add(InkWell(
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -57,7 +58,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> with AutomaticKeepA
             Text((course.favorite==true)?'取消收藏':'收藏',style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium), overflow: TextOverflow.ellipsis,),
           ],
         ),
-        onPressed: () async {
+        onTap: () async {
           var res = await handleNotAssociatedWithRefreshRequest(context, (course.favorite==true)?"/favorite/delete":"/favorite/save", {"id":course.id,"type":2});
 
           Navigator.pop(context);
@@ -84,9 +85,8 @@ class _CourseDetailPageState extends State<CourseDetailPage> with AutomaticKeepA
       appBar: new AppBar(
         title:Text("短课详情"),
         centerTitle: true, 
-        leading: FlatButton(
-          padding: EdgeInsets.all(0), 
-          child: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+        leading: IconButton(
+          icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
           onPressed: (){
             CommonUtils.closePage(context);
           },
@@ -113,6 +113,8 @@ class _CourseDetailPageState extends State<CourseDetailPage> with AutomaticKeepA
             ),
             ScholarItem(Scholar(avatar:course.avatar,name:course.author,honor:course.honor),onPressed:(){
 
+              CommonUtils.openPage(context, ScholarPage(course.sid));
+            
             }),
             SeparatorWidget(),
             (course.introduction==null||course.introduction.length==0)?new Container():Padding(

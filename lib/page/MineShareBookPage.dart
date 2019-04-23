@@ -37,13 +37,12 @@ class _MineShareBookPageState extends State<MineShareBookPage> with AutomaticKee
       for (int i = 0; i < res.data.length; i++) {
         Library library = Library.fromJson(res.data[i]);
         childWidgets.add(
-          FlatButton(
-            padding: EdgeInsets.zero,
+          InkWell(
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(library.name,style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large),overflow: TextOverflow.ellipsis)
             ),
-            onPressed: (){
+            onTap: (){
               Navigator.of(context).pop();
               CommonUtils.openPage(context, MineUnShareBookPage(library.id));
             }
@@ -98,8 +97,7 @@ class _MineShareBookPageState extends State<MineShareBookPage> with AutomaticKee
               color: Color(YYColors.gray),
               child: Align(
                 alignment: Alignment.centerRight,
-                child: FlatButton(
-                    padding: EdgeInsets.zero,
+                child: InkWell(
                     child: Container(
                       width: 104,
                       height: 47.0,
@@ -108,7 +106,7 @@ class _MineShareBookPageState extends State<MineShareBookPage> with AutomaticKee
                         child: Text("共享图书",style:TextStyle(color: Colors.white,fontSize: YYSize.tip),overflow: TextOverflow.ellipsis)
                       )
                     ),
-                    onPressed: () {
+                    onTap: () {
                       _share();
                     }
                 ),

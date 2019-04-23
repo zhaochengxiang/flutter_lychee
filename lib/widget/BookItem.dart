@@ -8,7 +8,7 @@ class BookItem extends StatelessWidget {
   final Book book;
   final double height;
   final VoidCallback onPressed;
-  BookItem({@required this.book,this.height=146.0,this.onPressed});
+  BookItem({@required this.book,this.height=114.0,this.onPressed});
 
   Widget _buildContent() {
     return Container(
@@ -19,14 +19,13 @@ class BookItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            FlatButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {
+            InkWell(
+              onTap: () {
               
               },
               child: Container(
-                width: 90,
-                height: 125,
+                width: 75,
+                height: 104,
                 child: (book.cover==null||book.cover.length==0)?Image.asset(CommonUtils.Local_Icon_prefix+'book_placeholder.png',fit:BoxFit.fill):FadeInImage.assetNetwork(
                   placeholder: CommonUtils.Local_Icon_prefix+'book_placeholder.png',
                   fit: BoxFit.fill,
@@ -66,9 +65,8 @@ class BookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (onPressed==null)?_buildContent():new FlatButton(
-      padding: EdgeInsets.zero,
-      onPressed: (){onPressed?.call();},
+    return (onPressed==null)?_buildContent():new InkWell(
+      onTap: (){onPressed?.call();},
       child: _buildContent(),
     );
   }

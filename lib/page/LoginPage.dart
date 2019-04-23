@@ -85,9 +85,8 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
       child: Scaffold(
         appBar: new AppBar(
           title:Text("用手机登录"),
-          leading: FlatButton(
-            padding: EdgeInsets.all(0), 
-            child: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+          leading: IconButton(
+            icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
             onPressed: (){
               CommonUtils.closePage(context);
             },
@@ -147,9 +146,8 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
                     child:Center(
                       child: Text('$countDownNum秒后重发',style: TextStyle(color: Colors.white,fontSize: YYSize.tip),overflow: TextOverflow.ellipsis)
                     )
-                  ):FlatButton(
-                    padding:EdgeInsets.all(0),
-                    onPressed: (){capthaPressd?.call();},
+                  ):InkWell(
+                    onTap: (){capthaPressd?.call();},
                     child: Container(
                       width: 104,
                       height: 41.5,
@@ -165,9 +163,8 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
                 ],
               ),
               Padding(padding: EdgeInsets.all(20)),
-              FlatButton(
-                padding:EdgeInsets.all(0),
-                onPressed: (){loginPressed?.call();},
+              InkWell(
+                onTap: (){loginPressed?.call();},
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 47,

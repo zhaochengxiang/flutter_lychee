@@ -11,9 +11,8 @@ class MineFramePage extends StatelessWidget {
       appBar: new AppBar(
         title:Text("我的书架"),
         centerTitle: true, 
-        leading: FlatButton(
-          padding: EdgeInsets.all(0), 
-          child: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+        leading: IconButton(
+          icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
           onPressed: (){
             CommonUtils.closePage(context);
           },
@@ -27,8 +26,7 @@ class MineFramePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              FlatButton(
-                padding: EdgeInsets.zero,
+              InkWell(
                 child: Container(
                   width: 104,
                   color: Color(YYColors.primary),
@@ -36,7 +34,7 @@ class MineFramePage extends StatelessWidget {
                     child: Text("添加书架",style:TextStyle(color: Colors.white,fontSize: YYSize.tip),overflow: TextOverflow.ellipsis)
                   ),
                 ),
-                onPressed: () {
+                onTap: () {
               
                 }
               )

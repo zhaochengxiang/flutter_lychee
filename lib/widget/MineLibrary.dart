@@ -47,15 +47,14 @@ class _MineLibraryState extends State<MineLibrary>  with AutomaticKeepAliveClien
   _renderListItem(index) {
     Library library = control.data[index];
 
-    return FlatButton( 
-      padding: EdgeInsets.all(0),
+    return InkWell( 
       child:Container(
         height: 47.0, 
         child: ListTile(
           title: Text(library.name,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
         )
       ),
-      onPressed: () {
+      onTap: () {
         widget.onPressed?.call(library);
       },
     );

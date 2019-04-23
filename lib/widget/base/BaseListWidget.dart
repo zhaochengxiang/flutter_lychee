@@ -65,6 +65,7 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
     return new ListView.builder(
       shrinkWrap: true,
       physics: new NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.zero,
       itemBuilder: (context, index) {
         if (widget.control.needSlide && widget.control.canNotSlideRows.contains(index) == false) {
           return Slidable(
@@ -97,38 +98,36 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
     Widget decoration = buildDecoration(widget.control,widget.onRefresh,widget.emptyTip);
     if (decoration != null) return decoration; 
 
-    return new SafeArea( 
-      child: new EasyRefresh(
-        key: widget.refreshKey,
-        refreshHeader: ClassicsHeader(
-          key: _refreshHeaderKey,
-          refreshText: "下拉刷新",
-          refreshReadyText: "释放刷新",
-          refreshingText: "正在刷新...",
-          refreshedText: "刷新结束",
-          moreInfo: "更新于 %T",
-          showMore: true,
-          bgColor: Colors.white,
-          textColor: Color(YYColors.primaryText),
-          moreInfoColor: Color(YYColors.secondaryText),
-        ),
-        refreshFooter: ClassicsFooter(
-          key: _refreshFooterKey,
-          loadText: "上拉加载",
-          loadReadyText: "释放加载",
-          loadingText: "正在加载",
-          loadedText: "加载结束",
-          noMoreText: "没有更多数据",
-          moreInfo: "更新于 %T",
-          bgColor: Colors.white,
-          textColor: Color(YYColors.primaryText),
-          moreInfoColor: Color(YYColors.secondaryText),
-          showMore: true,
-        ),
-        onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
-        loadMore:(widget.control.needRefreshFooter)?widget.onLoadMore:null,
-        child: buildListView(),
-      )
+    return new EasyRefresh(
+      key: widget.refreshKey,
+      refreshHeader: ClassicsHeader(
+        key: _refreshHeaderKey,
+        refreshText: "下拉刷新",
+        refreshReadyText: "释放刷新",
+        refreshingText: "正在刷新...",
+        refreshedText: "刷新结束",
+        moreInfo: "更新于 %T",
+        showMore: true,
+        bgColor: Colors.white,
+        textColor: Color(YYColors.primaryText),
+        moreInfoColor: Color(YYColors.secondaryText),
+      ),
+      refreshFooter: ClassicsFooter(
+        key: _refreshFooterKey,
+        loadText: "上拉加载",
+        loadReadyText: "释放加载",
+        loadingText: "正在加载",
+        loadedText: "加载结束",
+        noMoreText: "没有更多数据",
+        moreInfo: "更新于 %T",
+        bgColor: Colors.white,
+        textColor: Color(YYColors.primaryText),
+        moreInfoColor: Color(YYColors.secondaryText),
+        showMore: true,
+      ),
+      onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
+      loadMore:(widget.control.needRefreshFooter)?widget.onLoadMore:null,
+      child: buildListView(),
     );
   }
 }

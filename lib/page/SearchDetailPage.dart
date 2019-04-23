@@ -56,9 +56,8 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
   _buildTopOptionWidget(title,onPressed) {
     return new Row( 
       children: <Widget>[
-        FlatButton(
-          padding: EdgeInsets.zero,
-          onPressed: (){onPressed?.call();},
+        InkWell(
+          onTap: (){onPressed?.call();},
           child: SizedBox(
             width: 83.5,
             child: Row(
@@ -141,16 +140,14 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
         builder: (context, child, model) { 
           return new Scaffold(
             appBar: new AppBar(
-              leading: FlatButton(
-                padding: EdgeInsets.all(0), 
-                child: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+              leading: IconButton(
+                icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
                 onPressed: (){
                   CommonUtils.closePage(context);
                 },
               ),
-              title: FlatButton(
-                padding: EdgeInsets.zero,
-                onPressed: (){CommonUtils.openPage(context, SearchPage(onPressed: _searchPageOnPressed));},
+              title: InkWell(
+                onTap: (){CommonUtils.openPage(context, SearchPage(onPressed: _searchPageOnPressed));},
                 child: Container(
                   height: 31,
                   color:Color(YYColors.gray_light),

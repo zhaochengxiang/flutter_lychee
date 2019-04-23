@@ -71,9 +71,9 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
               ),
             ),
             actions: <Widget>[
-              FlatButton(
+              InkWell(
                 child: Text('确定',style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium),overflow: TextOverflow.ellipsis),
-                onPressed: () {
+                onTap: () {
                   Navigator.of(context).pop();
                 },
               ),
@@ -126,8 +126,7 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
               color: Color(YYColors.gray),
               child: Align(
                 alignment: Alignment.centerRight,
-                child: FlatButton(
-                    padding: EdgeInsets.zero,
+                child: InkWell(
                     child: Container(
                       width: 104,
                       height: 47.0,
@@ -136,7 +135,7 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
                         child: Text("扫描添加",style:TextStyle(color: Colors.white,fontSize: YYSize.tip),overflow: TextOverflow.ellipsis)
                       )
                     ),
-                    onPressed: () {
+                    onTap: () {
                       
                     }
                 ),

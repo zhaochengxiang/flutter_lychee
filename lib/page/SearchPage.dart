@@ -90,9 +90,8 @@ class _SearchPagetState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        leading: FlatButton(
-          padding: EdgeInsets.all(0), 
-          child: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+        leading: IconButton(
+          icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
           onPressed: (){
             CommonUtils.closePage(context);
           },
@@ -164,9 +163,8 @@ class _SearchPagetState extends State<SearchPage> {
                )
               ),
             ),
-            FlatButton(
-              padding: EdgeInsets.zero,
-              onPressed: (){_clearHistory();},
+            InkWell(
+              onTap: (){_clearHistory();},
               child: Container(
                 height: 47,
                 color: Color(YYColors.gray_light),

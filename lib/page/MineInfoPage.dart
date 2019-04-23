@@ -10,7 +10,6 @@ import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/model/User.dart';
-import 'package:lychee/widget/SeparatorWidget.dart';
 import 'package:lychee/common/manager/HttpManager.dart';
 import 'package:lychee/common/event/NeedRefreshEvent.dart';
 
@@ -174,8 +173,7 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
 
         return Container(
           height: 47,
-          child: FlatButton(
-            padding:EdgeInsets.zero,
+          child: InkWell(
             child: ListTile(
               title: Text(item['title'],style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis),
               trailing: ClipOval(
@@ -188,7 +186,7 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
                 ),
               ),
             ),
-            onPressed: () {
+            onTap: () {
 
               showCupertinoModalPopup<int>(context: context, builder:(cxt){
                 return CupertinoActionSheet(
@@ -217,13 +215,12 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
       } else if (index == 1 || index == 2) {
         return Container(
           height: 47,
-          child: FlatButton(
-            padding:EdgeInsets.zero,
+          child: InkWell(
             child: ListTile(
               title: Text(item['title'],style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis),
               trailing: Text(item['desc'],style: TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.tip), overflow: TextOverflow.ellipsis),
             ),
-            onPressed: () {
+            onTap: () {
               
             },
           ),
@@ -233,12 +230,11 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
 
         return Container(
           height: 47,
-          child: FlatButton(
-            padding:EdgeInsets.zero,
+          child: InkWell(
             child: Center(
               child: Text(item['title'],style: TextStyle(color: Color(YYColors.red),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
             ),
-            onPressed: () {
+            onTap: () {
               
             },
           ),

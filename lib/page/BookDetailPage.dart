@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:lychee/widget/base/BaseState.dart';
-import 'package:lychee/widget/base/BaseScrollSate.dart';
+import 'package:lychee/widget/base/BaseScrollState.dart';
 import 'package:lychee/widget/base/BaseScrollWidget.dart';
 import 'package:lychee/widget/BookItem.dart';
 import 'package:lychee/common/model/RichBook.dart';
@@ -46,7 +46,7 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
   _share() {
     List<Widget> customMenuItems = List();
     if (richBook != null) {
-      customMenuItems.add(FlatButton(
+      customMenuItems.add(InkWell(
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -54,7 +54,7 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
             Text((richBook.wantRead==true)?'取消想读':'想读此书',style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.medium), overflow: TextOverflow.ellipsis,),
           ],
         ),
-        onPressed: () async {
+        onTap: () async {
           var res = await handleNotAssociatedWithRefreshRequest(context, (richBook.wantRead==true)?"/label/deleteWant":"/label/saveWant", {"bid":richBook.book.id});
 
           Navigator.pop(context);
@@ -81,9 +81,8 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
       appBar: new AppBar(
         title:Text("图书详情"),
         centerTitle: true, 
-        leading: FlatButton(
-          padding: EdgeInsets.all(0), 
-          child: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+        leading: IconButton(
+          icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
           onPressed: (){
             CommonUtils.closePage(context);
           },

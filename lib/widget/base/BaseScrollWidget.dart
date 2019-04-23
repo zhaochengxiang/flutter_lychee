@@ -29,27 +29,25 @@ class _BaseScrollWidgetState extends State<BaseScrollWidget> with BaseDecoration
      Widget decoration = buildDecoration(widget.control,widget.onRefresh,widget.emptyTip);
     if (decoration != null) return decoration; 
 
-    return new SafeArea( 
-      child: new EasyRefresh(
-        key: widget.refreshKey,
-        refreshHeader: ClassicsHeader(
-          key: _refreshHeaderKey,
-          refreshText: "下拉刷新",
-          refreshReadyText: "释放刷新",
-          refreshingText: "正在刷新...",
-          refreshedText: "刷新结束",
-          moreInfo: "更新于 %T",
-          showMore: true,
-          bgColor: Colors.white,
-          textColor: Color(YYColors.primaryText),
-          moreInfoColor: Color(YYColors.secondaryText),
-        ),
-        onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
-        loadMore:null,
-        child: SingleChildScrollView(
-          child: widget.child,
-        ),
-      )
+    return new EasyRefresh(
+      key: widget.refreshKey,
+      refreshHeader: ClassicsHeader(
+        key: _refreshHeaderKey,
+        refreshText: "下拉刷新",
+        refreshReadyText: "释放刷新",
+        refreshingText: "正在刷新...",
+        refreshedText: "刷新结束",
+        moreInfo: "更新于 %T",
+        showMore: true,
+        bgColor: Colors.white,
+        textColor: Color(YYColors.primaryText),
+        moreInfoColor: Color(YYColors.secondaryText),
+      ),
+      onRefresh:(widget.control.needRefreshHeader)?widget.onRefresh:null,
+      loadMore:null,
+      child: SingleChildScrollView(
+        child: widget.child,
+      ),
     );
   }
 }

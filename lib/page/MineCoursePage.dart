@@ -5,13 +5,10 @@ import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseBookListState.dart';
 import 'package:lychee/widget/base/BaseBookListWidget.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
-import './SearchPage.dart';
 import 'package:lychee/common/model/CourseResult.dart';
 import 'package:lychee/common/model/Course.dart';
 import 'package:lychee/widget/CourseItem.dart';
 import './CourseDetailPage.dart';
-import 'package:lychee/common/model/Search.dart';
-import './SearchCoursePage.dart';
 
 class MineCoursePage extends StatefulWidget {
   MineCoursePage();

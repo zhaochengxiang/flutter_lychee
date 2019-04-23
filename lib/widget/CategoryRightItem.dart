@@ -30,15 +30,14 @@ class _CategoryRightItemState extends State<CategoryRightItem> {
     List<Widget> lists = new List();
     for (int i=0;i<widget.category.children.length;i++) {
       Category category =widget.category.children[i];
-      Widget tile = new FlatButton( 
-        padding: EdgeInsets.all(0),
+      Widget tile = new InkWell( 
         child: Container( 
           color: (widget.itemHighlightIndex==i)?Colors.white:Color(YYColors.gray),
           child: Center(
             child: Text(category.name,style: TextStyle(color: (widget.itemHighlightIndex==i)?Color(YYColors.primary):Color(YYColors.secondaryText),fontSize: YYSize.tip), overflow: TextOverflow.ellipsis)
           )
         ),
-        onPressed: () {widget.onItemPress?.call(i);},
+        onTap: () {widget.onItemPress?.call(i);},
       );
       lists.add(tile);
     }
@@ -53,10 +52,9 @@ class _CategoryRightItemState extends State<CategoryRightItem> {
       children: <Widget>[
         Container(
           height: sectionHeight,
-          child: FlatButton(
-            padding:EdgeInsets.all(0),
+          child: InkWell(
             child: Text(widget.category.name,style: TextStyle(color: widget.isSectionHighlight?Color(YYColors.primary):Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis),
-            onPressed: () {widget.onSectionPress?.call();},
+            onTap: () {widget.onSectionPress?.call();},
           )
         ),
         GridView.count(

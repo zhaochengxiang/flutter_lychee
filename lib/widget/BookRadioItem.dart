@@ -19,9 +19,8 @@ class BookRadioItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new FlatButton(
-      padding: EdgeInsets.zero,
-      onPressed: (){onPressed?.call();},
+    return new InkWell(
+      onTap: (){onPressed?.call();},
       child: Container(
         height: height,
         child: Padding(

@@ -29,7 +29,7 @@ class _LycheeAppState extends State<LycheeApp> {
 
     PushManager.init();
     ServiceLoader.load();
-    
+    CommonUtils.initStatusBarHeight();
     stream =  CommonUtils.eventBus.on<HttpErrorEvent>().listen((event) {
       errorHandleFunction(event.message);
     });

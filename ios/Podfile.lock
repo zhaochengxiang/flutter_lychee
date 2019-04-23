@@ -3,6 +3,8 @@ PODS:
     - Flutter
     - Reachability
   - Flutter (1.0.0)
+  - flutter_statusbar (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
   - FMDB (2.7.5):
@@ -67,6 +69,7 @@ PODS:
 DEPENDENCIES:
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_statusbar (from `.symlinks/plugins/flutter_statusbar/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - jpush_flutter (from `.symlinks/plugins/jpush_flutter/ios`)
@@ -92,6 +95,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/connectivity/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
+  flutter_statusbar:
+    :path: ".symlinks/plugins/flutter_statusbar/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   image_picker:
@@ -116,6 +121,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   connectivity: d5992e3758d68b1c4b12d6e012fe0813f1aa1645
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_statusbar: a563eb9416256f17660646aceb2314b113127da9
   fluttertoast: 0a20dcbbb8ecfd1a61b6285651ff2d5989d033fb
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: 86b84c4fe89267356a1f17297a45b5d317ebd2e7

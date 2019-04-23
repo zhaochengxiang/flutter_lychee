@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:event_bus/event_bus.dart';
+import 'package:flutter_statusbar/flutter_statusbar.dart';
 
 class CommonUtils {
   static const DEBUG = true;
@@ -53,5 +53,11 @@ class CommonUtils {
     }
 
     return false;
+  }
+
+  static double sStaticBarHeight = 0.0;
+
+  static void initStatusBarHeight() async {
+    sStaticBarHeight = await FlutterStatusbar.height;
   }
 }

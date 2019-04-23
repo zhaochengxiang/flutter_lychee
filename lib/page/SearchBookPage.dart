@@ -50,9 +50,8 @@ class _SearchBookPageState extends State<SearchBookPage> with AutomaticKeepAlive
           onPressed: () {
             CommonUtils.closePage(context);
           }),
-        title:FlatButton(
-          padding: EdgeInsets.zero,
-          onPressed: (){CommonUtils.openPage(context, SearchPage(type:Search.SEARCH_BOOK,onPressed: _searchPageOnPressed));},
+        title:InkWell(
+          onTap: (){CommonUtils.openPage(context, SearchPage(type:Search.SEARCH_BOOK,onPressed: _searchPageOnPressed));},
           child: Container(
             height: 31,
             color:Color(YYColors.gray_light),

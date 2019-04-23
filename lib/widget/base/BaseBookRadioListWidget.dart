@@ -50,8 +50,7 @@ class _BaseBookRadioListWidgetState extends State<BaseBookRadioListWidget> {
                 Expanded(
                   child: Text("共选择"+widget.control.indexPaths.length.toString()+"本",style:TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.tip),overflow: TextOverflow.ellipsis)
                 ),
-                FlatButton(
-                  padding: EdgeInsets.zero,
+                InkWell(
                   child: Container(
                     width: 104,
                     color: (widget.control.indexPaths.length==0)?Color(YYColors.disable):Color(YYColors.primary),
@@ -59,7 +58,7 @@ class _BaseBookRadioListWidgetState extends State<BaseBookRadioListWidget> {
                       child: Text(widget.control.buttonName,style:TextStyle(color: Colors.white,fontSize: YYSize.tip),overflow: TextOverflow.ellipsis)
                     ),
                   ),
-                  onPressed: () {
+                  onTap: () {
                     if (widget.control.indexPaths.length>0) {
                       widget.control.buttonOnPressed?.call();
                     }

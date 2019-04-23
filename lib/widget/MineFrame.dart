@@ -102,15 +102,14 @@ class _MineFrameState extends State<MineFrame>  with AutomaticKeepAliveClientMix
       frame =control.data[index-1];
     }
 
-    return FlatButton( 
-      padding: EdgeInsets.all(0),
+    return InkWell( 
       child:Container(
         height: 47.0, 
         child: ListTile(
           title: Text(frame.name,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
         )
       ),
-      onPressed: () {
+      onTap: () {
         widget.onPressed?.call(frame);
       },
     );

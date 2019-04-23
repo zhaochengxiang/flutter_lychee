@@ -121,9 +121,8 @@ class _BaseBookListWidgetState extends State<BaseBookListWidget> {
   _buildTopOptionWidget(title,onPressed) {
     return new Row( 
       children: <Widget>[
-        FlatButton(
-          padding: EdgeInsets.zero,
-          onPressed: (){onPressed?.call();},
+        InkWell(
+          onTap: (){onPressed?.call();},
           child: SizedBox(
             width: 83.5,
             child: Row(

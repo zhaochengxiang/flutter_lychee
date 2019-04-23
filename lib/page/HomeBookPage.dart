@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:lychee/widget/base/BaseScrollSate.dart';
+import 'package:lychee/widget/base/BaseScrollState.dart';
 import 'package:lychee/widget/base/BaseScrollWidget.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/common/model/BookHome.dart';
@@ -104,9 +104,8 @@ class _HomeBookPageState extends State<HomeBookPage> with AutomaticKeepAliveClie
       appBar: new AppBar(
         title:Text("图书"),
         centerTitle: true,
-        leading: FlatButton(
-          padding: EdgeInsets.all(0), 
-          child: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+        leading: IconButton(
+          icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
           onPressed: (){
             CommonUtils.closePage(context);
           },

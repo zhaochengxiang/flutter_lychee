@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:lychee/widget/base/BaseScrollSate.dart';
+import 'package:lychee/widget/base/BaseScrollState.dart';
 import 'package:lychee/widget/base/BaseScrollWidget.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/common/model/Index.dart';
@@ -53,8 +53,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
   }
 
   _optionIconText(String assetName,String text, VoidCallback callback) {
-    return new FlatButton(
-      padding: EdgeInsets.all(0),
+    return new InkWell(
       child: new IconText(
         direction:IconTextDirection.column,
         iconAssetName: assetName,
@@ -65,7 +64,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
         padding: 2.5,
         mainAxisAlignment: MainAxisAlignment.center,
       ),
-      onPressed: () {callback?.call();},
+      onTap: () {callback?.call();},
     );
   }
 

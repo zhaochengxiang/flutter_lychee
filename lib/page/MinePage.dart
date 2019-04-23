@@ -68,9 +68,8 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
   Widget _buildTop() {
     User user = control.data;
 
-    return FlatButton(
-      padding: EdgeInsets.all(0), 
-      onPressed: topPressed,
+    return InkWell(
+      onTap: topPressed,
       child: Container(
         height: topHeight,
         child:Stack(
@@ -121,8 +120,7 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
     List<Widget> lists = new List();
     for (int i=0;i<services.length;i++) {
       Map service = services[i];
-      Widget tile = new FlatButton( 
-        padding: EdgeInsets.all(0),
+      Widget tile = new InkWell( 
         child: Center(
           child:Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +131,7 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
             ],
           )
         ),
-        onPressed: (){
+        onTap: (){
           if (i==0) {
             CommonUtils.openPage(context, MineBookPage());
           } else if (i==1) {

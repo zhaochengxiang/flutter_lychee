@@ -39,8 +39,7 @@ class _MineBookPageState extends State<MineBookPage>  with AutomaticKeepAliveCli
   _renderListItem(index) {
     var data = control.data[index];
 
-    return FlatButton( 
-      padding: EdgeInsets.all(0),
+    return InkWell( 
       child:Container(
         height: 58.5, 
         child:new Column(
@@ -60,7 +59,7 @@ class _MineBookPageState extends State<MineBookPage>  with AutomaticKeepAliveCli
           ],
         )
       ),
-      onPressed: () {
+      onTap: () {
         if (index == 0) {
           CommonUtils.openPage(context, MineCollectionBookPage());
         } else if (index == 1) {

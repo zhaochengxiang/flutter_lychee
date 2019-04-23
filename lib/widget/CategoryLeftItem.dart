@@ -17,9 +17,8 @@ class _CategoryLeftItemState extends State<CategoryLeftItem> {
   @override
   Widget build(BuildContext context) {
 
-    return  FlatButton(
-      padding: EdgeInsets.all(0),
-      onPressed:() {widget.onPress?.call();},
+    return  InkWell(
+      onTap:() {widget.onPress?.call();},
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 44,

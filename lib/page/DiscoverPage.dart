@@ -37,8 +37,7 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
   _renderListItem(index) {
     var data = control.data[index];
 
-    return FlatButton( 
-      padding: EdgeInsets.all(0),
+    return InkWell( 
       child:Container(
         height: 58.5, 
         child:new Column(
@@ -55,7 +54,7 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
           ],
         )
       ),
-      onPressed: () {
+      onTap: () {
         if (index == 0) {
           CommonUtils.openPage(context, TopCollectionBookPage());
         } else if (index == 1) {

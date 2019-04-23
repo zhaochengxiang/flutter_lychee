@@ -93,9 +93,8 @@ class _SearchLessonPageState extends State<SearchLessonPage> with AutomaticKeepA
           onPressed: () {
             CommonUtils.closePage(context);
           }),
-        title:FlatButton(
-          padding: EdgeInsets.zero,
-          onPressed: (){CommonUtils.openPage(context, SearchPage(type: Search.SEARCH_LESSON, onPressed: _searchPageOnPressed));},
+        title:InkWell(
+          onTap: (){CommonUtils.openPage(context, SearchPage(type: Search.SEARCH_LESSON, onPressed: _searchPageOnPressed));},
           child: Container(
             height: 31,
             color:Color(YYColors.gray_light),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:lychee/widget/base/BaseState.dart';
-import 'package:lychee/widget/base/BaseScrollSate.dart';
+import 'package:lychee/widget/base/BaseScrollState.dart';
 import 'package:lychee/widget/base/BaseScrollWidget.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/widget/SectionWdiget.dart';
@@ -100,9 +100,8 @@ class _LessonPageState extends State<LessonPage> with AutomaticKeepAliveClientMi
       appBar: new AppBar(
         title:Text("小讲"),
         centerTitle: true, 
-        leading: FlatButton(
-          padding: EdgeInsets.all(0), 
-          child: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+        leading: IconButton(
+          icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
           onPressed: (){
             CommonUtils.closePage(context);
           },
