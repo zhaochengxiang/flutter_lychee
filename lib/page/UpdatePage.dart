@@ -10,21 +10,23 @@ import 'package:lychee/common/event/NeedRefreshEvent.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
 
 class UpdatePage extends StatefulWidget {
-  static int UPDATE_USERNAME = 0;
-
+ 
   final int type;
-  final String username;
-  UpdatePage({this.type,this.username});
+  final int id;
+  final String text;
+  UpdatePage({this.type,this.id,this.text});
 
   @override
-  _UpdatePageState createState() => _UpdatePageState(username);
+  _UpdatePageState createState() => _UpdatePageState(this.id,this.text);
 }
 
 class _UpdatePageState extends State<UpdatePage> with AutomaticKeepAliveClientMixin<UpdatePage>,BaseState<UpdatePage> {
 
-  String username;
+  int id;
+  String text;
   final TextEditingController editController = new TextEditingController();
-  _UpdatePageState(this.username);
+ 
+  _UpdatePageState(this.id,this.text);
 
   @override
   Future<bool> needNetworkRequest() async {
@@ -33,8 +35,25 @@ class _UpdatePageState extends State<UpdatePage> with AutomaticKeepAliveClientMi
 
   @protected
   _title() {
-    if (widget.type == 0) {
+    if (widget.type == UpDateModel.UPDATE_USERNAME) {
       return "修改称呼";
+    } else if (widget.type ==UpDateModel.ADD_FRAME) {
+      return "添加书架";
+    } else if (widget.type ==UpDateModel.UPDATE_FRAME) {
+      return "修改书架名称";
+    }
+
+    return "";
+  }
+
+  @protected
+  _message() {
+    if (widget.type == UpDateModel.UPDATE_USERNAME) {
+      return "修改称呼成功";
+    } else if (widget.type ==UpDateModel.ADD_FRAME) {
+      return "添加书架成功";
+    } else if (widget.type ==UpDateModel.UPDATE_FRAME) {
+      return "修改书架成功";
     }
 
     return "";
@@ -42,17 +61,46 @@ class _UpdatePageState extends State<UpdatePage> with AutomaticKeepAliveClientMi
 
   @protected
   _canEdit() {
-    if (widget.type == 0) {
-      return ((widget.username==null&&username!=null&&username.length!=0)||(widget.username!=null&&username!=null&&username.length!=0&&username!=widget.username));
-    }
+    return ((widget.text==null&&text!=null&&text.length!=0)||(widget.text!=null&&text!=null&&text.length!=0&&text!=widget.text));
+  }
 
-    return false;
+  @protected
+  _edit() async {
+    if (_canEdit()) {
+      
+      var res;
+
+      if (widget.type == UpDateModel.UPDATE_USERNAME) {
+
+        res = await handleNotAssociatedWithRefreshRequest("/user/updateUsername", {"username":text});
+      
+      } else if (widget.type == UpDateModel.ADD_FRAME) {
+                
+        res = await handleNotAssociatedWithRefreshRequest("/frame/createMy", {"name":text});
+
+      } else if (widget.type == UpDateModel.UPDATE_FRAME) {
+
+        res = await handleNotAssociatedWithRefreshRequest("/frame/update", {"id":id,"name":text});
+
+      }
+
+      if (res!=null && res.result) {
+        CommonUtils.closePage(context);
+        Fluttertoast.showToast(msg: _message(),gravity: ToastGravity.CENTER);
+        
+        if (widget.type == UpDateModel.UPDATE_USERNAME) {
+          NeedRefreshEvent.refreshHandleFunction("MineInfoPage");
+        } else if (widget.type == UpDateModel.ADD_FRAME || widget.type == UpDateModel.UPDATE_FRAME) {
+          NeedRefreshEvent.refreshHandleFunction("MineFrame");
+        }
+      }
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    editController.text = username;
+    editController.text = text;
   }
 
   @override
@@ -70,16 +118,8 @@ class _UpdatePageState extends State<UpdatePage> with AutomaticKeepAliveClientMi
         actions: <Widget>[
           IconButton(
           icon: new Icon(Icons.check,color: _canEdit()?Color(YYColors.primary):Color(YYColors.disable)),
-          onPressed: () async {
-            if (_canEdit()) {
-              var res = await handleNotAssociatedWithRefreshRequest("/user/updateUsername", {"username":username});
-
-              if (res!=null && res.result) {
-                CommonUtils.closePage(context);
-                Fluttertoast.showToast(msg: "修改称呼成功",gravity: ToastGravity.CENTER);
-                NeedRefreshEvent.refreshHandleFunction("MineInfoPage");
-              }
-            }
+          onPressed: () {
+            _edit();
           }),
         ]
       ),
@@ -93,7 +133,7 @@ class _UpdatePageState extends State<UpdatePage> with AutomaticKeepAliveClientMi
               onChanged: (String value) {
                 if (isShow) {
                   setState(() {
-                    username = value;
+                    text = value;
                   });
                 }
               },
@@ -107,4 +147,10 @@ class _UpdatePageState extends State<UpdatePage> with AutomaticKeepAliveClientMi
     );
   }
 
+}
+
+class UpDateModel {
+  static int UPDATE_USERNAME = 0;
+  static int ADD_FRAME = 1;
+  static int UPDATE_FRAME = 2;
 }

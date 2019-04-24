@@ -7,6 +7,8 @@ import 'package:lychee/widget/base/BaseListWidget.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/common/model/Frame.dart';
+import 'package:lychee/page/UpdatePage.dart';
+import 'package:lychee/common/util/CommonUtils.dart';
 
 typedef FrameItemCallback = void Function(Frame frame);
 
@@ -59,7 +61,8 @@ class _MineFrameState extends State<MineFrame>  with AutomaticKeepAliveClientMix
   }
 
   _modify(index) {
-
+    Frame frame = control.data[index-1];
+    CommonUtils.openPage(context, UpdatePage(type:UpDateModel.UPDATE_FRAME,id:frame.id,text:frame.name));
   }
 
   _delete(index) async {

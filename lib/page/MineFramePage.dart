@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/widget/MineFrame.dart';
 import 'package:lychee/common/style/Style.dart';
+import './UpdatePage.dart';
 
 class MineFramePage extends StatelessWidget {
 @override 
@@ -35,7 +36,7 @@ class MineFramePage extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-              
+                  CommonUtils.openPage(context, UpdatePage(type:UpDateModel.ADD_FRAME));
                 }
               )
             ],

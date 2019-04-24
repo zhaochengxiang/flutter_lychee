@@ -256,7 +256,7 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
             onTap: () {
               if (index == 1) {
 
-                CommonUtils.openPage(context, UpdatePage(type: 0,username: user.username));
+                CommonUtils.openPage(context, UpdatePage(type: UpDateModel.UPDATE_USERNAME,text: user.username));
 
               } else if (index == 2) {
 
