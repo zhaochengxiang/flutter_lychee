@@ -12,6 +12,7 @@ import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/model/User.dart';
 import 'package:lychee/common/manager/HttpManager.dart';
 import 'package:lychee/common/event/NeedRefreshEvent.dart';
+import './SexPage.dart';
 
 class MineInfoPage extends StatefulWidget {
   @override
@@ -22,6 +23,7 @@ class MineInfoPage extends StatefulWidget {
 
 class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveClientMixin<MineInfoPage>,BaseState<MineInfoPage>,BaseListState<MineInfoPage> {
 
+  User user;
   File _image;
 
   @override
@@ -43,12 +45,12 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
   @override
   handleRefreshData(data) {
     super.handleRefreshData(data);
-    User user =control.data;
-    control.data = getItems(user);
+    user =control.data;
+    control.data = getItems();
   }
 
   @protected
-  List getItems(User user) {
+  List getItems() {
     String sex = '';
     if (user.sex == 0) {
       sex = '女';
@@ -76,10 +78,10 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
     var res = await HttpManager.imageNetFetch('/user/uploadAvatar',_image);
     Navigator.pop(context);
     if (res!=null && res.result && res.data!=null) {
-      User user = User.fromJson(res.data);
+      user = User.fromJson(res.data);
       if (isShow) {
         setState(() {
-          control.data =getItems(user);     
+          control.data =getItems();     
         });
       }
       NeedRefreshEvent.refreshHandleFunction("MinePage");
@@ -221,7 +223,13 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
               trailing: Text(item['desc'],style: TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.tip), overflow: TextOverflow.ellipsis),
             ),
             onTap: () {
+              if (index == 1) {
+
+              } else if (index == 2) {
+
+                CommonUtils.openPage(context, SexPage(sex: user.sex));
               
+              }
             },
           ),
         );
@@ -246,6 +254,7 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
 
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(
