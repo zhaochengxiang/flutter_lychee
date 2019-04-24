@@ -13,6 +13,7 @@ import 'package:lychee/common/model/User.dart';
 import 'package:lychee/common/manager/HttpManager.dart';
 import 'package:lychee/common/event/NeedRefreshEvent.dart';
 import './SexPage.dart';
+import './UpdatePage.dart';
 
 class MineInfoPage extends StatefulWidget {
   @override
@@ -93,13 +94,11 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
     PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.camera);
     if (permission ==PermissionStatus.unknown) {
 
-      Navigator.pop(context);
       await PermissionHandler().requestPermissions([PermissionGroup.camera]);
       _openCamera();
 
     } else if (permission ==PermissionStatus.denied || permission ==PermissionStatus.restricted) {
 
-      Navigator.pop(context);
       showDialog<void>(
         context: context,
         barrierDismissible: false,
@@ -120,7 +119,6 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
     } else {
   
       _image =await ImagePicker.pickImage(source: ImageSource.camera,maxWidth: 200,maxHeight: 200);
-      Navigator.pop(context);
       if (_image!=null) {
         _uploadFile();
       }
@@ -133,13 +131,11 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
     PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.photos);
     if (permission ==PermissionStatus.unknown) {
 
-      Navigator.pop(context);
       await PermissionHandler().requestPermissions([PermissionGroup.photos]);
       _openGallery();
 
     } else if (permission == PermissionStatus.denied || permission == PermissionStatus.restricted) {
 
-      Navigator.pop(context);
       showDialog<void>(
         context: context,
         barrierDismissible: false,
@@ -160,12 +156,41 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
     } else {
 
       _image =await ImagePicker.pickImage(source: ImageSource.gallery,maxWidth: 200,maxHeight: 200);
-      Navigator.pop(context);
       if (_image!=null) {
         _uploadFile();
       }
 
     }
+  }
+
+  @protected
+  _exit() {
+    showCupertinoModalPopup<int>(context: context, builder:(cxt){
+      return CupertinoActionSheet(
+        title: Text("确定退出登录吗"),
+        cancelButton: CupertinoActionSheetAction(
+          onPressed: (){
+
+            Navigator.pop(context);
+          }, 
+          child: Text("取消",style: TextStyle(color: Color(YYColors.primary)))
+        ),
+        actions: <Widget>[
+          CupertinoActionSheetAction(onPressed: () async{
+
+            Navigator.pop(context);
+
+            var res = await handleNotAssociatedWithRefreshRequest(context, "/user/logout", {});
+            if (res!=null && res.result) {
+              HttpManager.clearAuthorization();
+              NeedRefreshEvent.refreshHandleFunction("MinePage");
+              CommonUtils.closePage(context);
+            }
+
+          }, child: Text('确定',style: TextStyle(color: Color(YYColors.primary)))),
+        ],
+      );
+    });
   }
 
   _renderListItem(index) {
@@ -193,20 +218,26 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
               showCupertinoModalPopup<int>(context: context, builder:(cxt){
                 return CupertinoActionSheet(
                   cancelButton: CupertinoActionSheetAction(
-                    onPressed: (){}, 
-                    child: Text("取消")
+                    onPressed: (){
+                      
+                      Navigator.pop(context);
+                    
+                    }, 
+                    child: Text("取消",style: TextStyle(color: Color(YYColors.primary)))
                   ),
                   actions: <Widget>[
                     CupertinoActionSheetAction(onPressed: (){
 
+                      Navigator.pop(context);
                       _openCamera();
 
-                    }, child: Text('拍照')),
+                    }, child: Text('拍照',style: TextStyle(color: Color(YYColors.primary)))),
                     CupertinoActionSheetAction(onPressed: (){
 
+                      Navigator.pop(context);
                       _openGallery();
 
-                    }, child: Text('从手机相册选择')),
+                    }, child: Text('从手机相册选择',style: TextStyle(color: Color(YYColors.primary)))),
                   ],
                 );
               });
@@ -224,6 +255,8 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
             ),
             onTap: () {
               if (index == 1) {
+
+                CommonUtils.openPage(context, UpdatePage(type: 0,username: user.username));
 
               } else if (index == 2) {
 
@@ -243,7 +276,7 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
               child: Text(item['title'],style: TextStyle(color: Color(YYColors.red),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
             ),
             onTap: () {
-              
+              _exit();
             },
           ),
         );

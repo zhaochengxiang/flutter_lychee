@@ -57,6 +57,21 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
      return User.fromJson(json);
   }
 
+  @override
+  refreshHandleFunction(String name) async {
+
+    var token = await LocalStorage.get(CommonUtils.TOKEN_KEY);
+    if (token != null) {
+      super.refreshHandleFunction(name);
+    } else {
+      if (isShow) {
+        setState(() {
+          control.data = null;
+        });
+      }
+    }
+  }
+
   topPressed() {
     if (control.data == null) {
       CommonUtils.openPage(context, LoginPage());
