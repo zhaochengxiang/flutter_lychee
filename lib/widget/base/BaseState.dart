@@ -101,10 +101,10 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
       return new ResultData(null, false);
     }
 
-    CommonUtils.showLoadingDialog(context);
+    // CommonUtils.showLoadingDialog(context);
 
     var res = await HttpManager.netFetch(context,url,params,null,null);
-    Navigator.pop(context);
+    // Navigator.pop(context);
 
     return res;
   }

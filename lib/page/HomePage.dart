@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:lychee/widget/base/BaseScrollState.dart';
@@ -25,6 +26,8 @@ import './BookDetailPage.dart';
 import './SearchPage.dart';
 import './SearchDetailPage.dart';
 import './WebViewPage.dart';
+import 'package:lychee/common/xservice/cross-platform/service/CrossPlatformService.dart';
+import 'package:lychee/common/model/Book.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -205,6 +208,37 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
     );
   }
 
+  @protected
+  _scan() {
+    if(Platform.isIOS){
+      CrossPlatformService.MessageToNative("flutter_event_open_scan");
+      CrossPlatformService.service().addEventListner("native_event_scan_code", (String event,Map<dynamic,dynamic> params) async{
+        String code = params["code"]??"";
+        if (code.startsWith(CommonUtils.QRCode_Prefix)) {
+
+        } else {
+          var res = await handleNotAssociatedWithRefreshRequest("/book/findByIsbn", {"isbn":code});
+
+          if (res!=null && res.result && res.data!=null && res.data.length!=0) {
+            List<Book> books = new List();
+            for (int i=0;i<res.data.length;i++) {
+              books.add(Book.fromJson(res.data[i]));
+            }
+
+            if (books.length == 1) {
+
+              Book book = books[0];
+              CommonUtils.openPage(context, BookDetailPage({'uuid': book.uuid,'lid': 0}));
+            
+            } else {
+
+            }
+          }
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     homeIndex = control.data;
@@ -214,6 +248,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
         leading: IconButton(
           icon: new Image.asset(CommonUtils.Local_Icon_prefix+"scan.png",width: 18.0,height: 18.0),
           onPressed: () {
+
+            _scan();
 
           }),
         title:Text("荔枝课堂"),
