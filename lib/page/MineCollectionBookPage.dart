@@ -54,7 +54,7 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
 
   _location(index) async{
     Book book = control.data[index];
-    var res = await handleNotAssociatedWithRefreshRequest(context, "/frame/findMyByBid", {"bid":book.id});
+    var res = await handleNotAssociatedWithRefreshRequest("/frame/findMyByBid", {"bid":book.id});
     if (res!=null && res.result && res.data!=null) {
       Frame frame = Frame.fromJson(res.data);
       showDialog<void>(
@@ -86,7 +86,7 @@ class _MineCollectionBookPageState extends State<MineCollectionBookPage> with Au
 
   _delete(index) async{
     Book book = control.data[index];
-    var res = await handleNotAssociatedWithRefreshRequest(context, "/collection/delete", {"bid":book.id});
+    var res = await handleNotAssociatedWithRefreshRequest("/collection/delete", {"bid":book.id});
     if (res!=null && res.result) {
       if (isShow) {
         setState(() {

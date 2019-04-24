@@ -3,10 +3,14 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/local/LocalStorage.dart';
 import 'package:lychee/common/event/HttpErrorEvent.dart';
+import 'package:lychee/common/event/NeedRefreshEvent.dart';
+import 'package:lychee/page/LoginPage.dart';
 
 class ResultData {
   var data;
@@ -31,7 +35,7 @@ class HttpManager {
   ///[ params] 请求参数
   ///[ header] 外加头
   ///[ option] 配置
-  static netFetch(url, params, Map<String, String> header, Options option, {noTip = false}) async {
+  static netFetch(context,url, params, Map<String, String> header, Options option, {noTip = false}) async {
 
     var connectivityResult = await (new Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
@@ -101,16 +105,21 @@ class HttpManager {
     }
 
     var responseData = response.data;
+    //账号被踢
     if (responseData['code'] == 401) {
+      
+      HttpManager.accountKick(context);
 
     } else if (responseData['code'] == 200) {
+
       return new ResultData(responseData['data'], true);
+
     }
 
     return new ResultData(HttpErrorEvent.errorHandleFunction(responseData['message'], noTip), false);
   }
 
-  static imageNetFetch(url,File file, {noTip = false}) async {
+  static imageNetFetch(context,url,File file, {noTip = false}) async {
 
     var connectivityResult = await (new Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
@@ -163,11 +172,28 @@ class HttpManager {
     var responseData = response.data;
     if (responseData['code'] == 401) {
 
+      HttpManager.accountKick(context);
+
     } else if (responseData['code'] == 200) {
+      
       return new ResultData(responseData['data'], true);
+    
     }
 
     return new ResultData(HttpErrorEvent.errorHandleFunction(responseData['message'], noTip), false);
+  }
+
+  static accountKick(BuildContext context) {
+    HttpManager.clearAuthorization();
+    NeedRefreshEvent.refreshHandleFunction("MinPage");
+
+    if (Navigator.canPop(context) == true) {
+      return Navigator.of(context)
+      ..pop()
+      ..push(new CupertinoPageRoute(builder: (context) => LoginPage()));
+    } else {
+      Navigator.push(context, new CupertinoPageRoute(builder: (context) => LoginPage()));
+    }
   }
 
   ///清除授权

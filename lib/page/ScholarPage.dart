@@ -158,7 +158,7 @@ class _ScholarPageState extends State<ScholarPage> with AutomaticKeepAliveClient
             right: 10.5,
             child: InkWell(
               onTap: () async{
-                var res = await handleNotAssociatedWithRefreshRequest(context, (scholar.followed==true)?"/scholar/unfollow":"/scholar/follow", {"id":scholar.id});
+                var res = await handleNotAssociatedWithRefreshRequest((scholar.followed==true)?"/scholar/unfollow":"/scholar/follow", {"id":scholar.id});
 
                 if (res!=null && res.result) {
                   if (isShow) {

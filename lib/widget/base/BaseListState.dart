@@ -54,7 +54,7 @@ mixin BaseListState<T extends StatefulWidget> on BaseState<T>,AutomaticKeepAlive
     }
 
     var params = generateMoreRemoteParams();
-    var res = await HttpManager.netFetch(remotePath(),params,null,null);
+    var res = await HttpManager.netFetch(context,remotePath(),params,null,null);
 
     if (res != null && res.result) {
       if (isShow) {

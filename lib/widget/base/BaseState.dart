@@ -68,7 +68,7 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
 
     var params = generateRemoteParams();
 
-    var res = await HttpManager.netFetch(remotePath(),params,null,null,noTip:true);
+    var res = await HttpManager.netFetch(context,remotePath(),params,null,null,noTip:true);
 
     if (res != null && res.result) {
       var data = res.data;
@@ -96,14 +96,14 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
 
   ///与刷新无关的网络请求
   @protected
-  Future<ResultData> handleNotAssociatedWithRefreshRequest(BuildContext context,String url, Map<String, dynamic> params) async {
+  Future<ResultData> handleNotAssociatedWithRefreshRequest(String url, Map<String, dynamic> params) async {
     if (control.isLoading) {
       return new ResultData(null, false);
     }
 
     CommonUtils.showLoadingDialog(context);
 
-    var res = await HttpManager.netFetch(url,params,null,null);
+    var res = await HttpManager.netFetch(context,url,params,null,null);
     Navigator.pop(context);
 
     return res;

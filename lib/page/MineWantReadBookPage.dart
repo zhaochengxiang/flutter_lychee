@@ -70,7 +70,7 @@ class _MineWantReadBookPageState extends State<MineWantReadBookPage> with Automa
   _delete(index) async{
     Book book = control.data[index];
 
-    var res = await handleNotAssociatedWithRefreshRequest(context, "/label/deleteWant", {"bid":book.id});
+    var res = await handleNotAssociatedWithRefreshRequest("/label/deleteWant", {"bid":book.id});
 
     if (res!=null && res.result) {
       if (isShow) {

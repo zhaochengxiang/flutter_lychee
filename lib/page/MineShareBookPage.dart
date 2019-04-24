@@ -31,7 +31,7 @@ class _MineShareBookPageState extends State<MineShareBookPage> with AutomaticKee
   String get libraryRemotePath => "/library/findOpenShare";
 
   _share() async {
-    var res = await handleNotAssociatedWithRefreshRequest(context, "/library/findOpenShare", {});
+    var res = await handleNotAssociatedWithRefreshRequest("/library/findOpenShare", {});
     if (res!=null && res.result && res.data!=null) {
       List<Widget> childWidgets = List();
       for (int i = 0; i < res.data.length; i++) {

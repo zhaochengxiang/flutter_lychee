@@ -72,7 +72,7 @@ class _UpdatePageState extends State<UpdatePage> with AutomaticKeepAliveClientMi
           icon: new Icon(Icons.check,color: _canEdit()?Color(YYColors.primary):Color(YYColors.disable)),
           onPressed: () async {
             if (_canEdit()) {
-              var res = await handleNotAssociatedWithRefreshRequest(context, "/user/updateUsername", {"username":username});
+              var res = await handleNotAssociatedWithRefreshRequest("/user/updateUsername", {"username":username});
 
               if (res!=null && res.result) {
                 CommonUtils.closePage(context);

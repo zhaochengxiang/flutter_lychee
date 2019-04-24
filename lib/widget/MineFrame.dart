@@ -65,7 +65,7 @@ class _MineFrameState extends State<MineFrame>  with AutomaticKeepAliveClientMix
   _delete(index) async {
     Frame frame = control.data[index-1];
 
-    var res = await handleNotAssociatedWithRefreshRequest(context, "/frame/delete", {"id":frame.id});
+    var res = await handleNotAssociatedWithRefreshRequest("/frame/delete", {"id":frame.id});
 
     if (res!=null && res.result) {
       if (isShow) {

@@ -25,7 +25,7 @@ class _LycheeAppState extends State<LycheeApp> {
   void initState() {
     super.initState();
 
-    LocalStorage.save(CommonUtils.TOKEN_KEY, "a08f202de86cf70d3537ceac2c365b94");
+    LocalStorage.save(CommonUtils.TOKEN_KEY, "95cee8a5f4c80f0648b6d7862fe1e1b3");
 
     PushManager.init();
     ServiceLoader.load();

@@ -76,7 +76,7 @@ class _SexPageState extends State<SexPage>  with AutomaticKeepAliveClientMixin<S
           icon: new Icon(Icons.check,color: ((widget.sex==null&&sex!=null)||(widget.sex!=null&&sex!=widget.sex))?Color(YYColors.primary):Color(YYColors.disable)),
           onPressed: () async {
             if ((widget.sex==null&&sex!=null)||(widget.sex!=null&&sex!=widget.sex)) {
-              var res = await handleNotAssociatedWithRefreshRequest(context, "/user/updateSex", {"sex":sex});
+              var res = await handleNotAssociatedWithRefreshRequest("/user/updateSex", {"sex":sex});
 
               if (res!=null && res.result) {
                 CommonUtils.closePage(context);

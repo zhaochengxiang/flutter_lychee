@@ -49,7 +49,7 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
   Widget buildDecoration(control, onRefresh, emptyTip) {
     if (control.isLoading && control.data==null) {
       return buildActivityIndicator();
-    } else if (!control.isLoading && control.errorMessage.length!=0) {
+    } else if (!control.isLoading && control.errorMessage!=null && control.errorMessage.length!=0) {
       ///网络请求出错显示提示框
       return buildErrorTip(control.errorMessage,onRefresh);
     } else if (!control.needHeader && control.data!=null && control.data.length == 0) {

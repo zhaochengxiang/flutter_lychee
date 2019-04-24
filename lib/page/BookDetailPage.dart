@@ -61,7 +61,7 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
           ],
         ),
         onTap: () async {
-          var res = await handleNotAssociatedWithRefreshRequest(context, (richBook.wantRead==true)?"/label/deleteWant":"/label/saveWant", {"bid":richBook.book.id});
+          var res = await handleNotAssociatedWithRefreshRequest( (richBook.wantRead==true)?"/label/deleteWant":"/label/saveWant", {"bid":richBook.book.id});
 
           Navigator.pop(context);
           if (res!=null && res.result) {
@@ -80,7 +80,7 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
   }
 
   _receiptWantSave(cid) async {
-    var res = await handleNotAssociatedWithRefreshRequest(context, "/receipt/saveWant", {"cid":cid});
+    var res = await handleNotAssociatedWithRefreshRequest("/receipt/saveWant", {"cid":cid});
     if (res!=null && res.result) {
       Fluttertoast.showToast(msg:"添加成功",gravity: ToastGravity.CENTER);
     }
@@ -105,7 +105,7 @@ class _BookDetailPageState extends State<BookDetailPage> with AutomaticKeepAlive
               if (currentPanelIndex != pannelIndex) {
                 Library library = richBook.libraryList[pannelIndex];
                 if (libraryCopyMap.containsKey(library.id.toString()) == false) {
-                  var res = await handleNotAssociatedWithRefreshRequest(context, "/copy/findLocation", {"lid":library.id,"bid":richBook.book.id});
+                  var res = await handleNotAssociatedWithRefreshRequest("/copy/findLocation", {"lid":library.id,"bid":richBook.book.id});
                   if (res!=null && res.result && res.data!=null) {
                     List<Copy> copies = new List();
                     for (int i = 0; i < res.data.length; i++) {

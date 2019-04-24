@@ -55,7 +55,7 @@ class _LessonDetailPageState extends State<LessonDetailPage> with AutomaticKeepA
           ],
         ),
         onTap: () async {
-          var res = await handleNotAssociatedWithRefreshRequest(context, (lesson.favorite==true)?"/favorite/delete":"/favorite/save", {"id":lesson.id,"type":1});
+          var res = await handleNotAssociatedWithRefreshRequest((lesson.favorite==true)?"/favorite/delete":"/favorite/save", {"id":lesson.id,"type":1});
 
           Navigator.pop(context);
           if (res!=null && res.result) {

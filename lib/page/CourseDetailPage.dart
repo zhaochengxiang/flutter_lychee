@@ -59,7 +59,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> with AutomaticKeepA
           ],
         ),
         onTap: () async {
-          var res = await handleNotAssociatedWithRefreshRequest(context, (course.favorite==true)?"/favorite/delete":"/favorite/save", {"id":course.id,"type":2});
+          var res = await handleNotAssociatedWithRefreshRequest((course.favorite==true)?"/favorite/delete":"/favorite/save", {"id":course.id,"type":2});
 
           Navigator.pop(context);
           if (res!=null && res.result) {

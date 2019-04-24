@@ -76,7 +76,7 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
     }
 
     CommonUtils.showLoadingDialog(context);
-    var res = await HttpManager.imageNetFetch('/user/uploadAvatar',_image);
+    var res = await HttpManager.imageNetFetch(context,'/user/uploadAvatar',_image);
     Navigator.pop(context);
     if (res!=null && res.result && res.data!=null) {
       user = User.fromJson(res.data);
@@ -180,7 +180,7 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
 
             Navigator.pop(context);
 
-            var res = await handleNotAssociatedWithRefreshRequest(context, "/user/logout", {});
+            var res = await handleNotAssociatedWithRefreshRequest("/user/logout", {});
             if (res!=null && res.result) {
               HttpManager.clearAuthorization();
               NeedRefreshEvent.refreshHandleFunction("MinePage");

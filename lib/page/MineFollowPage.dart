@@ -56,7 +56,7 @@ class _MineFollowPageState extends State<MineFollowPage> with AutomaticKeepAlive
   _delete(index) async{
     Scholar scholar = control.data[index];
 
-    var res = await handleNotAssociatedWithRefreshRequest(context, "/scholar/unfollow", {"id":scholar.id});
+    var res = await handleNotAssociatedWithRefreshRequest("/scholar/unfollow", {"id":scholar.id});
 
     if (res!=null && res.result) {
       if (isShow) {

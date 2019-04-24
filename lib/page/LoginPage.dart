@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
   capthaPressd() async {
     if (isPhoneValid) {
 
-      var res = await handleNotAssociatedWithRefreshRequest(context,'/user/sendCaptcha',{"phone":phone.replaceAll(' ', '').replaceAll('-', '')});
+      var res = await handleNotAssociatedWithRefreshRequest('/user/sendCaptcha',{"phone":phone.replaceAll(' ', '').replaceAll('-', '')});
       if (res!=null && res.result) {
         setState(() {
           showCountDown = true;
@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
 
   loginPressed() async {
     if (isLoginValid) {
-      var res = await handleNotAssociatedWithRefreshRequest(context,'/user/validateCaptcha',{'phone':phone.replaceAll(' ', '').replaceAll('-', ''),'captcha':captha});
+      var res = await handleNotAssociatedWithRefreshRequest('/user/validateCaptcha',{'phone':phone.replaceAll(' ', '').replaceAll('-', ''),'captcha':captha});
       
       if (res!=null && res.result) {
         LocalStorage.save(CommonUtils.TOKEN_KEY, res.data['token']);

@@ -49,7 +49,7 @@ mixin BaseDecorationState<T extends StatefulWidget> on State<T> {
   Widget buildDecoration(control,onRefresh,emptyTip) {
     if (control.isLoading&&control.data==null) {
       return buildActivityIndicator();
-    } else if (!control.isLoading&&control.errorMessage.length!=0) {
+    } else if (!control.isLoading&&control.errorMessage!=null&&control.errorMessage.length!=0) {
       return buildErrorTip(control.errorMessage,onRefresh);
     } else {
       if (control.data==null|| ((control.data is Map)&&control.data.isEmpty) || ((control.data is List)&&control.data.length==0))
