@@ -1,3 +1,4 @@
+import "dart:io";
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -100,6 +101,7 @@ class _BaseListWidgetState extends State<BaseListWidget> with BaseDecorationStat
 
     return new EasyRefresh(
       key: widget.refreshKey,
+      behavior: (Platform.isIOS)?ScrollOverBehavior():null,
       refreshHeader: ClassicsHeader(
         key: _refreshHeaderKey,
         refreshText: "下拉刷新",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 import 'package:lychee/common/style/Style.dart';
 import "package:flutter_easyrefresh/easy_refresh.dart";
@@ -31,6 +32,7 @@ class _BaseScrollWidgetState extends State<BaseScrollWidget> with BaseDecoration
 
     return new EasyRefresh(
       key: widget.refreshKey,
+      behavior: (Platform.isIOS)?ScrollOverBehavior():null,
       refreshHeader: ClassicsHeader(
         key: _refreshHeaderKey,
         refreshText: "下拉刷新",

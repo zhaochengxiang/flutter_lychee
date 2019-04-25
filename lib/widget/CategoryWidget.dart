@@ -54,22 +54,24 @@ class _CategoryWidgetPageState extends State<CategoryWidget>  with AutomaticKeep
 
     rightCategories = control.data[leftIndex].children;
 
-    return new ListView.builder(
-      physics: ClampingScrollPhysics(),
-      itemBuilder: (context, index) {
-        return CategoryLeftItem(category: control.data[index],highlight: (index==leftIndex),onPress: (){
-          setState(() {
-            if (leftIndex == index) {
-              widget.onPressed?.call(control.data[index],leftIndex,rightSection,rightIndex);
-            } else {
-              leftIndex = index;
-              rightSection = -1;
-              rightIndex = -1;
-            }
+    return ScrollConfiguration(
+      behavior: ScrollBehavior(),
+      child: new ListView.builder(
+        itemBuilder: (context, index) {
+          return CategoryLeftItem(category: control.data[index],highlight: (index==leftIndex),onPress: (){
+            setState(() {
+              if (leftIndex == index) {
+                widget.onPressed?.call(control.data[index],leftIndex,rightSection,rightIndex);
+              } else {
+                leftIndex = index;
+                rightSection = -1;
+                rightIndex = -1;
+              }
+            });
           });
-        });
-      },
-      itemCount: control.data.length,
+        },
+        itemCount: control.data.length,
+      )
     );
   }
 
@@ -77,32 +79,34 @@ class _CategoryWidgetPageState extends State<CategoryWidget>  with AutomaticKeep
   Widget _buildRightListView() {
     if (control.data==null || control.data.length==0) return new Container();
 
-    return new ListView.builder(
-      physics: ClampingScrollPhysics(),
-      itemBuilder: (context, index) {
-        return CategoryRightItem(
-          category: rightCategories[index],
-          isSectionHighlight: (index==rightSection&&rightIndex==-1),
-          itemHighlightIndex: (index==rightSection)?rightIndex:-1,
-          onSectionPress: () {
-            setState(() {
-              rightSection = index;
-              rightIndex = -1;
-              widget.onPressed?.call(rightCategories[index],leftIndex,rightSection,rightIndex);
-            });
-          },
-          onItemPress: (_index) {
-            setState(() {
-              rightSection = index;
-              rightIndex = _index;
+    return ScrollConfiguration(
+      behavior: ScrollBehavior(),
+      child: new ListView.builder(
+        itemBuilder: (context, index) {
+          return CategoryRightItem(
+            category: rightCategories[index],
+            isSectionHighlight: (index==rightSection&&rightIndex==-1),
+            itemHighlightIndex: (index==rightSection)?rightIndex:-1,
+            onSectionPress: () {
+              setState(() {
+                rightSection = index;
+                rightIndex = -1;
+                widget.onPressed?.call(rightCategories[index],leftIndex,rightSection,rightIndex);
+              });
+            },
+            onItemPress: (_index) {
+              setState(() {
+                rightSection = index;
+                rightIndex = _index;
 
-              Category section = rightCategories[index];
-              widget.onPressed?.call(section.children[_index],leftIndex,rightSection,rightIndex);
-            });
-          },
-        );
-      },
-      itemCount: rightCategories.length,
+                Category section = rightCategories[index];
+                widget.onPressed?.call(section.children[_index],leftIndex,rightSection,rightIndex);
+              });
+            },
+          );
+        },
+        itemCount: rightCategories.length,
+      )
     );
   }
 
