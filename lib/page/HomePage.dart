@@ -228,8 +228,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
             if (books.length == 1) {
 
               Book book = books[0];
-              CommonUtils.openPage(context, BookDetailPage({'uuid': book.uuid,'lid': 0}));
-            
+              Future.delayed(Duration(milliseconds: 500),(){
+                CommonUtils.openPage(context, BookDetailPage({'uuid': book.uuid,'lid': 0}));
+              });
+          
             } else {
 
             }

@@ -26,10 +26,13 @@ class CommonUtils {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
-        return WillPopScope(
-          onWillPop: () => new Future.value(false),
-          child: Center(
-            child: new CupertinoActivityIndicator(),              
+        return new Material(
+          color: Colors.transparent,
+          child: WillPopScope(
+            onWillPop: () => new Future.value(false),
+            child: Center(
+              child: new CupertinoActivityIndicator(),              
+            )
           )
         );
       }
