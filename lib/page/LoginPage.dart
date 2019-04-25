@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
       var res = await handleNotAssociatedWithRefreshRequest('/user/validateCaptcha',{'phone':phone.replaceAll(' ', '').replaceAll('-', ''),'captcha':captha});
       
       if (res!=null && res.result) {
-        LocalStorage.save(CommonUtils.TOKEN_KEY, res.data['token']);
+        await LocalStorage.save(CommonUtils.TOKEN_KEY, res.data['token']);
         NeedRefreshEvent.refreshHandleFunction('MinePage');
         CommonUtils.closePage(context);
       }
