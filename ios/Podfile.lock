@@ -1,4 +1,20 @@
 PODS:
+  - AMap3DMap (6.6.0):
+    - AMapFoundation (~> 1.5)
+  - amap_base (0.1.8):
+    - AMapLocation
+    - AMapNavi
+    - AMapSearch
+    - Flutter
+    - MJExtension
+  - AMapFoundation (1.5.6)
+  - AMapLocation (2.6.1):
+    - AMapFoundation (~> 1.4)
+  - AMapNavi (6.5.0):
+    - AMap3DMap (~> 6.4)
+    - AMapFoundation (~> 1.5)
+  - AMapSearch (6.6.0):
+    - AMapFoundation (~> 1.4)
   - connectivity (0.0.1):
     - Flutter
     - Reachability
@@ -18,6 +34,7 @@ PODS:
   - jpush_flutter (0.0.2):
     - Flutter
     - JPush
+  - MJExtension (3.0.15.1)
   - mob_sharesdk (4.2.1.1):
     - mob_sharesdk/ShareSDK (= 4.2.1.1)
     - MOBFoundation
@@ -67,6 +84,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - amap_base (from `.symlinks/plugins/amap_base/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_statusbar (from `.symlinks/plugins/flutter_statusbar/ios`)
@@ -83,14 +101,22 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AMap3DMap
+    - AMapFoundation
+    - AMapLocation
+    - AMapNavi
+    - AMapSearch
     - FMDB
     - JCore
     - JPush
+    - MJExtension
     - mob_sharesdk
     - MOBFoundation
     - Reachability
 
 EXTERNAL SOURCES:
+  amap_base:
+    :path: ".symlinks/plugins/amap_base/ios"
   connectivity:
     :path: ".symlinks/plugins/connectivity/ios"
   Flutter:
@@ -119,6 +145,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/xservice_kit/ios"
 
 SPEC CHECKSUMS:
+  AMap3DMap: 37425c7d47420cbfaee88328be3dc3781814b999
+  amap_base: 00f37acf64d3e55cf7bcdd350a93f2b04d696f6f
+  AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
+  AMapLocation: cf024b53dc03663efb4ea4bcce27d4cce58bb97a
+  AMapNavi: b3084406c074bdc2f6f6e80474fa6aa80f4ec0d0
+  AMapSearch: def5983c8ca1a6d7430970046dc814f6e337621d
   connectivity: d5992e3758d68b1c4b12d6e012fe0813f1aa1645
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
   flutter_statusbar: a563eb9416256f17660646aceb2314b113127da9
@@ -128,6 +160,7 @@ SPEC CHECKSUMS:
   JCore: cae516dd2bf1a73b578ce6e1065abd49e709e0f7
   JPush: d0cead70ba223a6a3b52749899ebda830dfbc49a
   jpush_flutter: 1cc882286b5cac7a307a635fbd2a7c296730ca59
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   mob_sharesdk: 78dbad90fdb227017c27097be9090180da4b042a
   MOBFoundation: ce2ba976fd435b0cb06897466b2746e639895b7d
   package_info: d7c98b64f60add4c2908b9d94d82a45d3c8827ad

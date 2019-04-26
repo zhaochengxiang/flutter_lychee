@@ -64,7 +64,6 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
       {'title':'头像','desc':user.avatar},
       {'title':'昵称','desc':user.username??''},
       {'title':'性别','desc':sex},
-      {'title':'退出'},
     ]);
     return items;
   }
@@ -267,21 +266,7 @@ class _MineInfoPageState extends State<MineInfoPage>  with AutomaticKeepAliveCli
           ),
         );
 
-      } else if (index == 3) {
-
-        return Container(
-          height: 47,
-          child: InkWell(
-            child: Center(
-              child: Text(item['title'],style: TextStyle(color: Color(YYColors.red),fontSize: YYSize.large), overflow: TextOverflow.ellipsis)
-            ),
-            onTap: () {
-              _exit();
-            },
-          ),
-        );
-
-      }
+      } 
     }    
   }
 
