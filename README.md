@@ -4,7 +4,8 @@
 
 ### 示例效果
 
-<img src="https://raw.githubusercontent.com/zhaochengxiang/flutter_lychee/master/效果图/1.jpeg" width="426px"/>
+<img src="https://raw.githubusercontent.com/zhaochengxiang/flutter_lychee/master/效果图/1.jpeg" width="400px"/> <img src="https://raw.githubusercontent.com/zhaochengxiang/flutter_lychee/master/效果图/2.jpeg" width="400px"/>
+<img src="https://raw.githubusercontent.com/zhaochengxiang/flutter_lychee/master/效果图/3.jpeg" width="400px"/> <img src="https://raw.githubusercontent.com/zhaochengxiang/flutter_lychee/master/效果图/4.jpeg" width="400px"/>
 
 ### 第三方框架
 
