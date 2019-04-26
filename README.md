@@ -1,6 +1,6 @@
 # lychee
 
-使用flutter实现荔枝课堂app,您可以在appstore和安卓应用商店下载到使用原生语言开发的app。
+一款跨平台的客户端App，目前支持微信分享，二维码扫描(暂时只支持iOS)，极光推送，图片上传，打开相机相册等功能，项目涉及各种常用控件，如ExpansionPanelList，GridView,ListView,StackIndex等，同样设计到网络、数据库、与原生之间的交互等内容，同时项目封装了几个基础Mixin,如BaseState,BaseScrollState,BaseListState等，将界面中设计到的公共代码放在里面，进行统一管理。
 
 ### 示例效果
 
@@ -31,3 +31,6 @@
 | **permission_handler**     | **权限**         |
 | **device_info**            | **设备信息**       |
 | **flutter_statusbar**      | **状态栏**        |
+
+### 相关博客
+* [flutter sharesdk实现跨平台分享](https://www.jianshu.com/p/6678c29a963c )
