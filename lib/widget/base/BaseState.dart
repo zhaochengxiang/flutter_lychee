@@ -127,6 +127,9 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
     setControl();
 
     needNetworkRequest().then((res) {
+      setState(() {
+        control.needNetworkRequestComplete = true;
+      });
       if (res == true) {
         handleRefresh();
       } 

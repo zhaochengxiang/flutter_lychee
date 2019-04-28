@@ -60,7 +60,7 @@ class CommonUtils {
 
   static double sStaticBarHeight = 0.0;
 
-  static void initStatusBarHeight() async {
+  static Future initStatusBarHeight() async {
     sStaticBarHeight = await FlutterStatusbar.height;
   }
 }

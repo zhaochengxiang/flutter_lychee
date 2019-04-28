@@ -10,6 +10,7 @@ import './TopCollectionBookPage.dart';
 import './TopReadingBookPage.dart';
 import './TopReadBookPage.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
+import './NearLibraryPage.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -61,6 +62,8 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
           CommonUtils.openPage(context, TopReadingBookPage());
         } else if (index == 2) {
           CommonUtils.openPage(context, TopReadBookPage());
+        } else if (index ==3) {
+          CommonUtils.openPage(context, NearLibraryPage());
         }
       },
     );

@@ -47,7 +47,7 @@ mixin BaseDecorationState<T extends StatefulWidget> on State<T> {
 
   @protected
   Widget buildDecoration(control,onRefresh,emptyTip) {
-    if (control.isLoading&&control.data==null) {
+    if (!control.needNetworkRequestComplete || (control.isLoading&&control.data==null)) {
       return buildActivityIndicator();
     } else if (!control.isLoading&&control.errorMessage!=null&&control.errorMessage.length!=0) {
       return buildErrorTip(control.errorMessage,onRefresh);

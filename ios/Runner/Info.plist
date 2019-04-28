@@ -53,11 +53,14 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>使用相机是为了扫描图书或者拍摄用户头像</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>使用定位是为了搜索附近的图书馆或者周边活动</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>使用相册是为了设置用户头像</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

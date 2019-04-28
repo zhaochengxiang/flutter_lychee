@@ -34,6 +34,8 @@ class _BaseWidgetState extends State<BaseWidget> with BaseDecorationState<BaseWi
 class BaseWidgetControl {
   dynamic data;
 
+  ///是否需要网络请求是否完成
+  bool needNetworkRequestComplete = false;
   ///是否正在加载
   bool isLoading = false;
   ///网络请求返回的错误信息

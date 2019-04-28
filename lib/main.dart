@@ -7,9 +7,15 @@ import 'package:lychee/page/HomeTabBarPage.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/manager/PushManager.dart';
 import 'package:lychee/common/xservice/loader/ServiceLoader.dart';
-import 'package:lychee/common/local/LocalStorage.dart';
+import 'package:lychee/common/manager/MapManager.dart';
 
-void main() => runApp(LycheeApp());
+void main() async {
+  PushManager();
+  ServiceLoader.load();
+  await MapManager.init();
+  await CommonUtils.initStatusBarHeight();
+  runApp(LycheeApp());
+}
 
 class LycheeApp extends StatefulWidget {
   @override
@@ -25,9 +31,6 @@ class _LycheeAppState extends State<LycheeApp> {
   void initState() {
     super.initState();
 
-    PushManager.init();
-    ServiceLoader.load();
-    CommonUtils.initStatusBarHeight();
     stream =  CommonUtils.eventBus.on<HttpErrorEvent>().listen((event) {
       errorHandleFunction(event.message);
     });

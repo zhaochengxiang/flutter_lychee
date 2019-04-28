@@ -16,6 +16,9 @@
         android:label="荔枝课堂_flutter"
         android:icon="@mipmap/ic_launcher"
         tools:replace="android:name">
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="be1d1e6ba53adaae8a973c6a908c7835"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -35,6 +35,7 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.wanjuanlink.lychee"
         minSdkVersion 16
+        multiDexEnabled true
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -52,11 +53,27 @@ android {
         ]
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+            storeFile file("../gsygithubapp-debug.jks")
+            storePassword "871227"
+            keyAlias "zcx"
+            keyPassword "871227"
+        }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            storeFile file("../android_key.jks")
+            storePassword "871227"
+            keyAlias "zcx"
+            keyPassword "871227"
+        }
+    }
+
+    buildTypes {
+        debug {
             signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -71,6 +88,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 
