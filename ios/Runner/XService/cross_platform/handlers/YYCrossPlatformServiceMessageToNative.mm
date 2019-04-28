@@ -2,19 +2,10 @@
 #import "ServiceGateway.h"
 #import "YYCrossPlatformServiceMessageToNative.h"
 #import <UIKit/UIKit.h>
-#import "YYScanViewController.h"
  
  @implementation YYCrossPlatformServiceMessageToNative
  - (void)onCall:(void (^)(BOOL))result message:(NSString *)message {
     
-     if ([message isEqualToString:@"flutter_event_open_scan"]) {
-         UIViewController* hostVC = [UIApplication sharedApplication].delegate.window.rootViewController;
-         YYScanViewController *scanVC = [[YYScanViewController alloc] init];
-         UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:scanVC];
-         nc.navigationBarHidden = YES;
-         [hostVC presentViewController:nc animated:NO completion:nil];
-     }
-     
  }
  #pragma mark - Do not edit these method.
  - (void)__flutter_p_handler_MessageToNative:(NSDictionary *)args result:(void (^)(BOOL))result {

@@ -55,7 +55,7 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file("../gsygithubapp-debug.jks")
+            storeFile file("../android_key.jks")
             storePassword "871227"
             keyAlias "zcx"
             keyPassword "871227"
@@ -83,6 +83,7 @@ flutter {
 }
 
 dependencies {
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
@@ -90,5 +91,3 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.android.support:multidex:1.0.3'
 }
-
-

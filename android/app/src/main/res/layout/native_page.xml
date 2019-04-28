@@ -16,35 +16,20 @@
         android:textSize="28sp"
         android:layout_gravity="center_horizontal"/>
 
-    <View android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
 
-    <TextView
-        android:background="@android:color/holo_orange_dark"
-        android:layout_margin="8.0dp"
-        android:padding="8.0dp"
-        android:textColor="@android:color/black"
-        android:id="@+id/open_flutter"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/back"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/open_flutter" />
-
-    <TextView
-        android:background="@android:color/holo_orange_dark"
         android:layout_marginLeft="8.0dp"
-        android:layout_marginTop="8.0dp"
+        android:layout_marginTop="30.0dp"
         android:layout_marginRight="8.0dp"
         android:layout_marginBottom="80.0dp"
-        android:padding="8.0dp"
-        android:textColor="@android:color/black"
-        android:id="@+id/back"
+        android:background="@android:color/holo_orange_dark"
+        android:padding="2.0dp"
+        android:text="@string/back"
         android:textAllCaps="false"
-        android:textSize="16sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back" />
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
 
 </LinearLayout>
