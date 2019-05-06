@@ -67,11 +67,9 @@ class _AboutUsPageState extends State<AboutUsPage>  with AutomaticKeepAliveClien
     AboutModel item = control.data[index];
     return Container(
       height: 47,
-      child: InkWell(
-        child: ListTile(
-          title: Text(item.title,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis),
-          trailing: (item.desc==null)? Image.asset(CommonUtils.Local_Icon_prefix+"arrow_more.png",width: 13,height: 13,fit:BoxFit.fill) : Text(item.desc,style: TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.tip), overflow: TextOverflow.ellipsis)
-        ),
+      child: ListTile(
+        title: Text(item.title,style: TextStyle(color: Color(YYColors.primaryText),fontSize: YYSize.large), overflow: TextOverflow.ellipsis),
+        trailing: (item.desc==null)? Image.asset(CommonUtils.Local_Icon_prefix+"arrow_more.png",width: 13,height: 13,fit:BoxFit.fill) : Text(item.desc,style: TextStyle(color: Color(YYColors.thirdText),fontSize: YYSize.tip), overflow: TextOverflow.ellipsis),
         onTap: () {
           if (index == 4) {
             CommonUtils.openPage(context, WebViewPage(url:privacyUrl));

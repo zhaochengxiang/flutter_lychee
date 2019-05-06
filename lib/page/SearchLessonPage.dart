@@ -97,7 +97,7 @@ class _SearchLessonPageState extends State<SearchLessonPage> with AutomaticKeepA
           onTap: (){CommonUtils.openPage(context, SearchPage(type: Search.SEARCH_LESSON, onPressed: _searchPageOnPressed));},
           child: Container(
             height: 31,
-            color:Color(YYColors.gray_light),
+            color:Color(YYColors.gray_dark),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,

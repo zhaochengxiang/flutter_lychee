@@ -13,7 +13,6 @@ void main() async {
   PushManager();
   ServiceLoader.load();
   await MapManager.init();
-  await CommonUtils.initStatusBarHeight();
   runApp(LycheeApp());
 }
 
@@ -34,6 +33,12 @@ class _LycheeAppState extends State<LycheeApp> {
     stream =  CommonUtils.eventBus.on<HttpErrorEvent>().listen((event) {
       errorHandleFunction(event.message);
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    CommonUtils.initStatusBarHeight(context);
   }
 
   @override

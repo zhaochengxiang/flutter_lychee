@@ -83,7 +83,7 @@ class _SearchScholarPagetState extends State<SearchScholarPage> with SingleTicke
                 onTap: (){CommonUtils.openPage(context, SearchPage(type: Search.SEARCH_SCHOLAR,onPressed: _searchPageOnPressed));},
                 child: Container(
                   height: 31,
-                  color:Color(YYColors.gray_light),
+                  color:Color(YYColors.gray_dark),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,

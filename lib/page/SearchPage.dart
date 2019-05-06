@@ -98,12 +98,12 @@ class _SearchPagetState extends State<SearchPage> {
         ),
         title: Container(   
           height: 31,
-          color: Color(YYColors.gray_light),
+          color: Color(YYColors.gray_dark),
           child: Stack(
             children: <Widget>[
               Container(
                 height: 31,
-                color: Color(YYColors.gray_light),
+                color: Color(YYColors.gray_dark),
               ),
               Positioned(
                 left: 0,
@@ -143,7 +143,7 @@ class _SearchPagetState extends State<SearchPage> {
             Container(
               width:MediaQuery.of(context).size.width,
               height: 31,
-              color: Color(YYColors.gray_light),
+              color: Color(YYColors.gray_dark),
               child: Padding(
                 padding: EdgeInsets.only(left: 10.5,right: 10.5),
                 child: Align( 
@@ -167,7 +167,7 @@ class _SearchPagetState extends State<SearchPage> {
               onTap: (){_clearHistory();},
               child: Container(
                 height: 47,
-                color: Color(YYColors.gray_light),
+                color: Color(YYColors.gray_dark),
                 child: Center(
                   child: Text("清空历史",style:TextStyle(color: Color(YYColors.secondarySection),fontSize: YYSize.tip),overflow: TextOverflow.ellipsis)
                 )
