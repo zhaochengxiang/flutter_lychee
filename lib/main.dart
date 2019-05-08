@@ -38,7 +38,7 @@ class _LycheeAppState extends State<LycheeApp> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    CommonUtils.initStatusBarHeight(context);
+    CommonUtils.initStatusBarHeight();
   }
 
   @override
