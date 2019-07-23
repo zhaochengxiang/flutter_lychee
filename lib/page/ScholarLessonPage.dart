@@ -8,13 +8,11 @@ import './LessonDetailPage.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/model/LessonResult.dart';
 import 'package:lychee/widget/ScholarLessonItem.dart';
-import './SearchScholarPage.dart';
 
 class ScholarLessonPage extends StatefulWidget {
-  final int type;
   final int id;
   final String keyword;
-  ScholarLessonPage({this.type=0,this.id,this.keyword=""});
+  ScholarLessonPage({this.id,this.keyword=""});
 
   @override
   _ScholarLessonPageState createState() => _ScholarLessonPageState();
@@ -41,12 +39,12 @@ class _ScholarLessonPageState extends State<ScholarLessonPage> with AutomaticKee
 
   @override
   generateRemoteParams() {
-    return {"sid":widget.id,"keyword":(widget.type==0)?widget.keyword:SearchScholarModel.of(context).currentKeyword,"last":0,"offset":0};
+    return {"sid":widget.id,"keyword":widget.keyword,"last":0,"offset":0};
   }
 
   @override
   generateMoreRemoteParams() {
-    return {"sid":widget.id,"keyword":(widget.type==0)?widget.keyword:SearchScholarModel.of(context).currentKeyword,"last":last,"offset":offset};
+    return {"sid":widget.id,"keyword":widget.keyword,"last":last,"offset":offset};
   }
 
   @override
@@ -82,6 +80,7 @@ class _ScholarLessonPageState extends State<ScholarLessonPage> with AutomaticKee
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BaseListWidget(
       control:control,
       onRefresh: handleRefresh,

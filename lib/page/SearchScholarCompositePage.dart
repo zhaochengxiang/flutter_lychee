@@ -37,7 +37,7 @@ class _SearchScholarCompositePageState extends State<SearchScholarCompositePage>
 
   @override
   generateRemoteParams() {
-    return {"id":widget.id,"keyword":SearchScholarModel.of(context).currentKeyword};
+    return {"id":widget.id,"keyword":widget.keyword};
   }
 
    @override

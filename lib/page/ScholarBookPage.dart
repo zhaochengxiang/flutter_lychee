@@ -7,10 +7,9 @@ import 'package:lychee/widget/base/BaseBookListWidget.dart';
 import './SearchScholarPage.dart';
 
 class ScholarBookPage extends StatefulWidget {
-  final int type;
   final int id;
   final String keyword;
-  ScholarBookPage({this.type=0,this.id,this.keyword=""});
+  ScholarBookPage({this.id,this.keyword=""});
   
   @override
   _ScholarBookPageState createState() => _ScholarBookPageState();
@@ -40,16 +39,17 @@ class _ScholarBookPageState extends State<ScholarBookPage> with AutomaticKeepAli
 
    @override
   generateRemoteParams() {
-    return {"sid":widget.id,"keyword":(widget.type==0)?widget.keyword:SearchScholarModel.of(context).currentKeyword,"last":0,"offset":0};
+    return {"sid":widget.id,"keyword":widget.keyword,"last":0,"offset":0};
   }
 
   @override
   generateMoreRemoteParams() {
-    return {"sid":widget.id,"keyword":(widget.type==0)?widget.keyword:SearchScholarModel.of(context).currentKeyword,"last":control.last,"offset":control.offset};
+    return {"sid":widget.id,"keyword":widget.keyword,"last":control.last,"offset":control.offset};
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BaseBookListWidget(
       control:control,
       onRefresh: handleRefresh,
