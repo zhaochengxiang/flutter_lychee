@@ -62,7 +62,7 @@ class IconText extends StatelessWidget {
       child: FadeInImage.assetNetwork(placeholder: CommonUtils.Local_Icon_prefix+'book_placeholder.png',image:iconNetUrl,fit:iconFit),
     ) : new Container());
     widgetList.add(new Padding(padding: new EdgeInsets.all(padding)));
-    widgetList.add(new Container(width:iconWidth,height:maxLines*textLineHeight,child:Text(text,style: textStyle,overflow: TextOverflow.ellipsis,maxLines: maxLines,textAlign: TextAlign.center)));
+    widgetList.add(new Container(height:maxLines*textLineHeight,child:Text(text,style: textStyle,overflow: TextOverflow.ellipsis,maxLines: maxLines,textAlign: TextAlign.center)));
 
     return widgetList;
   }

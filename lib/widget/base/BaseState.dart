@@ -13,6 +13,7 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
 
   @protected
   dynamic control;
+
   @protected
   StreamSubscription refreshEventStream;
 
@@ -23,9 +24,7 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
   dynamic get getData => null;
 
   @protected
-  Future<bool> needNetworkRequest() async {
-    return true;
-  }
+  bool get needNetworkRequest => true;
 
   @protected
   remotePath() {
@@ -117,6 +116,7 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
   @protected
   void setControl() {
     control.data = getData;
+    control.needNetworkRequest = this.needNetworkRequest;
   }
 
   @override
@@ -126,16 +126,11 @@ mixin BaseState<T extends StatefulWidget> on State<T>, AutomaticKeepAliveClientM
     initControl();
     setControl();
 
-    needNetworkRequest().then((res) {
-      setState(() {
-        control.needNetworkRequestComplete = true;
-      });
-      if (res == true) {
-        handleRefresh();
-      } 
-    });
+    if (this.needNetworkRequest == true) {
+      handleRefresh();
+    }
     
-    refreshEventStream =  CommonUtils.eventBus.on<NeedRefreshEvent>().listen((event) {
+    refreshEventStream = CommonUtils.eventBus.on<NeedRefreshEvent>().listen((event) {
       refreshHandleFunction(event.className);
     });
   }

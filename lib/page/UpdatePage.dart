@@ -28,10 +28,8 @@ class _UpdatePageState extends State<UpdatePage> with AutomaticKeepAliveClientMi
  
   _UpdatePageState(this.id,this.text);
 
-  @override
-  Future<bool> needNetworkRequest() async {
-    return false;
-  }
+  @protected
+  bool get needNetworkRequest => false;
 
   @protected
   _title() {

@@ -28,10 +28,8 @@ class _AboutUsPageState extends State<AboutUsPage>  with AutomaticKeepAliveClien
   @override
   bool get needRefreshFooter => false;
 
-  @override
-  Future<bool> needNetworkRequest() async {
-    return false;
-  }
+  @protected
+  bool get needNetworkRequest => false;
 
   @override
   dynamic get getData => [

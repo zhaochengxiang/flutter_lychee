@@ -32,15 +32,8 @@ class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin<
 
   static const List services = [{"image":"my_book.png","title":"我的图书"},{"image":"my_library.png","title":"我的图书馆"},{"image":"my_note.png","title":"拍书笔记"},{"image":"my_lesson.png","title":"我的小讲"},{"image":"my_course.png","title":"我的短课"},{"image":"my_frame.png","title":"我的书架"},{"image":"my_follow.png","title":"我的关注"},{"image":"my_recommend.png","title":"推荐给朋友"},{"image":"my_about.png","title":"关于我们"}];
 
-   @override
-  Future<bool> needNetworkRequest() async {
-    var token = await LocalStorage.get(CommonUtils.TOKEN_KEY);
-    if (token != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  @protected
+  bool get needNetworkRequest => CommonUtils.sStaticUserIsLogin;
 
   @override
   remotePath() {

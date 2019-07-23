@@ -10,6 +10,7 @@ import 'package:lychee/common/xservice/loader/ServiceLoader.dart';
 import 'package:lychee/common/manager/MapManager.dart';
 
 void main() async {
+  await CommonUtils.initUserIsLoginState();
   PushManager();
   ServiceLoader.load();
   await MapManager.init();

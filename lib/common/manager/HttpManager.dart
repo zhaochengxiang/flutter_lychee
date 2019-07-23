@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:connectivity/connectivity.dart';
@@ -26,7 +27,6 @@ class HttpManager {
 
   static Map optionParams = {
     "timeoutMs": 10000,
-    "token": null,
     "authorizationCode": null,
   };
 
@@ -105,6 +105,13 @@ class HttpManager {
     }
 
     var responseData = response.data;
+
+    ///账号被踢 服务器返回的String类型 应该返回Map类型 未保持一直
+    ///我们先强制转换吧!!!
+    if (responseData is String) {
+      responseData = json.decode(responseData);
+    }
+    
     //账号被踢
     if (responseData['code'] == 401) {
       
@@ -170,6 +177,11 @@ class HttpManager {
     }
 
     var responseData = response.data;
+
+    if (responseData is String) {
+      responseData = json.decode(responseData);
+    }
+
     if (responseData['code'] == 401) {
 
       HttpManager.accountKick(context);

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:amap_base/amap_base.dart';
 
 import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseListWidget.dart';
 import 'package:lychee/widget/base/BaseState.dart';
-import 'package:lychee/common/style/Style.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/manager/MapManager.dart';
-import 'package:amap_base/amap_base.dart';
 import 'package:lychee/common/model/Library.dart';
 import 'package:lychee/widget/NearLibraryItem.dart';
 
 class NearLibraryPage extends StatefulWidget {
+  final Location location;
+  NearLibraryPage(this.location);
+
   @override
   State<NearLibraryPage> createState() {
     return _NearLibraryPageState();
@@ -20,30 +22,11 @@ class NearLibraryPage extends StatefulWidget {
 
 class _NearLibraryPageState extends State<NearLibraryPage>  with AutomaticKeepAliveClientMixin<NearLibraryPage>,BaseState<NearLibraryPage>, BaseListState<NearLibraryPage> {
 
-  bool permission;
-  Location location;
-
   @override
   bool get needRefreshHeader => false;
 
   @override
   bool get needRefreshFooter => false;
-
-  @override
-  Future<bool> needNetworkRequest() async {
-    var res =  await MapManager.requestPermission();
-    
-    setState(() {
-      permission = res;
-    });
-
-    if (permission == false) {
-      return false;
-    } else {
-      location = await MapManager.getLocation();
-      return true;
-    }
-  }
 
   @override
   remotePath() {
@@ -52,7 +35,7 @@ class _NearLibraryPageState extends State<NearLibraryPage>  with AutomaticKeepAl
 
   @override
   generateRemoteParams() {
-    return {"latitude":location.latitude,"longitude":location.longitude};
+    return {"latitude":widget.location.latitude,"longitude":widget.location.longitude};
   }
 
   @override
@@ -69,6 +52,7 @@ class _NearLibraryPageState extends State<NearLibraryPage>  with AutomaticKeepAl
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return new Scaffold(
       appBar: new AppBar(
         leading: IconButton(
@@ -82,7 +66,7 @@ class _NearLibraryPageState extends State<NearLibraryPage>  with AutomaticKeepAl
       body: BaseListWidget(
         control:control,
         refreshKey: refreshIndicatorKey,
-        emptyTip: (permission==true)?"附近没有图书馆":"定位服务未开启",
+        emptyTip: "附近没有图书馆",
         itemBuilder: (BuildContext context, int index) => _renderListItem(index),
       )
     );

@@ -26,10 +26,8 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
   final TextEditingController phoneController = new TextEditingController();
   final TextEditingController capthaController = new TextEditingController();
 
-   @override
-  Future<bool> needNetworkRequest() async {
-    return false;
-  }
+  @protected
+  bool get needNetworkRequest => false;
 
   capthaPressd() async {
     if (isPhoneValid) {
@@ -62,6 +60,7 @@ class _LoginPageState extends State<LoginPage> with AutomaticKeepAliveClientMixi
       
       if (res!=null && res.result) {
         await LocalStorage.save(CommonUtils.TOKEN_KEY, res.data['token']);
+        await CommonUtils.initUserIsLoginState();
         NeedRefreshEvent.refreshHandleFunction('MinePage');
         CommonUtils.closePage(context);
       }

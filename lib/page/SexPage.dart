@@ -29,10 +29,8 @@ class _SexPageState extends State<SexPage>  with AutomaticKeepAliveClientMixin<S
   @override
   bool get needRefreshFooter => false;
 
-  @override
-  Future<bool> needNetworkRequest() async {
-    return false;
-  }
+  @protected
+  bool get needNetworkRequest => false;
 
   @override
   dynamic get getData => [

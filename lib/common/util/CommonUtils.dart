@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter_statusbar/flutter_statusbar.dart';
 
+import '../local/LocalStorage.dart';
+
 class CommonUtils {
   static const DEBUG = true;
   static const TOKEN_KEY = "token";
@@ -62,5 +64,15 @@ class CommonUtils {
 
   static Future initStatusBarHeight() async {
     sStaticBarHeight = await FlutterStatusbar.height;
+  }
+
+  static bool sStaticUserIsLogin = false;
+  static initUserIsLoginState() async {
+    var token =await LocalStorage.get(CommonUtils.TOKEN_KEY);
+    if (token==null||token.length==0) {
+      sStaticUserIsLogin = false;
+    } else {
+      sStaticUserIsLogin = true;
+    }
   }
 }

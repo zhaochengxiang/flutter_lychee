@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:amap_base/amap_base.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseListWidget.dart';
@@ -11,6 +13,7 @@ import './TopReadingBookPage.dart';
 import './TopReadBookPage.dart';
 import 'package:lychee/widget/SeparatorWidget.dart';
 import './NearLibraryPage.dart';
+import '../common/manager/MapManager.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -21,10 +24,8 @@ class DiscoverPage extends StatefulWidget {
 
 class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveClientMixin<DiscoverPage>,BaseState<DiscoverPage>, BaseListState<DiscoverPage> {
 
-  @override
-  Future<bool> needNetworkRequest() async {
-    return false;
-  }
+  @protected
+  bool get needNetworkRequest => false;
 
   @override
   bool get needRefreshHeader => false;
@@ -55,7 +56,7 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
           ],
         )
       ),
-      onTap: () {
+      onTap: () async {
         if (index == 0) {
           CommonUtils.openPage(context, TopCollectionBookPage());
         } else if (index == 1) {
@@ -63,7 +64,13 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
         } else if (index == 2) {
           CommonUtils.openPage(context, TopReadBookPage());
         } else if (index ==3) {
-          CommonUtils.openPage(context, NearLibraryPage());
+          var res = await MapManager.requestPermission();
+          if (res == true) {
+            Location location = await MapManager.getLocation();
+            CommonUtils.openPage(context, NearLibraryPage(location));
+          } else {
+            Fluttertoast.showToast(msg: "定位服务未开启",gravity: ToastGravity.CENTER);
+          }
         }
       },
     );
@@ -71,7 +78,7 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
 
   @override
   Widget build(BuildContext context) {
-    
+    super.build(context);
     return new Scaffold(
       appBar: new AppBar(
         title:Text("发现"),

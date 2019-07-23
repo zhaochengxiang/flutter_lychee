@@ -22,10 +22,8 @@ class MineBookPage extends StatefulWidget {
 
 class _MineBookPageState extends State<MineBookPage>  with AutomaticKeepAliveClientMixin<MineBookPage>,BaseState<MineBookPage>, BaseListState<MineBookPage> {
 
-  @override
-  Future<bool> needNetworkRequest() async {
-    return false;
-  }
+  @protected
+  bool get needNetworkRequest => false;
 
   @override
   bool get needRefreshHeader => false;
