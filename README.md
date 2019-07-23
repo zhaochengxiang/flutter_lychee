@@ -33,11 +33,11 @@
 | **flutter_slidable**       | **侧滑**         |
 | **qr_flutter**             | **生成二维码**         |
 | **sqflite**                | **数据库**        |
-| **scope_model**            | **状态管理和共享**    |
 | **webview_flutter**        | **内嵌webview**    |
 | **permission_handler**     | **权限**         |
 | **device_info**            | **设备信息**       |
 | **flutter_statusbar**      | **状态栏**        |
+| **amap_base_location**     | **高德定位**    |
 
 ### 相关博客
 * [flutter sharesdk实现跨平台分享](https://www.jianshu.com/p/6678c29a963c )
