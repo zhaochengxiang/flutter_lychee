@@ -4,9 +4,12 @@ import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/widget/base/BaseBookListState.dart';
 import 'package:lychee/widget/base/BaseBookListWidget.dart';
-import './SearchDetailPage.dart';
 
 class SearchDetailBookPage extends StatefulWidget {
+    
+  final int cid;
+  final String keyword;
+  SearchDetailBookPage(this.cid,this.keyword);
   @override
   _SearchDetailBookPageState createState() => _SearchDetailBookPageState();
 }
@@ -36,9 +39,9 @@ class _SearchDetailBookPageState extends State<SearchDetailBookPage> with Automa
    @override
   generateRemoteParams() {
     Map<String,dynamic> params = new Map();
-    params["category"] = SearchDetailModel.of(context).currentCid;
+    params["category"] = widget.cid;
     params["lid"] = 0;
-    params["keyword"] = SearchDetailModel.of(context).currentKeyword;
+    params["keyword"] = widget.keyword;
     
     params["last"] = 0;
     params["offset"] = 0;
@@ -48,9 +51,9 @@ class _SearchDetailBookPageState extends State<SearchDetailBookPage> with Automa
   @override
   generateMoreRemoteParams() {
     Map<String,dynamic> params = new Map();
-    params["category"] = SearchDetailModel.of(context).currentCid;
+    params["category"] = widget.cid;
     params["lid"] = 0;
-    params["keyword"] = SearchDetailModel.of(context).currentKeyword;
+    params["keyword"] = widget.keyword;
     
     params["last"] = control.last;
     params["offset"] = control.offset;
@@ -59,6 +62,7 @@ class _SearchDetailBookPageState extends State<SearchDetailBookPage> with Automa
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return new Scaffold(
       body: BaseBookListWidget(
         control:control,

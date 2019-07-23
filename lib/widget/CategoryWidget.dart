@@ -5,9 +5,6 @@ import 'package:lychee/widget/base/BaseWidget.dart';
 import 'package:lychee/common/model/Category.dart';
 import 'package:lychee/widget/CategoryLeftItem.dart';
 import 'package:lychee/widget/CategoryRightItem.dart';
-import 'package:lychee/common/util/CommonUtils.dart';
-import 'package:lychee/common/event/CategoryIndexChangeEvent.dart';
-import 'package:lychee/page/SearchDetailPage.dart';
 
 typedef CategoryItemCallback = void Function(Category category,int leftIndex,int rightSection,int rightIndex);
 
@@ -111,20 +108,8 @@ class _CategoryWidgetPageState extends State<CategoryWidget>  with AutomaticKeep
   }
 
   @override
-  void initState() {
-    super.initState();
-    refreshEventStream =  CommonUtils.eventBus.on<CategoryIndexChangeEvent>().listen((event) {
-      setState(() {
-        leftIndex = SearchDetailModel.of(context).currentCategoryLeftIndex;
-        rightSection =SearchDetailModel.of(context).currentCategoryRightSection;
-        rightIndex =SearchDetailModel.of(context).currentCategoryRightIndex;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-
+    super.build(context);
     return BaseWidget(
         control: control,
         onRefresh: handleRefresh,

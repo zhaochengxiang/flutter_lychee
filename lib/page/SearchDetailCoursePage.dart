@@ -11,6 +11,9 @@ import 'package:lychee/common/model/CourseResult.dart';
 import './SearchDetailPage.dart';
 
 class SearchDetailCoursePage extends StatefulWidget {
+  final int cid;
+  final String keyword;
+  SearchDetailCoursePage(this.cid,this.keyword);
   @override
   _SearchDetailCoursePageState createState() => _SearchDetailCoursePageState();
 }
@@ -37,8 +40,8 @@ class _SearchDetailCoursePageState extends State<SearchDetailCoursePage> with Au
    @override
   generateRemoteParams() {
     Map<String,dynamic> params = new Map();
-    params["category"] = SearchDetailModel.of(context).currentCid;
-    params["keyword"] = SearchDetailModel.of(context).currentKeyword;
+    params["category"] = widget.cid;
+    params["keyword"] = widget.keyword;
     
     params["last"] = 0;
     params["offset"] = 0;
@@ -48,8 +51,8 @@ class _SearchDetailCoursePageState extends State<SearchDetailCoursePage> with Au
   @override
   generateMoreRemoteParams() {
     Map<String,dynamic> params = new Map();
-    params["category"] = SearchDetailModel.of(context).currentCid;
-    params["keyword"] = SearchDetailModel.of(context).currentKeyword;
+    params["category"] = widget.cid;
+    params["keyword"] = widget.keyword;
     
     params["last"] = last;
     params["offset"] = offset;
@@ -89,6 +92,7 @@ class _SearchDetailCoursePageState extends State<SearchDetailCoursePage> with Au
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return new Scaffold(
       body: BaseListWidget(
         control:control,

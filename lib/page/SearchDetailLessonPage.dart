@@ -11,6 +11,9 @@ import 'package:lychee/common/model/LessonResult.dart';
 import './SearchDetailPage.dart';
 
 class SearchDetailLessonPage extends StatefulWidget {
+  final int cid;
+  final String keyword;
+  SearchDetailLessonPage(this.cid,this.keyword);
   @override
   _SearchDetailLessonPageState createState() => _SearchDetailLessonPageState();
 }
@@ -37,8 +40,8 @@ class _SearchDetailLessonPageState extends State<SearchDetailLessonPage> with Au
   @override
   generateRemoteParams() {
     Map<String,dynamic> params = new Map();
-    params["category"] = SearchDetailModel.of(context).currentCid;
-    params["keyword"] = SearchDetailModel.of(context).currentKeyword;
+    params["category"] = widget.cid;
+    params["keyword"] = widget.keyword;
     
     params["last"] = 0;
     params["offset"] = 0;
@@ -48,8 +51,8 @@ class _SearchDetailLessonPageState extends State<SearchDetailLessonPage> with Au
   @override
   generateMoreRemoteParams() {
     Map<String,dynamic> params = new Map();
-    params["category"] = SearchDetailModel.of(context).currentCid;
-    params["keyword"] = SearchDetailModel.of(context).currentKeyword;
+    params["category"] = widget.cid;
+    params["keyword"] = widget.keyword;
     
     params["last"] = last;
     params["offset"] = offset;
@@ -89,6 +92,7 @@ class _SearchDetailLessonPageState extends State<SearchDetailLessonPage> with Au
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return new Scaffold(
       body: BaseListWidget(
         control:control,

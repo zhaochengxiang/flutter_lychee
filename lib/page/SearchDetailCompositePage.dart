@@ -19,6 +19,10 @@ import './SearchDetailPage.dart';
 
 class SearchDetailCompositePage extends StatefulWidget {
 
+  final int cid;
+  final String keyword;
+  SearchDetailCompositePage(this.cid,this.keyword);
+
   @override
   _SearchDetailCompositePageState createState() => new _SearchDetailCompositePageState();
 }
@@ -33,7 +37,7 @@ class _SearchDetailCompositePageState extends State<SearchDetailCompositePage> w
 
   @override
   generateRemoteParams() {
-    return {'cid':SearchDetailModel.of(context).currentCid,'keyword':SearchDetailModel.of(context).currentKeyword};
+    return {'cid':widget.cid,'keyword':widget.keyword};
   }
 
    @override
@@ -112,8 +116,9 @@ class _SearchDetailCompositePageState extends State<SearchDetailCompositePage> w
   
   @override
   Widget build(BuildContext context) {
-    searchResult = control.data;
+    super.build(context);
 
+    searchResult = control.data;
     return new Scaffold(
       body: SafeArea(
         child: BaseScrollWidget(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:lychee/common/util/CommonUtils.dart';
 import 'package:lychee/common/style/Style.dart';
@@ -11,7 +11,6 @@ import './SearchDetailLessonPage.dart';
 import './SearchDetailCoursePage.dart';
 import 'package:lychee/common/event/NeedRefreshEvent.dart';
 import 'package:lychee/common/model/Category.dart';
-import 'package:lychee/common/event/CategoryIndexChangeEvent.dart';
 
 class SearchDetailPage extends StatefulWidget {
   final String keyword;
@@ -23,33 +22,49 @@ class SearchDetailPage extends StatefulWidget {
   SearchDetailPage({this.keyword="",this.category,this.leftIndex=0,this.rightSection=-1,this.rightIndex=-1});
 
   @override
-  _SearchDetailPagetState createState() => new _SearchDetailPagetState(curCategoryName: (this.category==null)?"分类":this.category.name,cid:(this.category==null)?-1:this.category.id);
+  _SearchDetailPagetState createState() => new _SearchDetailPagetState();
 }
 
 class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerProviderStateMixin {
   String curCategoryName;
   int cid;
+  String keyword;
+  int categoryLeftIndex;
+  int categoryRightSection;
+  int categoryRightIndex;
+
   bool isCategorySelected = false;
   int stackIndex = 0;
   List tabTitles = ["综合","图书","小讲","短课"];
   int tabIndex = 0;
   TabController _tabController;
-  final SearchDetailModel searchDetailModel = new SearchDetailModel();
 
-  _SearchDetailPagetState({this.curCategoryName,this.cid});
+  _SearchDetailPagetState();
 
    @override
   void initState() {
     super.initState();
-    searchDetailModel.setCurrentCid(cid);
-    searchDetailModel.setCurrentKeyword(widget.keyword);
-    searchDetailModel.setCategoryIndex(widget.leftIndex, widget.rightSection, widget.rightIndex);
+
+    if (widget.category == null) {
+      curCategoryName = "分类";
+      cid = -1;
+    } else {
+      curCategoryName = widget.category.name;
+      cid = widget.category.id;
+    }
+
+    keyword = widget.keyword;
+    categoryLeftIndex = widget.leftIndex;
+    categoryRightSection = widget.rightSection;
+    categoryRightIndex = widget.rightIndex;
 
     _tabController =  TabController(vsync: this, length: tabTitles.length);
     _tabController.addListener((){
-      setState(() {
-        tabIndex = _tabController.index;
-      });
+      if (mounted) {
+        setState(() {
+          tabIndex = _tabController.index;
+        });
+      }
     });
   }
 
@@ -90,39 +105,53 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
   }
 
   _searchPageOnPressed(value) {
-    setState(() {
-      searchDetailModel.setCurrentKeyword(value);
-    });
+    if (mounted) {
+      setState(() {
+        keyword = value.trim();
+      });
+    }
 
-    _childWidgetsNeedRefresh();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _childWidgetsNeedRefresh();
+    });
   }
 
   _topCategoryOnPressed() {
-    setState(() {
-      isCategorySelected = !isCategorySelected;
-      if (isCategorySelected==true) {
-        stackIndex = 1;
-        curCategoryName = "不限";
-      } else {
-        stackIndex = 0;
-        curCategoryName = "分类";
-        searchDetailModel.setCurrentCid(0);
-        _childWidgetsNeedRefresh();
-        searchDetailModel.setCategoryIndex(0, -1, -1);
-        CategoryIndexChangeEvent.changeHandleFunction();
-      }
+    if (mounted) {
+      setState(() {
+        isCategorySelected = !isCategorySelected;
+        if (isCategorySelected==true) {
+          stackIndex = 1;
+          curCategoryName = "不限";
+        } else {
+          stackIndex = 0;
+          curCategoryName = "分类";
+          cid = 0;
+          categoryLeftIndex = 0;
+          categoryRightSection = -1;
+          categoryRightIndex = -1;
+        }
+      });
+    }
+
+     SchedulerBinding.instance.addPostFrameCallback((_) {
+      _childWidgetsNeedRefresh();
     });
   }
 
   _categoryWidgetOnPressed(category) {
-    setState(() {
-      isCategorySelected = false;
-      curCategoryName = category.name;
-      stackIndex = 0;
-      searchDetailModel.setCurrentCid(category.id);
-    });
+    if (mounted) {
+      setState(() {
+        isCategorySelected = false;
+        curCategoryName = category.name;
+        stackIndex = 0;
+        cid =category.id;
+      });
+    }
     
-    _childWidgetsNeedRefresh();
+     SchedulerBinding.instance.addPostFrameCallback((_) {
+      _childWidgetsNeedRefresh();
+    });
   }
 
   _childWidgetsNeedRefresh() {
@@ -134,120 +163,81 @@ class _SearchDetailPagetState extends State<SearchDetailPage> with SingleTickerP
 
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<SearchDetailModel>(
-      model: searchDetailModel,
-      child: new ScopedModelDescendant<SearchDetailModel>(
-        builder: (context, child, model) { 
-          return new Scaffold(
-            appBar: new AppBar(
-              leading: IconButton(
-                icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
-                onPressed: (){
-                  CommonUtils.closePage(context);
-                },
-              ),
-              title: InkWell(
-                onTap: (){CommonUtils.openPage(context, SearchPage(onPressed: _searchPageOnPressed));},
-                child: Container(
-                  height: 31,
-                  color:Color(YYColors.gray_dark),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      SizedBox(width: 5.0),
-                      Image.asset(CommonUtils.Local_Icon_prefix+'search_gray.png',width: 13,height: 14,fit: BoxFit.fill),
-                      SizedBox(width: 5.0),
-                      Expanded(
-                        child:Text(model.currentKeyword,style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.tip),overflow: TextOverflow.ellipsis,maxLines: 1)                   
-                      ),
-                      SizedBox(width: 5.0)
-                    ],
-                  ),
-                )
-              )
+    return Scaffold(
+      appBar: new AppBar(
+        leading: IconButton(
+          icon: Image.asset(CommonUtils.Local_Icon_prefix+"back.png",width: 18,height: 18),
+          onPressed: (){
+            CommonUtils.closePage(context);
+          },
+        ),
+        title: InkWell(
+          onTap: (){CommonUtils.openPage(context, SearchPage(onPressed: _searchPageOnPressed));},
+          child: Container(
+            height: 31,
+            color:Color(YYColors.gray_dark),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                SizedBox(width: 5.0),
+                Image.asset(CommonUtils.Local_Icon_prefix+'search_gray.png',width: 13,height: 14,fit: BoxFit.fill),
+                SizedBox(width: 5.0),
+                Expanded(
+                  child:Text(keyword??"",style: TextStyle(color: Color(YYColors.secondaryText),fontSize: YYSize.tip),overflow: TextOverflow.ellipsis,maxLines: 1)                   
+                ),
+                SizedBox(width: 5.0)
+              ],
             ),
-            body: SafeArea(
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    height: 42,
-                    color: Color(YYColors.gray),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 10.5,right: 10.5),
-                      child: Row(
-                        children: <Widget>[
-                          _buildTopOptionWidget(curCategoryName, _topCategoryOnPressed),
-                          Expanded(
-                            child: TabBar(
-                              isScrollable: false,
-                              controller: _tabController,
-                              indicatorColor: Color(YYColors.primary),
-                              indicatorSize: TabBarIndicatorSize.label,
-                              tabs: _buildTabsWidget(),
-                            ),
-                          )
-                        ],
+          )
+        )
+      ),
+      body: SafeArea(
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 42,
+              color: Color(YYColors.gray),
+              child: Padding(
+                padding: EdgeInsets.only(left: 10.5,right: 10.5),
+                child: Row(
+                  children: <Widget>[
+                    _buildTopOptionWidget(curCategoryName, _topCategoryOnPressed),
+                    Expanded(
+                      child: TabBar(
+                        isScrollable: false,
+                        controller: _tabController,
+                        indicatorColor: Color(YYColors.primary),
+                        indicatorSize: TabBarIndicatorSize.label,
+                        tabs: _buildTabsWidget(),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    child: IndexedStack(
-                      children: <Widget>[
-                        TabBarView(controller: _tabController, children: <Widget>[
-                          SearchDetailCompositePage(),
-                          SearchDetailBookPage(),
-                          SearchDetailLessonPage(),
-                          SearchDetailCoursePage(),
-                        ]),
-                        new CategoryWidget(leftIndex: model.currentCategoryLeftIndex,rightSection:model.currentCategoryRightSection,rightIndex: model.currentCategoryRightIndex,onPressed: (category,_leftIndex,_rightSection,_rightIndex){
-                          _categoryWidgetOnPressed(category);
-                        })
-                      ],
-                      index: stackIndex,
                     )
-                  
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          );
-        })
+            Expanded(
+              child: IndexedStack(
+                children: <Widget>[
+                  TabBarView(controller: _tabController, children: <Widget>[
+                    SearchDetailCompositePage(cid,keyword),
+                    SearchDetailBookPage(cid,keyword),
+                    SearchDetailLessonPage(cid,keyword),
+                    SearchDetailCoursePage(cid,keyword),
+                  ]),
+                  new CategoryWidget(leftIndex: categoryLeftIndex,rightSection:categoryRightSection,rightIndex: categoryRightIndex,onPressed: (category,_leftIndex,_rightSection,_rightIndex){
+                    _categoryWidgetOnPressed(category);
+                  })
+                ],
+                index: stackIndex,
+              )
+            
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
-
-class SearchDetailModel extends Model {
-  int _cid;
-  String _keyword;
-  int _categoryLeftIndex;
-  int _categoryRightSection;
-  int _categoryRightIndex;
-
-  String get currentKeyword => _keyword;
-  int get currentCid => _cid;
-  int get currentCategoryLeftIndex => _categoryLeftIndex;
-  int get currentCategoryRightSection => _categoryRightSection;
-  int get currentCategoryRightIndex => _categoryRightIndex;
-
-  static SearchDetailModel of(BuildContext context) => ScopedModel.of<SearchDetailModel>(context,rebuildOnChange: true);
-
-  void setCurrentKeyword(String keyword) {
-    _keyword = keyword;
-    notifyListeners();
-  }
-
-  void setCurrentCid(int cid) {
-    _cid = cid;
-    notifyListeners();
-  }
-
-  void setCategoryIndex(int leftIndex,int rightSection,int rightIndex) {
-    _categoryLeftIndex =leftIndex;
-    _categoryRightSection =rightSection;
-    _categoryRightIndex =rightIndex;
-  }
-}
-
