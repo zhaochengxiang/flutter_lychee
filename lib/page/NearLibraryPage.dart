@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:amap_base/amap_base.dart';
+import 'package:amap_base_location/amap_base_location.dart';
 
 import 'package:lychee/widget/base/BaseListState.dart';
 import 'package:lychee/widget/base/BaseListWidget.dart';
 import 'package:lychee/widget/base/BaseState.dart';
 import 'package:lychee/common/util/CommonUtils.dart';
-import 'package:lychee/common/manager/MapManager.dart';
 import 'package:lychee/common/model/Library.dart';
 import 'package:lychee/widget/NearLibraryItem.dart';
 

@@ -1,4 +1,4 @@
-import 'package:amap_base/amap_base.dart';
+import 'package:amap_base_location/amap_base_location.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

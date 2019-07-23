@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:amap_base/amap_base.dart';
+import 'package:amap_base_location/amap_base_location.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:lychee/widget/base/BaseListState.dart';
